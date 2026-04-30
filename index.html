@@ -474,31 +474,13 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
             </div>
             <div class="step-nav">
               <button class="btn-back" onclick="goTo(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="back"></span></button>
-              <button class="btn-next" onclick="goTo(4)"><span data-t="seeResults"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              <button class="btn-next" onclick="goTo(4)"><span data-t="getMyResults"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 4: Results -->
+        <!-- STEP 4: Contact (now before results) -->
         <div class="step-panel" id="step4">
-          <div class="results-hero" id="resultsHero"></div>
-          <div class="result-numbers" id="resultNumbers"></div>
-          <div class="result-ratios" id="resultRatios"></div>
-          <div class="results-cta-area">
-            <div class="result-teaser" id="resultTeaser"></div>
-            <button class="btn-unlock" onclick="goTo(5)">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span data-t="unlockBtn"></span>
-            </button>
-            <div class="disclaimer" data-t="unlockDisclaimer"></div>
-            <div style="text-align:center;margin-top:10px">
-              <button class="btn-back" onclick="goTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="adjustNumbers"></span></button>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 5: Contact -->
-        <div class="step-panel" id="step5">
           <div class="contact-header">
             <h4 data-t="contactTitle"></h4>
             <p data-t="contactSub"></p>
@@ -548,8 +530,19 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
               <div class="trust-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span data-t="trust3"></span></div>
             </div>
             <div style="text-align:center;margin-top:10px">
-              <button class="btn-back" onclick="goTo(4)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="backToResults"></span></button>
+              <button class="btn-back" onclick="goTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="back"></span></button>
             </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Results (unlocked after contact submitted) -->
+        <div class="step-panel" id="step5">
+          <div class="results-hero" id="resultsHero"></div>
+          <div class="result-numbers" id="resultNumbers"></div>
+          <div class="result-ratios" id="resultRatios"></div>
+          <div class="results-cta-area">
+            <div class="result-teaser" id="resultTeaser"></div>
+            <div class="disclaimer" data-t="unlockDisclaimer"></div>
           </div>
         </div>
 
@@ -708,6 +701,7 @@ const T = {
     credit600: '600–679 Fair',
     creditU600: 'Under 600',
     seeResults: 'See My Results',
+    getMyResults: 'Get My Results',
     unlockBtn: 'Get a Better Rate — Free',
     unlockDisclaimer: 'Free consultation · No obligation · Response within 24 hours',
     adjustNumbers: 'Adjust my numbers',
@@ -729,8 +723,8 @@ const T = {
     lbl_max: 'Est. max purchase',
     lbl_balance: 'Remaining balance',
     lbl_newPayment: 'New est. payment',
-    contactTitle: 'Almost there — where should we send your options?',
-    contactSub: 'A licensed mortgage expert will review your profile and contact you within 24 hours.',
+    contactTitle: 'One last step — enter your info to see your results',
+    contactSub: 'Your personalized estimate is ready. Enter your details to unlock it — a mortgage expert will also follow up within 24 hours.',
     nameLabel: 'Your name',
     namePh: 'First and last name',
     errName: 'Please enter your full name.',
@@ -746,7 +740,7 @@ const T = {
     tl6plus: '6+ months',
     consentText: 'I agree to be contacted by a licensed mortgage professional. My information will be used solely to provide mortgage advice. <a href="#" onclick="return false;" style="color:var(--blue)">Privacy Policy</a>.',
     errConsent: 'Please check the consent box to continue.',
-    submitBtn: 'Send My Request',
+    submitBtn: 'Show My Results',
     trust1: 'Secure & encrypted',
     trust2: 'No obligation',
     trust3: 'Response in 24h',
@@ -855,6 +849,7 @@ const T = {
     credit600: '600–679 Passable',
     creditU600: 'Moins de 600',
     seeResults: 'Voir mes résultats',
+    getMyResults: 'Voir mes résultats',
     unlockBtn: 'Obtenir un meilleur taux — Gratuit',
     unlockDisclaimer: 'Consultation gratuite · Sans engagement · Réponse dans les 24 heures',
     adjustNumbers: 'Ajuster mes chiffres',
@@ -876,8 +871,8 @@ const T = {
     lbl_max: 'Prix max. estimé',
     lbl_balance: 'Solde restant',
     lbl_newPayment: 'Nouveau paiement est.',
-    contactTitle: 'Presque terminé — où souhaitez-vous recevoir vos options ?',
-    contactSub: 'Un expert hypothécaire agréé examinera votre profil et vous contactera dans les 24 heures.',
+    contactTitle: 'Dernière étape — entrez vos coordonnées pour voir vos résultats',
+    contactSub: 'Votre estimation personnalisée est prête. Entrez vos coordonnées pour la déverrouiller — un expert vous contactera aussi dans les 24 heures.',
     nameLabel: 'Votre nom',
     namePh: 'Prénom et nom de famille',
     errName: 'Veuillez entrer votre nom complet.',
@@ -893,7 +888,7 @@ const T = {
     tl6plus: '6 mois et plus',
     consentText: 'J\'accepte d\'être contacté par un professionnel hypothécaire agréé. Mes informations seront utilisées uniquement pour me fournir des conseils hypothécaires. <a href="#" onclick="return false;" style="color:var(--blue)">Politique de confidentialité</a>.',
     errConsent: 'Veuillez cocher la case de consentement pour continuer.',
-    submitBtn: 'Envoyer ma demande',
+    submitBtn: 'Afficher mes résultats',
     trust1: 'Sécurisé et chiffré',
     trust2: 'Sans engagement',
     trust3: 'Réponse en 24h',
@@ -1248,8 +1243,19 @@ function submitForm() {
   setTimeout(() => {
     submitting = false; btn.disabled = false;
     document.getElementById('submitBtnText').textContent = t('submitBtn');
-    document.getElementById('modalName').textContent = name.split(' ')[0];
-    document.getElementById('successModal').classList.add('open');
+    // Reveal results step
+    currentStep = 5;
+    document.querySelectorAll('.step-panel').forEach((p, i) => p.classList.toggle('active', i + 1 === 5));
+    for (let i = 1; i <= 5; i++) {
+      const d = document.getElementById('dot' + i);
+      d.classList.remove('active', 'done');
+      if (i === 5) d.classList.add('active');
+      else d.classList.add('done');
+    }
+    updateStepCounter();
+    document.getElementById('progressFill').style.width = '100%';
+    renderResults();
+    setTimeout(() => document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }, 1200);
 }
 
