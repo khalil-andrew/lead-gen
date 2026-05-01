@@ -1442,108 +1442,80 @@ function submitForm(){
 }
 
 // ═══════════════════════════════════════════════════════
-// TOOLTIP PORTAL ENGINE
-// Works on both hover (desktop) and tap (mobile)
-// Renders into a fixed div so it never clips inside tables/cards
+// TOOLTIP PORTAL — click/tap to toggle, works on all devices
 // ═══════════════════════════════════════════════════════
 (function(){
-  // Create the single portal element
   const portal = document.createElement('div');
   portal.className = 'tip-portal';
+  portal.style.display = 'none';
   document.body.appendChild(portal);
 
-  let currentTarget = null;
-  let hideTimer = null;
+  let current = null;
 
-  function showTip(el) {
-    clearTimeout(hideTimer);
-    const text = el.getAttribute('data-tip');
-    if (!text) return;
-    // Close any previously open one
-    if (currentTarget && currentTarget !== el) {
-      currentTarget.classList.remove('tip-open');
-    }
-    currentTarget = el;
-    el.classList.add('tip-open');
+  function position(el) {
+    const rect = el.getBoundingClientRect();
+    const pW   = portal.offsetWidth;
+    const pH   = portal.offsetHeight;
+    const margin = 12;
+    const vw   = window.innerWidth;
 
-    portal.textContent = text;
-    portal.style.display = 'block';
-
-    // Position: measure after display
-    const rect   = el.getBoundingClientRect();
-    const pW     = portal.offsetWidth;
-    const pH     = portal.offsetHeight;
-    const vw     = window.innerWidth;
-    const vh     = window.innerHeight;
-    const margin = 10;
-
-    // Try above first, fall back to below
+    // Arrow: show above if room, otherwise below
     let top, arrowDir;
-    if (rect.top - pH - 12 >= margin) {
-      top = rect.top - pH - 10;
+    if (rect.top - pH - 14 >= margin) {
+      top = rect.top + window.scrollY - pH - 10;
       arrowDir = 'arr-down';
     } else {
-      top = rect.bottom + 10;
+      top = rect.bottom + window.scrollY + 10;
       arrowDir = 'arr-up';
     }
 
-    // Horizontal: centre on badge, clamp to viewport
+    // Centre horizontally, clamp to viewport edges
     let left = rect.left + rect.width / 2 - pW / 2;
     left = Math.max(margin, Math.min(left, vw - pW - margin));
 
-    portal.style.top  = top + window.scrollY + 'px';
+    portal.style.top  = top + 'px';
     portal.style.left = left + 'px';
     portal.className  = 'tip-portal ' + arrowDir;
+  }
+
+  function open(el) {
+    if (current) current.classList.remove('tip-open');
+    current = el;
+    el.classList.add('tip-open');
+    portal.textContent = el.getAttribute('data-tip');
     portal.style.display = 'block';
+    // Re-position after content is set so offsetWidth is accurate
+    requestAnimationFrame(() => position(el));
   }
 
-  function hideTip(immediate) {
-    if (immediate) {
-      portal.style.display = 'none';
-      if (currentTarget) { currentTarget.classList.remove('tip-open'); currentTarget = null; }
-    } else {
-      hideTimer = setTimeout(() => {
-        portal.style.display = 'none';
-        if (currentTarget) { currentTarget.classList.remove('tip-open'); currentTarget = null; }
-      }, 120);
-    }
+  function close() {
+    portal.style.display = 'none';
+    if (current) { current.classList.remove('tip-open'); current = null; }
   }
 
-  // Event delegation on document
-  document.addEventListener('mouseover', e => {
-    const el = e.target.closest('.info-i[data-tip]');
-    if (el) showTip(el);
-  });
-  document.addEventListener('mouseout', e => {
-    const el = e.target.closest('.info-i[data-tip]');
-    if (el) hideTip(false);
-  });
-  document.addEventListener('touchstart', e => {
-    const el = e.target.closest('.info-i[data-tip]');
-    if (el) {
-      e.preventDefault(); // prevent ghost click
-      if (currentTarget === el && portal.style.display !== 'none') {
-        hideTip(true);
-      } else {
-        showTip(el);
-      }
-    } else {
-      hideTip(true);
-    }
-  }, { passive: false });
+  // Guard: only real Element nodes have .closest()
+  function fromEvent(e) {
+    return (e.target && e.target.nodeType === 1 && typeof e.target.closest === 'function')
+      ? e.target.closest('.info-i[data-tip]')
+      : null;
+  }
+
+  // Single click — works for mouse AND tap on every device
   document.addEventListener('click', e => {
-    const el = e.target.closest('.info-i[data-tip]');
-    if (!el) hideTip(true);
+    const el = fromEvent(e);
+    if (el) { current === el ? close() : open(el); }
+    else close();
   });
-  // Keyboard support
+
+  // Desktop hover
+  document.addEventListener('mouseenter', e => { const el = fromEvent(e); if (el) open(el); }, true);
+  document.addEventListener('mouseleave', e => { const el = fromEvent(e); if (el) close(); }, true);
+
+  // Keyboard
   document.addEventListener('keydown', e => {
-    if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.info-i[data-tip]')) {
-      e.preventDefault();
-      const el = e.target.closest('.info-i[data-tip]');
-      if (currentTarget === el && portal.style.display !== 'none') hideTip(true);
-      else showTip(el);
-    }
-    if (e.key === 'Escape') hideTip(true);
+    const el = fromEvent(e);
+    if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); current === el ? close() : open(el); }
+    if (e.key === 'Escape') close();
   });
 })();
 
