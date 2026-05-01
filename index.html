@@ -165,11 +165,52 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 
 
 /* INFO TOOLTIPS */
-.info-i{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--gray-200);color:var(--gray-500);font-size:0.62rem;font-weight:700;cursor:help;margin-left:5px;flex-shrink:0;vertical-align:middle;position:relative;transition:background 0.15s}
-.info-i:hover{background:var(--blue);color:white}
-.info-i .tip-pop{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--navy);color:white;font-size:0.7rem;font-weight:400;line-height:1.5;padding:8px 11px;border-radius:8px;width:200px;white-space:normal;z-index:300;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,0.25)}
-.info-i .tip-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy)}
-.info-i:hover .tip-pop,.info-i:focus .tip-pop{display:block;animation:fUp 0.15s ease}
+/* The (i) badge */
+.info-i{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--gray-200);color:var(--gray-500);
+  font-size:0.65rem;font-weight:700;font-style:normal;
+  cursor:pointer;margin-left:5px;flex-shrink:0;
+  vertical-align:middle;position:static;
+  transition:background 0.15s,color 0.15s;
+  -webkit-user-select:none;user-select:none;
+  line-height:1;
+}
+.info-i:hover,.info-i.tip-open{background:var(--blue);color:white}
+
+/* Tooltip panel — rendered via JS into a fixed portal so it never clips */
+.tip-portal{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  background:var(--navy);
+  color:white;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.72rem;
+  font-weight:400;
+  line-height:1.55;
+  padding:9px 12px;
+  border-radius:9px;
+  max-width:min(220px, calc(100vw - 32px));
+  white-space:normal;
+  box-shadow:0 6px 20px rgba(0,0,0,0.28);
+  pointer-events:none;
+  animation:fUp 0.15s ease;
+}
+.tip-portal::after{
+  content:'';
+  position:absolute;
+  border:5px solid transparent;
+}
+.tip-portal.arr-down::after{
+  top:100%;left:50%;transform:translateX(-50%);
+  border-top-color:var(--navy);
+}
+.tip-portal.arr-up::after{
+  bottom:100%;left:50%;transform:translateX(-50%);
+  border-bottom-color:var(--navy);
+}
 .row-cat{display:flex;align-items:center;gap:0}
 
 /* STEP PANELS */
@@ -1206,20 +1247,20 @@ function renderResults(){
   const gW=Math.min(r.GDS/50*100,100), tW=Math.min(r.TDS/55*100,100);
   const gC=r.GDS<=39?'#15803d':r.GDS<=43?'#d97706':'#dc2626';
   const tC=r.TDS<=44?'#15803d':r.TDS<=48?'#d97706':'#dc2626';
-  const gdsTip = isFR
-    ? 'Ratio des dépenses brutes de logement. Maximum permis : 39 %. Inclut hypothèque, taxes et chauffage.'
-    : 'Gross Debt Service ratio. Max allowed: 39%. Includes mortgage, taxes and heating costs.';
-  const tdsTip = isFR
-    ? 'Ratio du service de la dette total. Maximum permis : 44 %. Inclut le GDS plus toutes les autres dettes mensuelles.'
-    : 'Total Debt Service ratio. Max allowed: 44%. Includes GDS plus all other monthly debt payments.';
+  const gdsTip = (isFR
+    ? 'Ratio des dépenses brutes de logement. Max : 39 %. Inclut hypothèque, taxes et chauffage.'
+    : 'Gross Debt Service ratio. Max 39%. Includes mortgage, property taxes and heating.').replace(/"/g,'&quot;');
+  const tdsTip = (isFR
+    ? 'Ratio du service de la dette total. Max : 44 %. Inclut le GDS plus toutes les autres dettes mensuelles.'
+    : 'Total Debt Service ratio. Max 44%. Includes GDS plus all other monthly debt payments.').replace(/"/g,'&quot;');
   $('resRatios').innerHTML=`
     <div class="ratio-i">
-      <div class="ratio-lbl" style="display:flex;align-items:center">GDS <span class="info-i" tabindex="0" style="margin-left:4px">i<span class="tip-pop">${gdsTip}</span></span></div>
+      <div class="ratio-lbl" style="display:flex;align-items:center">GDS <span class="info-i" data-tip="${gdsTip}" tabindex="0" role="button" aria-label="More info">i</span></div>
       <div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div>
       <div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.gdsMax})</span></div>
     </div>
     <div class="ratio-i">
-      <div class="ratio-lbl" style="display:flex;align-items:center">TDS <span class="info-i" tabindex="0" style="margin-left:4px">i<span class="tip-pop">${tdsTip}</span></span></div>
+      <div class="ratio-lbl" style="display:flex;align-items:center">TDS <span class="info-i" data-tip="${tdsTip}" tabindex="0" role="button" aria-label="More info">i</span></div>
       <div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div>
       <div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.tdsMax})</span></div>
     </div>`;
@@ -1232,10 +1273,10 @@ function renderResults(){
   // ── SUMMARY TABLE + CHART ─────────────────────────────
   const termLbl  = isFR ? `Terme ${r.termYrs} ans`   : `${r.termYrs}-Year Term`;
   const amortLbl = isFR ? `Amort. ${r.amort} ans`    : `${r.amort}-Year Amort.`;
-  // Info tooltip helper
+  // Info tooltip helper — stores tip text in data-tip, rendered by JS portal
   const tip = (label, tipEN, tipFR) => {
-    const tipText = isFR ? tipFR : tipEN;
-    return `${label}<span class="info-i" tabindex="0">i<span class="tip-pop">${tipText}</span></span>`;
+    const tipText = (isFR ? tipFR : tipEN).replace(/"/g, '&quot;');
+    return `${label}<span class="info-i" data-tip="${tipText}" tabindex="0" role="button" aria-label="More info">i</span>`;
   };
 
   const rows = [
@@ -1330,8 +1371,8 @@ function renderResults(){
     <table class="sum-table">
       <thead><tr>
         <th>${isFR?'Catégorie':'Category'}</th>
-        <th>${termLbl} <span class="info-i" tabindex="0" style="font-size:0.55rem">i<span class="tip-pop">${isFR?'Période pendant laquelle votre taux est garanti — généralement 5 ans au Canada.':'The period your rate is locked in — typically 5 years in Canada.'}</span></span></th>
-        <th>${amortLbl} <span class="info-i" tabindex="0" style="font-size:0.55rem">i<span class="tip-pop">${isFR?'Durée totale pour rembourser entièrement votre hypothèque.':'Total time to fully pay off your mortgage.'}</span></span></th>
+        <th>${termLbl} <span class="info-i" data-tip="${isFR?'Période où votre taux est garanti — généralement 5 ans au Canada.':'The period your rate is locked in — typically 5 years in Canada.'}" tabindex="0" role="button" aria-label="More info">i</span></th>
+        <th>${amortLbl} <span class="info-i" data-tip="${isFR?'Durée totale pour rembourser entièrement votre hypothèque.':'Total time to fully pay off your mortgage.'}" tabindex="0" role="button" aria-label="More info">i</span></th>
       </tr></thead>
       <tbody>${tableRows}</tbody>
     </table>
@@ -1399,6 +1440,112 @@ function submitForm(){
     try{localStorage.removeItem('mqiq');}catch(e){}
   },1200);
 }
+
+// ═══════════════════════════════════════════════════════
+// TOOLTIP PORTAL ENGINE
+// Works on both hover (desktop) and tap (mobile)
+// Renders into a fixed div so it never clips inside tables/cards
+// ═══════════════════════════════════════════════════════
+(function(){
+  // Create the single portal element
+  const portal = document.createElement('div');
+  portal.className = 'tip-portal';
+  document.body.appendChild(portal);
+
+  let currentTarget = null;
+  let hideTimer = null;
+
+  function showTip(el) {
+    clearTimeout(hideTimer);
+    const text = el.getAttribute('data-tip');
+    if (!text) return;
+    // Close any previously open one
+    if (currentTarget && currentTarget !== el) {
+      currentTarget.classList.remove('tip-open');
+    }
+    currentTarget = el;
+    el.classList.add('tip-open');
+
+    portal.textContent = text;
+    portal.style.display = 'block';
+
+    // Position: measure after display
+    const rect   = el.getBoundingClientRect();
+    const pW     = portal.offsetWidth;
+    const pH     = portal.offsetHeight;
+    const vw     = window.innerWidth;
+    const vh     = window.innerHeight;
+    const margin = 10;
+
+    // Try above first, fall back to below
+    let top, arrowDir;
+    if (rect.top - pH - 12 >= margin) {
+      top = rect.top - pH - 10;
+      arrowDir = 'arr-down';
+    } else {
+      top = rect.bottom + 10;
+      arrowDir = 'arr-up';
+    }
+
+    // Horizontal: centre on badge, clamp to viewport
+    let left = rect.left + rect.width / 2 - pW / 2;
+    left = Math.max(margin, Math.min(left, vw - pW - margin));
+
+    portal.style.top  = top + window.scrollY + 'px';
+    portal.style.left = left + 'px';
+    portal.className  = 'tip-portal ' + arrowDir;
+    portal.style.display = 'block';
+  }
+
+  function hideTip(immediate) {
+    if (immediate) {
+      portal.style.display = 'none';
+      if (currentTarget) { currentTarget.classList.remove('tip-open'); currentTarget = null; }
+    } else {
+      hideTimer = setTimeout(() => {
+        portal.style.display = 'none';
+        if (currentTarget) { currentTarget.classList.remove('tip-open'); currentTarget = null; }
+      }, 120);
+    }
+  }
+
+  // Event delegation on document
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest('.info-i[data-tip]');
+    if (el) showTip(el);
+  });
+  document.addEventListener('mouseout', e => {
+    const el = e.target.closest('.info-i[data-tip]');
+    if (el) hideTip(false);
+  });
+  document.addEventListener('touchstart', e => {
+    const el = e.target.closest('.info-i[data-tip]');
+    if (el) {
+      e.preventDefault(); // prevent ghost click
+      if (currentTarget === el && portal.style.display !== 'none') {
+        hideTip(true);
+      } else {
+        showTip(el);
+      }
+    } else {
+      hideTip(true);
+    }
+  }, { passive: false });
+  document.addEventListener('click', e => {
+    const el = e.target.closest('.info-i[data-tip]');
+    if (!el) hideTip(true);
+  });
+  // Keyboard support
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.info-i[data-tip]')) {
+      e.preventDefault();
+      const el = e.target.closest('.info-i[data-tip]');
+      if (currentTarget === el && portal.style.display !== 'none') hideTip(true);
+      else showTip(el);
+    }
+    if (e.key === 'Escape') hideTip(true);
+  });
+})();
 
 // ═══════════════════════════════════════════════════════
 // EXIT INTENT
