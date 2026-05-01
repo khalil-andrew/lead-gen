@@ -163,6 +163,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .sp-txt{font-size:0.75rem;color:var(--green);font-weight:500;margin-left:12px;line-height:1.4}
 .sp-txt strong{display:block;font-size:0.8rem}
 
+
+/* INFO TOOLTIPS */
+.info-i{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--gray-200);color:var(--gray-500);font-size:0.62rem;font-weight:700;cursor:help;margin-left:5px;flex-shrink:0;vertical-align:middle;position:relative;transition:background 0.15s}
+.info-i:hover{background:var(--blue);color:white}
+.info-i .tip-pop{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--navy);color:white;font-size:0.7rem;font-weight:400;line-height:1.5;padding:8px 11px;border-radius:8px;width:200px;white-space:normal;z-index:300;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,0.25)}
+.info-i .tip-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy)}
+.info-i:hover .tip-pop,.info-i:focus .tip-pop{display:block;animation:fUp 0.15s ease}
+.row-cat{display:flex;align-items:center;gap:0}
+
 /* STEP PANELS */
 .sp{display:none}
 .sp.on{display:block;animation:fUp 0.25s ease}
@@ -225,6 +234,49 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
 .btn-modal-done:hover{background:var(--navy-mid)}
 .modal-next{margin-top:16px;padding:14px;background:var(--gray-50);border-radius:12px;font-size:0.78rem;color:var(--gray-500)}
 .modal-next strong{display:block;color:var(--navy);margin-bottom:3px;font-size:0.83rem}
+
+
+/* RESULTS SUMMARY TABLE + CHART */
+.res-summary{padding:0 22px 20px}
+.res-section-title{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:600;color:var(--navy);margin:18px 0 10px;letter-spacing:-0.01em}
+.sum-table{width:100%;border-collapse:collapse;font-size:0.78rem;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.sum-table th{background:var(--navy);color:white;padding:9px 12px;text-align:left;font-weight:600;font-size:0.72rem;letter-spacing:0.03em}
+.sum-table th:not(:first-child){text-align:right}
+.sum-table td{padding:9px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-700)}
+.sum-table td:not(:first-child){text-align:right;font-weight:500;color:var(--navy);font-family:'Fraunces',serif;font-size:0.82rem}
+.sum-table tr:last-child td{border-bottom:none;font-weight:700;background:var(--gray-50)}
+.sum-table tr:hover td{background:var(--sky)}
+.sum-table .row-cat{color:var(--gray-500);font-size:0.74rem}
+
+/* DONUT CHART */
+.chart-wrap{display:flex;align-items:center;gap:20px;padding:4px 0 8px}
+.donut-svg{flex-shrink:0}
+.chart-legend{display:flex;flex-direction:column;gap:8px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:0.78rem}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-label{color:var(--gray-500)}
+.legend-val{font-weight:600;color:var(--navy);font-family:'Fraunces',serif;margin-left:auto}
+
+/* NARRATIVE */
+.res-narrative{background:var(--gray-50);border-radius:12px;padding:14px 16px;font-size:0.8rem;color:var(--gray-600);line-height:1.7;margin-top:4px}
+.res-narrative p{margin-bottom:8px}
+.res-narrative p:last-child{margin-bottom:0}
+.res-narrative .nar-icon{margin-right:5px}
+.res-narrative strong{color:var(--navy)}
+
+/* BROKER CTA at bottom of results */
+.res-broker-cta{margin:16px 22px 20px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:14px;padding:18px 20px;color:white;text-align:center}
+.res-broker-cta h4{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:5px}
+.res-broker-cta p{font-size:0.75rem;color:rgba(255,255,255,0.65);margin-bottom:12px}
+.btn-broker-cta{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy);font-weight:700;font-size:0.85rem;padding:10px 22px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-broker-cta:hover{background:#dbb958;transform:translateY(-1px)}
+
+@media(max-width:480px){
+  .res-summary{padding:0 16px 16px}
+  .res-broker-cta{margin:12px 16px 16px}
+  .chart-wrap{flex-direction:column;align-items:flex-start}
+  .sum-table td,.sum-table th{padding:7px 9px}
+}
 
 /* MOBILE */
 @media(max-width:860px){
@@ -521,6 +573,10 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
             <div class="res-teaser" id="resTeaser"></div>
             <div class="disc" id="resDisc"></div>
           </div>
+          <!-- SUMMARY TABLE + CHART + NARRATIVE -->
+          <div class="res-summary" id="resSummary"></div>
+          <!-- BROKER CTA -->
+          <div id="resBrokerCta"></div>
         </div>
 
       </div><!-- /calc-card -->
@@ -954,39 +1010,121 @@ function validate(s){
 }
 
 // ═══════════════════════════════════════════════════════
-// CALC ENGINE
+// CALC ENGINE — Canadian semi-annual compounding (Bank Act)
 // ═══════════════════════════════════════════════════════
 const incMap={under50:40000,'50to75':62500,'75to100':87500,'100to125':112500,'125to150':137500,'150to175':162500,'175to200':187500,'200plus':220000};
 const taxR={montreal:0.01085,laval:0.01073,longueuil:0.01053,brossard:0.00924,'west-island':0.01085,'south-shore':0.00980,other:0.01000};
 
+// Canadian mortgages compound semi-annually by law (Bank Act).
+// Effective monthly rate = (1 + annualRate/2)^(1/6) - 1
+function getMonthlyRate(annualRate){
+  return Math.pow(1 + annualRate/2, 1/6) - 1;
+}
+
+// Standard amortization payment formula
+function calcPayment(principal, monthlyRate, nPayments){
+  if(monthlyRate === 0) return principal / nPayments;
+  return principal * (monthlyRate * Math.pow(1+monthlyRate, nPayments)) / (Math.pow(1+monthlyRate, nPayments) - 1);
+}
+
+// Balance remaining after k payments
+function calcBalance(principal, monthlyRate, nTotal, k){
+  return principal * Math.pow(1+monthlyRate, k) - calcPayment(principal,monthlyRate,nTotal) * (Math.pow(1+monthlyRate,k)-1)/monthlyRate;
+}
+
+// Total interest paid between payment 1 and payment k
+function calcInterestPaid(principal, monthlyRate, nTotal, k){
+  const pmt = calcPayment(principal, monthlyRate, nTotal);
+  const totalPaid = pmt * k;
+  const balRemaining = calcBalance(principal, monthlyRate, nTotal, k);
+  const principalPaid = principal - balRemaining;
+  return totalPaid - principalPaid;
+}
+
 function calcMtg(){
-  const price=parseMoney($('propPrice').value);
-  const loc=$('location').value;
-  const amort=parseInt(picks.amortG);
-  const freq=picks.freqG;
-  const inc=incMap[$('incomeBracket').value]||75000;
-  const car=parseMoney($('carPay').value);
-  const debts=parseMoney($('otherDebts').value);
-  const r=0.0525/12, n=amort*12;
-  const principal=purpose==='purchase'?price-parseMoney($('downPay').value):parseMoney($('remainBal').value);
-  const mMtg=principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
-  let disPay,payLbl;
-  if(freq==='monthly'){disPay=mMtg;payLbl='/mo';}
-  else{disPay=mMtg*12/26;payLbl=freq==='biweekly'?'/2wk':'/2wk (accel.)';}
-  const tax=(price*(taxR[loc]||0.01)/12)+(price*0.00154/12);
-  const heat=150;
-  const totHousing=mMtg+tax+heat;
-  const mInc=inc/12;
-  const GDS=totHousing/mInc*100;
-  const TDS=(totHousing+car+debts)/mInc*100;
-  let col,emoji;
-  if(GDS<=39&&TDS<=44){col='green';emoji='✓';}
-  else if(GDS<=43||TDS<=48){col='yellow';emoji='~';}
-  else{col='red';emoji='!';}
-  const maxMPay=mInc*0.39-tax-heat;
-  const maxPrin=maxMPay>0?maxMPay*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n)):0;
-  const down=purpose==='purchase'?parseMoney($('downPay').value):0;
-  return{disPay,payLbl,tax,totHousing,GDS,TDS,col,emoji,maxPrice:maxPrin+down,principal,mMtg};
+  const price    = parseMoney($('propPrice').value);
+  const loc      = $('location').value;
+  const amort    = parseInt(picks.amortG);         // years (25 or 30)
+  const termYrs  = 5;                               // fixed 5-year term
+  const freq     = picks.freqG;
+  const annRate  = 0.0525;                          // 5.25% nominal
+  const inc      = incMap[$('incomeBracket').value] || 75000;
+  const car      = parseMoney($('carPay').value);
+  const debts    = parseMoney($('otherDebts').value);
+
+  const down      = purpose==='purchase' ? parseMoney($('downPay').value) : 0;
+  const principal = purpose==='purchase' ? price - down : parseMoney($('remainBal').value);
+
+  // Canadian effective monthly rate (semi-annual compounding)
+  const r  = getMonthlyRate(annRate);
+  const nA = amort * 12;          // total payments over amortization
+  const nT = termYrs * 12;        // payments over term (60)
+
+  // Monthly mortgage payment (always calculated monthly, then converted)
+  const mMtg = calcPayment(principal, r, nA);
+
+  // Display payment by frequency
+  let disPay, payLbl, payFreqLabel, paymentsPerYear, nTermDisplay;
+  if(freq==='monthly'){
+    disPay=mMtg; payLbl='/mo';
+    payFreqLabel=lang==='fr'?'mensuel (12x/an)':'monthly (12x/year)';
+    paymentsPerYear=12; nTermDisplay=nT;
+  } else if(freq==='biweekly'){
+    disPay=mMtg*12/26; payLbl='/2wk';
+    payFreqLabel=lang==='fr'?'aux deux semaines (26x/an)':'biweekly (26x/year)';
+    paymentsPerYear=26; nTermDisplay=termYrs*26;
+  } else {
+    // Accelerated biweekly: pay half monthly payment every 2 weeks
+    // Results in one extra monthly payment per year → pays off faster
+    disPay=mMtg/2; payLbl='/2wk';
+    payFreqLabel=lang==='fr'?'bihebdomadaire accéléré (26x/an)':'accelerated biweekly (26x/year)';
+    paymentsPerYear=26; nTermDisplay=termYrs*26;
+  }
+
+  // Term figures (5 years)
+  const termInterest   = calcInterestPaid(principal, r, nA, nT);
+  const termBalance    = Math.max(calcBalance(principal, r, nA, nT), 0);
+  const termPrincipal  = principal - termBalance;
+  const termTotalPaid  = mMtg * nT;
+
+  // Full amortization figures
+  const fullInterest   = mMtg * nA - principal;
+  const fullTotalPaid  = mMtg * nA;
+
+  // Taxes (municipal + school) based on property value and location
+  const tax  = (price*(taxR[loc]||0.01)/12) + (price*0.00154/12);
+  const heat = 150; // standard heating estimate
+
+  // Total housing cost (monthly)
+  const totHousing = mMtg + tax + heat;
+
+  // GDS & TDS ratios
+  const mInc = inc / 12;
+  const GDS  = (totHousing / mInc) * 100;
+  const TDS  = ((totHousing + car + debts) / mInc) * 100;
+
+  // Qualification colour
+  let col, emoji;
+  if(GDS<=39 && TDS<=44)      { col='green';  emoji='✓'; }
+  else if(GDS<=43 || TDS<=48) { col='yellow'; emoji='~'; }
+  else                         { col='red';    emoji='!'; }
+
+  // Max purchase price back-calculation
+  const maxMPay  = mInc*0.39 - tax - heat;
+  const maxPrin  = maxMPay>0 ? maxMPay*(Math.pow(1+r,nA)-1)/(r*Math.pow(1+r,nA)) : 0;
+  const maxPrice = maxPrin + down;
+
+  return {
+    disPay, payLbl, payFreqLabel, paymentsPerYear,
+    nTermDisplay, nTermMonthly:nT, nAmortMonthly:nA,
+    mMtg, tax, heat, totHousing,
+    GDS, TDS, col, emoji,
+    maxPrice, principal, down,
+    termYrs, amort, annRate,
+    termInterest, termPrincipal, termBalance, termTotalPaid,
+    fullInterest, fullTotalPaid,
+    price
+  };
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1006,25 +1144,211 @@ function countUp(el,target,dur){
 // RENDER RESULTS
 // ═══════════════════════════════════════════════════════
 const cMap={green:{bar:'#15803d',bg:'#dcfce7',txt:'#15803d'},yellow:{bar:'#d97706',bg:'#fef3c7',txt:'#b45309'},red:{bar:'#dc2626',bg:'#fee2e2',txt:'#b91c1c'}};
-const fmt=n=>'$'+Math.round(Math.max(n,0)).toLocaleString('en-CA');
+const fmt=n=>'$'+(Math.max(n,0)).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtR=n=>'$'+Math.round(Math.max(n,0)).toLocaleString('en-CA');
+
+function donutSVG(principal, interest, size){
+  const total = principal + interest;
+  const r = size/2 - 8;
+  const cx = size/2, cy = size/2;
+  const circumference = 2 * Math.PI * r;
+  const principalFrac = principal / total;
+  const principalDash = circumference * principalFrac;
+  const interestDash  = circumference - principalDash;
+  // Interest arc first (starts at top), then principal
+  return `<svg class="donut-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e4e7ee" stroke-width="14"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#2460e8" stroke-width="14"
+      stroke-dasharray="${principalDash} ${interestDash}"
+      stroke-dashoffset="${circumference * 0.25}"
+      stroke-linecap="round" style="transition:stroke-dasharray 1s ease"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#c9a84c" stroke-width="14"
+      stroke-dasharray="${interestDash} ${principalDash}"
+      stroke-dashoffset="${circumference * 0.25 - principalDash}"
+      stroke-linecap="round" style="transition:stroke-dasharray 1s ease"/>
+  </svg>`;
+}
 
 function renderResults(){
-  const r=calcMtg();const c=cMap[r.col];const tl=T[lang];
-  const qLbl=tl['qual'+r.col.charAt(0).toUpperCase()+r.col.slice(1)+'Lbl'];
-  const qMsg=tl['qual'+r.col.charAt(0).toUpperCase()+r.col.slice(1)+'Msg'];
-  $('resHero').innerHTML=`<div class="res-bar" style="background:${c.bar}"></div><div class="res-status"><div class="res-icon" style="background:${c.bg};color:${c.txt}">${r.emoji}</div><div class="res-status-txt"><h4 style="color:${c.txt}">${qLbl}</h4><p>${qMsg}</p></div></div>`;
-  const n1=purpose==='purchase'?tl.lblPay:tl.lblNewPay;
-  const n4=purpose==='purchase'?tl.lblMax:tl.lblBal;
-  const v4=purpose==='purchase'?r.maxPrice:r.principal;
-  $('resNums').innerHTML=`<div class="res-num"><div class="res-num-val" id="rv1">$0</div><div class="res-num-lbl">${n1} ${r.payLbl}</div></div><div class="res-num"><div class="res-num-val" id="rv2">$0</div><div class="res-num-lbl">${tl.lblTax}</div></div><div class="res-num"><div class="res-num-val" id="rv3">$0</div><div class="res-num-lbl">${tl.lblTotal}</div></div><div class="res-num"><div class="res-num-val" id="rv4">$0</div><div class="res-num-lbl">${n4}</div></div>`;
-  setTimeout(()=>{countUp($('rv1'),r.disPay,900);countUp($('rv2'),r.tax,900);countUp($('rv3'),r.totHousing,900);countUp($('rv4'),v4,900);},100);
-  const gW=Math.min(r.GDS/50*100,100),tW=Math.min(r.TDS/55*100,100);
+  const r   = calcMtg();
+  const c   = cMap[r.col];
+  const tl  = T[lang];
+  const isFR = lang === 'fr';
+  const CAP  = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // ── Status banner ──────────────────────────────────────
+  const qLbl = tl['qual'+CAP(r.col)+'Lbl'];
+  const qMsg = tl['qual'+CAP(r.col)+'Msg'];
+  $('resHero').innerHTML=`
+    <div class="res-bar" style="background:${c.bar}"></div>
+    <div class="res-status">
+      <div class="res-icon" style="background:${c.bg};color:${c.txt}">${r.emoji}</div>
+      <div class="res-status-txt"><h4 style="color:${c.txt}">${qLbl}</h4><p>${qMsg}</p></div>
+    </div>`;
+
+  // ── 4 key numbers with count-up ────────────────────────
+  const n1 = purpose==='purchase' ? tl.lblPay : tl.lblNewPay;
+  const n4 = purpose==='purchase' ? tl.lblMax  : tl.lblBal;
+  const v4 = purpose==='purchase' ? r.maxPrice : r.principal;
+  $('resNums').innerHTML=`
+    <div class="res-num"><div class="res-num-val" id="rv1">$0</div><div class="res-num-lbl">${n1} ${r.payLbl}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv2">$0</div><div class="res-num-lbl">${tl.lblTax}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv3">$0</div><div class="res-num-lbl">${tl.lblTotal}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv4">$0</div><div class="res-num-lbl">${n4}</div></div>`;
+  setTimeout(()=>{
+    countUp($('rv1'),r.disPay,900);
+    countUp($('rv2'),r.tax,900);
+    countUp($('rv3'),r.totHousing,900);
+    countUp($('rv4'),v4,900);
+  },100);
+
+  // ── GDS / TDS ratio bars ───────────────────────────────
+  const gW=Math.min(r.GDS/50*100,100), tW=Math.min(r.TDS/55*100,100);
   const gC=r.GDS<=39?'#15803d':r.GDS<=43?'#d97706':'#dc2626';
   const tC=r.TDS<=44?'#15803d':r.TDS<=48?'#d97706':'#dc2626';
-  $('resRatios').innerHTML=`<div class="ratio-i"><div class="ratio-lbl">GDS</div><div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div><div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.gdsMax})</span></div></div><div class="ratio-i"><div class="ratio-lbl">TDS</div><div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div><div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.tdsMax})</span></div></div>`;
-  const tk=purpose==='renewal'?'tRen':'tPur';
-  const col=r.col.charAt(0).toUpperCase()+r.col.slice(1);
-  $('resTeaser').innerHTML=tl[tk+col]||'';
+  const gdsTip = isFR
+    ? 'Ratio des dépenses brutes de logement. Maximum permis : 39 %. Inclut hypothèque, taxes et chauffage.'
+    : 'Gross Debt Service ratio. Max allowed: 39%. Includes mortgage, taxes and heating costs.';
+  const tdsTip = isFR
+    ? 'Ratio du service de la dette total. Maximum permis : 44 %. Inclut le GDS plus toutes les autres dettes mensuelles.'
+    : 'Total Debt Service ratio. Max allowed: 44%. Includes GDS plus all other monthly debt payments.';
+  $('resRatios').innerHTML=`
+    <div class="ratio-i">
+      <div class="ratio-lbl" style="display:flex;align-items:center">GDS <span class="info-i" tabindex="0" style="margin-left:4px">i<span class="tip-pop">${gdsTip}</span></span></div>
+      <div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div>
+      <div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.gdsMax})</span></div>
+    </div>
+    <div class="ratio-i">
+      <div class="ratio-lbl" style="display:flex;align-items:center">TDS <span class="info-i" tabindex="0" style="margin-left:4px">i<span class="tip-pop">${tdsTip}</span></span></div>
+      <div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div>
+      <div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.tdsMax})</span></div>
+    </div>`;
+
+  // ── Teaser copy ────────────────────────────────────────
+  const tk = purpose==='renewal'?'tRen':'tPur';
+  $('resTeaser').innerHTML = tl[tk+CAP(r.col)] || '';
+  $('resDisc').textContent = tl.disc;
+
+  // ── SUMMARY TABLE + CHART ─────────────────────────────
+  const termLbl  = isFR ? `Terme ${r.termYrs} ans`   : `${r.termYrs}-Year Term`;
+  const amortLbl = isFR ? `Amort. ${r.amort} ans`    : `${r.amort}-Year Amort.`;
+  // Info tooltip helper
+  const tip = (label, tipEN, tipFR) => {
+    const tipText = isFR ? tipFR : tipEN;
+    return `${label}<span class="info-i" tabindex="0">i<span class="tip-pop">${tipText}</span></span>`;
+  };
+
+  const rows = [
+    [
+      tip(isFR?'Nombre de paiements':'Number of payments',
+        'Total number of payments made during this period.',
+        'Nombre total de paiements effectués pendant cette période.'),
+      r.nTermDisplay, r.nAmortMonthly
+    ],
+    [
+      tip(isFR?'Paiement hypothécaire':'Mortgage payment',
+        'The fixed amount paid each period covering principal and interest.',
+        'Le montant fixe payé chaque période couvrant le capital et les intérêts.'),
+      fmt(r.disPay)+r.payLbl, fmt(r.mMtg)+'/mo'
+    ],
+    [
+      tip(isFR?'Capital remboursé':'Principal paid',
+        'The portion of your payments that reduces your loan balance.',
+        'La portion de vos paiements qui réduit le solde de votre prêt.'),
+      fmt(r.termPrincipal), fmt(r.principal)
+    ],
+    [
+      tip(isFR?'Intérêts payés':'Interest paid',
+        'The cost of borrowing — paid to the lender on top of principal.',
+        'Le coût d\'emprunt — payé au prêteur en plus du capital.'),
+      fmt(r.termInterest), fmt(r.fullInterest)
+    ],
+    [
+      tip(isFR?'Coût total':'Total cost',
+        'Principal + interest combined — the full amount you will pay.',
+        'Capital + intérêts combinés — le montant total que vous paierez.'),
+      fmt(r.termTotalPaid), fmt(r.fullTotalPaid)
+    ],
+    [
+      tip(isFR?'Solde à la fin du terme':'Balance at term end',
+        'The remaining loan amount you will need to renew or pay off at the end of your term.',
+        'Le montant restant à renouveler ou rembourser à la fin de votre terme.'),
+      fmt(r.termBalance), '—'
+    ],
+  ];
+  const tableRows = rows.map((row,i)=>`
+    <tr>
+      <td class="row-cat">${row[0]}</td>
+      <td>${row[1]}</td>
+      <td>${row[2]}</td>
+    </tr>`).join('');
+
+  // Donut: principal vs interest over full amortization
+  const donut = donutSVG(r.principal, r.fullInterest, 110);
+  const totalCost = r.principal + r.fullInterest;
+  const principalPct = (r.principal/totalCost*100).toFixed(0);
+  const interestPct  = (r.fullInterest/totalCost*100).toFixed(0);
+
+  // Narrative
+  const freqWord = r.payFreqLabel;
+  const nar = isFR ? `
+    <p><span class="nar-icon">📅</span> Sur la période d'amortissement de <strong>${r.amort} ans</strong>, vous effectuerez <strong>${r.nAmortMonthly} paiements mensuels</strong> de <strong>${fmt(r.mMtg)}</strong>.</p>
+    <p><span class="nar-icon">💰</span> Vous aurez remboursé <strong>${fmt(r.principal)}</strong> en capital et <strong>${fmt(r.fullInterest)}</strong> en intérêts, pour un coût total de <strong>${fmt(r.fullTotalPaid)}</strong>.</p>
+    <p><span class="nar-icon">📆</span> Au terme de <strong>${r.termYrs} ans</strong>, vous aurez effectué <strong>${r.nTermDisplay} paiements</strong> (${freqWord}) de <strong>${fmt(r.disPay)}</strong>, remboursé <strong>${fmt(r.termPrincipal)}</strong> en capital et payé <strong>${fmt(r.termInterest)}</strong> en intérêts.</p>
+    <p><span class="nar-icon">🏦</span> Il vous restera un solde de <strong>${fmt(r.termBalance)}</strong> à renouveler.</p>
+  ` : `
+    <p><span class="nar-icon">📅</span> Over the <strong>${r.amort}-year amortization</strong>, you will make <strong>${r.nAmortMonthly} monthly payments</strong> of <strong>${fmt(r.mMtg)}</strong>.</p>
+    <p><span class="nar-icon">💰</span> You will pay <strong>${fmt(r.principal)}</strong> in principal and <strong>${fmt(r.fullInterest)}</strong> in interest, for a total of <strong>${fmt(r.fullTotalPaid)}</strong>.</p>
+    <p><span class="nar-icon">📆</span> Over the <strong>${r.termYrs}-year term</strong>, you will make <strong>${r.nTermDisplay} payments</strong> (${freqWord}) of <strong>${fmt(r.disPay)}</strong>, paying <strong>${fmt(r.termPrincipal)}</strong> in principal and <strong>${fmt(r.termInterest)}</strong> in interest.</p>
+    <p><span class="nar-icon">🏦</span> At the end of your term, your remaining balance will be <strong>${fmt(r.termBalance)}</strong>.</p>
+  `;
+
+  $('resSummary').innerHTML = `
+    <div class="res-section-title">${isFR?'Répartition principal / intérêts':'Principal vs. Interest Breakdown'}</div>
+    <div class="chart-wrap">
+      ${donut}
+      <div class="chart-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#2460e8"></div>
+          <span class="legend-label">${isFR?'Capital':'Principal'}</span>
+          <span class="legend-val">${fmtR(r.principal)} (${principalPct}%)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#c9a84c"></div>
+          <span class="legend-label">${isFR?'Intérêts':'Interest'}</span>
+          <span class="legend-val">${fmtR(r.fullInterest)} (${interestPct}%)</span>
+        </div>
+        <div class="legend-item" style="padding-top:4px;border-top:1px solid var(--gray-200);margin-top:4px">
+          <div class="legend-dot" style="background:var(--gray-300)"></div>
+          <span class="legend-label">${isFR?'Coût total':'Total cost'}</span>
+          <span class="legend-val">${fmtR(totalCost)}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="res-section-title">${isFR?'Sommaire des paiements':'Payment Summary'}</div>
+    <table class="sum-table">
+      <thead><tr>
+        <th>${isFR?'Catégorie':'Category'}</th>
+        <th>${termLbl} <span class="info-i" tabindex="0" style="font-size:0.55rem">i<span class="tip-pop">${isFR?'Période pendant laquelle votre taux est garanti — généralement 5 ans au Canada.':'The period your rate is locked in — typically 5 years in Canada.'}</span></span></th>
+        <th>${amortLbl} <span class="info-i" tabindex="0" style="font-size:0.55rem">i<span class="tip-pop">${isFR?'Durée totale pour rembourser entièrement votre hypothèque.':'Total time to fully pay off your mortgage.'}</span></span></th>
+      </tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+
+    <div class="res-section-title">${isFR?'Résumé hypothécaire':'Mortgage Summary'}</div>
+    <div class="res-narrative">${nar}</div>`;
+
+  // ── Broker CTA ─────────────────────────────────────────
+  $('resBrokerCta').innerHTML = `
+    <div class="res-broker-cta">
+      <h4>${isFR?'Un courtier peut vous faire économiser des milliers $':'A broker could save you thousands'}</h4>
+      <p>${isFR?`Même une réduction de 0,25 % sur votre taux vous économiserait environ ${fmtR(r.fullInterest*0.05)} en intérêts.`:`Even a 0.25% rate reduction could save you approximately ${fmtR(r.fullInterest*0.05)} in interest.`}</p>
+      <button class="btn-broker-cta" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        ${isFR?'Parler à un courtier — Gratuit':'Talk to a Broker — Free'}
+      </button>
+    </div>`;
 }
 
 // ═══════════════════════════════════════════════════════
