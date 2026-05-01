@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MortgageIQ — Free Quebec Mortgage Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0f1e3c;--navy-mid:#1a2f58;--blue:#2460e8;--blue-light:#4f7ef5;--sky:#eef3fd;--gold:#c9a84c;--green:#15803d;--green-soft:#dcfce7;--yellow:#b45309;--yellow-soft:#fef3c7;--red:#b91c1c;--red-soft:#fee2e2;--white:#fff;--gray-50:#f8f9fb;--gray-100:#f1f3f7;--gray-200:#e4e7ee;--gray-300:#cbd1dc;--gray-400:#9aa3b2;--gray-500:#6b7585;--gray-700:#374151;--gray-900:#111827;--shadow:0 2px 16px rgba(15,30,60,0.08);--shadow-lg:0 16px 56px rgba(15,30,60,0.16)}
+:root{--navy:#0f1e3c;--navy-mid:#1a2f58;--blue:#2460e8;--blue-light:#4f7ef5;--sky:#eef3fd;--gold:#c9a84c;--green:#15803d;--green-soft:#dcfce7;--yellow:#b45309;--red:#b91c1c;--white:#fff;--gray-50:#f8f9fb;--gray-100:#f1f3f7;--gray-200:#e4e7ee;--gray-300:#cbd1dc;--gray-400:#9aa3b2;--gray-500:#6b7585;--gray-700:#374151;--gray-900:#111827;--shadow-lg:0 16px 56px rgba(15,30,60,0.16)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-900);line-height:1.6;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--gray-900);line-height:1.6;overflow-x:hidden}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);height:60px;display:flex;align-items:center;padding:0 20px;gap:10px}
@@ -18,1259 +18,1149 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .nav-logo span{color:var(--blue)}
 .nav-pill{display:flex;align-items:center;gap:5px;background:var(--green-soft);color:var(--green);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:100px;white-space:nowrap}
 .nav-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
-
-/* LANG SWITCHER */
-.lang-switcher{display:flex;background:var(--gray-100);border-radius:100px;padding:3px;gap:2px;flex-shrink:0}
-.lang-btn{padding:4px 11px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:600;color:var(--gray-500);background:transparent;transition:all 0.18s;white-space:nowrap}
+.lang-sw{display:flex;background:var(--gray-100);border-radius:100px;padding:3px;gap:2px;flex-shrink:0}
+.lang-btn{padding:4px 11px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:600;color:var(--gray-500);background:transparent;transition:all 0.18s}
 .lang-btn.active{background:white;color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
 
 /* HERO */
 .hero{min-height:100svh;background:linear-gradient(155deg,#0b1730 0%,#142a68 52%,#1c4099 100%);display:flex;align-items:center;padding:80px 20px 48px;position:relative;overflow:hidden}
 .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;top:-100px;right:-100px;background:radial-gradient(circle,rgba(36,96,232,0.22) 0%,transparent 65%);pointer-events:none}
 .hero-inner{max-width:1080px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;z-index:2}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:0.74rem;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:18px}
-.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:0.74rem;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:18px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
 .hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,4.5vw,3.1rem);font-weight:700;color:white;line-height:1.12;letter-spacing:-0.03em;margin-bottom:18px}
 .hero h1 em{font-style:italic;color:#93c5fd}
 .hero-sub{font-size:1rem;color:rgba(255,255,255,0.65);max-width:400px;margin-bottom:32px;font-weight:300;line-height:1.75}
 .hero-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .btn-hero{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--navy);font-weight:700;font-size:0.95rem;padding:14px 28px;border-radius:100px;border:none;cursor:pointer;box-shadow:0 4px 18px rgba(201,168,76,0.38);text-decoration:none;transition:all 0.2s;font-family:'DM Sans',sans-serif}
-.btn-hero:hover{background:#dbb958;transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,168,76,0.46)}
+.btn-hero:hover{background:#dbb958;transform:translateY(-2px)}
 .hero-reassure{font-size:0.76rem;color:rgba(255,255,255,0.45)}
+.hero-reviews{display:flex;align-items:center;gap:10px;margin-top:28px}
+.rev-avatars{display:flex}
+.rev-av{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);margin-right:-8px;background:linear-gradient(135deg,#4f7ef5,#1a3a7c);display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:white}
+.rev-txt{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-left:14px}
+.rev-stars{color:#fbbf24;font-size:0.7rem;display:block;margin-bottom:1px}
 .hero-stats{display:flex;gap:28px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.1)}
 .hero-stat{color:rgba(255,255,255,0.5);font-size:0.78rem}
 .hero-stat strong{display:block;color:white;font-size:1.2rem;font-family:'Fraunces',serif;font-weight:600;margin-bottom:1px}
-.hero-reviews{display:flex;align-items:center;gap:10px;margin-top:28px}
-.review-avatars{display:flex}
-.review-avatar{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);margin-right:-8px;background:linear-gradient(135deg,#4f7ef5,#1a3a7c);display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:white}
-.review-text-sm{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-left:14px}
-.review-stars-sm{color:#fbbf24;font-size:0.7rem;display:block;margin-bottom:1px}
 
 /* CALC CARD */
 .calc-card{background:white;border-radius:20px;box-shadow:0 28px 72px rgba(0,0,0,0.26);overflow:hidden}
-.calc-progress{height:3px;background:var(--gray-100)}
-.calc-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),#6fa3f7);transition:width 0.5s cubic-bezier(.4,0,.2,1);border-radius:0 2px 2px 0}
-.step-indicator{display:flex;align-items:center;justify-content:space-between;padding:14px 22px 0}
-.step-dots{display:flex;gap:6px}
-.step-dot{width:7px;height:7px;border-radius:50%;background:var(--gray-200);transition:all 0.3s}
-.step-dot.active{background:var(--blue);width:18px;border-radius:4px}
-.step-dot.done{background:var(--green)}
-.step-counter{font-size:0.72rem;color:var(--gray-400);font-weight:500}
-.step-title-row{padding:10px 22px 16px;border-bottom:1px solid var(--gray-100)}
-.step-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;color:var(--navy);letter-spacing:-0.02em}
-.step-hint{font-size:0.76rem;color:var(--gray-400);margin-top:2px}
-.calc-body{padding:20px 22px 22px}
+.c-prog{height:3px;background:var(--gray-100)}
+.c-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),#6fa3f7);transition:width 0.5s cubic-bezier(.4,0,.2,1);border-radius:0 2px 2px 0}
+.c-ind{display:flex;align-items:center;justify-content:space-between;padding:14px 22px 0}
+.c-dots{display:flex;gap:6px}
+.c-dot{width:7px;height:7px;border-radius:50%;background:var(--gray-200);transition:all 0.3s}
+.c-dot.active{background:var(--blue);width:18px;border-radius:4px}
+.c-dot.done{background:var(--green)}
+.c-counter{font-size:0.72rem;color:var(--gray-400);font-weight:500}
+.c-title-row{padding:10px 22px 16px;border-bottom:1px solid var(--gray-100)}
+.c-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;color:var(--navy);letter-spacing:-0.02em}
+.c-hint{font-size:0.76rem;color:var(--gray-400);margin-top:2px}
+.c-body{padding:20px 22px 22px}
 
 /* FORM */
-.form-group{margin-bottom:16px}
-.form-label{display:flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--gray-700);margin-bottom:6px}
-.form-label .opt{color:var(--gray-400);font-weight:400;font-size:0.72rem}
-.form-input{width:100%;padding:11px 13px;border:1.5px solid var(--gray-200);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--gray-900);background:white;outline:none;transition:border-color 0.15s,box-shadow 0.15s;-webkit-appearance:none}
-.form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,96,232,0.1)}
-.form-input::placeholder{color:var(--gray-300)}
-.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aa3b2' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
-.input-with-prefix{position:relative}
-.input-prefix{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:0.88rem;color:var(--gray-400);font-weight:500;pointer-events:none}
-.input-with-prefix .form-input{padding-left:26px}
-.down-hint{font-size:0.73rem;margin-top:5px;transition:color 0.2s;min-height:16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{margin-bottom:16px}
+.fl{display:flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--gray-700);margin-bottom:6px}
+.fl .opt{color:var(--gray-400);font-weight:400;font-size:0.72rem}
+.fi{width:100%;padding:11px 13px;border:1.5px solid var(--gray-200);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--gray-900);background:white;outline:none;transition:border-color 0.15s,box-shadow 0.15s;-webkit-appearance:none}
+.fi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,96,232,0.1)}
+.fi::placeholder{color:var(--gray-300)}
+.fsel{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aa3b2' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.pfx{position:relative}
+.pfx-lbl{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:0.88rem;color:var(--gray-400);font-weight:500;pointer-events:none}
+.pfx .fi{padding-left:26px}
+.down-hint{font-size:0.73rem;margin-top:5px;min-height:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .err{font-size:0.73rem;color:var(--red);margin-top:4px;display:none}
-.err.visible{display:block;animation:fadeUp 0.2s ease}
+.err.on{display:block;animation:fUp 0.2s ease}
 
 /* CHIPS */
-.chip-group{display:flex;flex-wrap:wrap;gap:7px}
-.chip{padding:8px 14px;border:1.5px solid var(--gray-200);border-radius:9px;cursor:pointer;font-size:0.82rem;color:var(--gray-500);font-weight:500;background:white;transition:all 0.15s;user-select:none;white-space:nowrap}
-.chip:hover{border-color:var(--blue-light);color:var(--blue);background:var(--sky)}
-.chip.selected{border-color:var(--blue);color:var(--blue);background:var(--sky);font-weight:600}
-.chip-half{flex:1 0 calc(50% - 4px);text-align:center}
-.chip-full{flex:1 0 100%;text-align:center}
+.cg{display:flex;flex-wrap:wrap;gap:7px}
+.ch{padding:8px 14px;border:1.5px solid var(--gray-200);border-radius:9px;cursor:pointer;font-size:0.82rem;color:var(--gray-500);font-weight:500;background:white;transition:all 0.15s;user-select:none;white-space:nowrap}
+.ch:hover{border-color:var(--blue-light);color:var(--blue);background:var(--sky)}
+.ch.sel{border-color:var(--blue);color:var(--blue);background:var(--sky);font-weight:600}
+.ch-h{flex:1 0 calc(50% - 4px);text-align:center}
+.ch-f{flex:1 0 100%;text-align:center}
 
-/* PURPOSE TOGGLE — large prominent chips at top of step 1 */
-.purpose-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.purpose-chip{padding:14px 10px;border:2px solid var(--gray-200);border-radius:12px;cursor:pointer;text-align:center;transition:all 0.18s;user-select:none;background:white}
-.purpose-chip:hover{border-color:var(--blue-light);background:var(--sky)}
-.purpose-chip.selected{border-color:var(--blue);background:var(--sky)}
-.purpose-chip-icon{font-size:1.3rem;margin-bottom:5px}
-.purpose-chip-label{font-size:0.85rem;font-weight:600;color:var(--gray-700);display:block}
-.purpose-chip-sub{font-size:0.7rem;color:var(--gray-400);display:block;margin-top:2px}
-.purpose-chip.selected .purpose-chip-label{color:var(--blue)}
-
-/* Renewal-only field */
-.renewal-field{display:none}
-.renewal-field.show{display:block}
+/* PURPOSE CHIPS */
+.pur-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.pur-ch{padding:14px 10px;border:2px solid var(--gray-200);border-radius:12px;cursor:pointer;text-align:center;transition:all 0.18s;user-select:none;background:white}
+.pur-ch:hover{border-color:var(--blue-light);background:var(--sky)}
+.pur-ch.sel{border-color:var(--blue);background:var(--sky)}
+.pur-icon{font-size:1.3rem;margin-bottom:5px}
+.pur-lbl{font-size:0.85rem;font-weight:600;color:var(--gray-700);display:block}
+.pur-sub{font-size:0.7rem;color:var(--gray-400);display:block;margin-top:2px}
+.pur-ch.sel .pur-lbl{color:var(--blue)}
+.renew-f{display:none}
+.renew-f.on{display:block}
 
 /* RATE PILL */
 .rate-pill{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--sky);border:1.5px solid rgba(36,96,232,0.15);border-radius:10px}
 .rate-val{font-size:1.35rem;font-weight:700;color:var(--blue);font-family:'Fraunces',serif}
-.rate-label{font-size:0.74rem;color:var(--gray-400)}
-.rate-locked{font-size:0.72rem;color:var(--gray-400);display:flex;align-items:center;gap:4px}
+.rate-lbl{font-size:0.74rem;color:var(--gray-400)}
+.rate-lock{font-size:0.72rem;color:var(--gray-400);display:flex;align-items:center;gap:4px}
 
-/* NAV BUTTONS */
-.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100)}
+/* STEP NAV */
+.snav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100)}
 .btn-back{background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:0.83rem;font-weight:500;display:flex;align-items:center;gap:4px;font-family:'DM Sans',sans-serif;padding:8px 4px;border-radius:6px;transition:color 0.15s}
 .btn-back:hover{color:var(--gray-700)}
 .btn-next{display:flex;align-items:center;gap:8px;background:var(--blue);color:white;font-weight:600;font-size:0.9rem;padding:11px 22px;border-radius:100px;border:none;cursor:pointer;box-shadow:0 3px 12px rgba(36,96,232,0.28);font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.btn-next:hover{background:#1a4fd8;transform:translateY(-1px);box-shadow:0 6px 18px rgba(36,96,232,0.35)}
+.btn-next:hover{background:#1a4fd8;transform:translateY(-1px)}
 
 /* RESULTS */
-.results-hero{padding:18px 22px 16px;background:var(--gray-50);border-bottom:1px solid var(--gray-100)}
-.result-color-bar{height:4px;border-radius:100px;width:100%;margin-bottom:14px}
-.result-status{display:flex;align-items:flex-start;gap:10px}
-.result-status-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:700}
-.result-status-text h4{font-size:0.9rem;font-weight:700;margin-bottom:3px}
-.result-status-text p{font-size:0.78rem;line-height:1.5;color:var(--gray-500)}
-.result-numbers{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;margin:0 22px}
-.result-num{background:white;padding:13px 14px;text-align:center}
-.result-num-val{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;color:var(--navy);letter-spacing:-0.02em;line-height:1.1}
-.result-num-lbl{font-size:0.7rem;color:var(--gray-400);margin-top:3px}
-.result-ratios{display:flex;gap:16px;padding:14px 22px}
-.ratio-item{flex:1}
-.ratio-label{font-size:0.68rem;color:var(--gray-400);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px}
-.ratio-bar-wrap{height:5px;background:var(--gray-200);border-radius:5px;overflow:hidden;margin-bottom:3px}
-.ratio-bar{height:100%;border-radius:5px;transition:width 0.6s ease}
+.res-hero{padding:18px 22px 16px;background:var(--gray-50);border-bottom:1px solid var(--gray-100)}
+.res-bar{height:4px;border-radius:100px;width:100%;margin-bottom:14px}
+.res-status{display:flex;align-items:flex-start;gap:10px}
+.res-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:700}
+.res-status-txt h4{font-size:0.9rem;font-weight:700;margin-bottom:3px}
+.res-status-txt p{font-size:0.78rem;line-height:1.5;color:var(--gray-500)}
+.res-nums{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;margin:0 22px}
+.res-num{background:white;padding:13px 14px;text-align:center}
+.res-num-val{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;color:var(--navy);letter-spacing:-0.02em;line-height:1.1}
+.res-num-lbl{font-size:0.7rem;color:var(--gray-400);margin-top:3px}
+.res-ratios{display:flex;gap:16px;padding:14px 22px}
+.ratio-i{flex:1}
+.ratio-lbl{font-size:0.68rem;color:var(--gray-400);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px}
+.ratio-bw{height:5px;background:var(--gray-200);border-radius:5px;overflow:hidden;margin-bottom:3px}
+.ratio-b{height:100%;border-radius:5px;transition:width 0.6s ease}
 .ratio-val{font-size:0.75rem;font-weight:600}
-.results-cta-area{padding:0 22px 20px}
-.result-teaser{font-size:0.82rem;color:var(--gray-500);margin-bottom:14px;line-height:1.55}
-.result-teaser strong{color:var(--navy)}
-.btn-unlock{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),#1a4fd8);color:white;font-weight:700;font-size:0.95rem;border:none;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(36,96,232,0.32);transition:all 0.2s}
-.btn-unlock:hover{box-shadow:0 8px 26px rgba(36,96,232,0.4);transform:translateY(-1px)}
-.disclaimer{font-size:0.68rem;color:var(--gray-400);text-align:center;margin-top:10px;line-height:1.5}
+.res-cta{padding:0 22px 20px}
+.res-teaser{font-size:0.82rem;color:var(--gray-500);margin-bottom:14px;line-height:1.55}
+.res-teaser strong{color:var(--navy)}
+.disc{font-size:0.68rem;color:var(--gray-400);text-align:center;margin-top:10px;line-height:1.5}
 
 /* CONTACT */
-.contact-header{padding:16px 22px 14px;background:var(--sky);border-bottom:1px solid rgba(36,96,232,0.1)}
-.contact-header h4{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:3px}
-.contact-header p{font-size:0.75rem;color:var(--gray-500)}
-.phone-row{display:flex}
-.phone-cc{padding:11px 12px;background:var(--gray-100);border:1.5px solid var(--gray-200);border-right:none;border-radius:10px 0 0 10px;font-size:0.88rem;color:var(--gray-500);white-space:nowrap;display:flex;align-items:center}
-.phone-row .form-input{border-radius:0 10px 10px 0}
-.consent-label{display:flex;align-items:flex-start;gap:10px;background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:10px;padding:12px;cursor:pointer;transition:border-color 0.15s;margin-bottom:14px}
-.consent-label:hover{border-color:var(--gray-300)}
-.consent-label.checked{border-color:var(--blue);background:var(--sky)}
-.consent-box-check{width:18px;height:18px;border-radius:5px;flex-shrink:0;margin-top:1px;border:2px solid var(--gray-300);background:white;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.consent-label.checked .consent-box-check{background:var(--blue);border-color:var(--blue)}
-.consent-box-check svg{display:none}
-.consent-label.checked .consent-box-check svg{display:block}
-.consent-text{font-size:0.75rem;color:var(--gray-500);line-height:1.5}
-.btn-submit{width:100%;background:linear-gradient(135deg,var(--blue),#1a4fd8);color:white;font-weight:700;font-size:0.95rem;padding:14px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(36,96,232,0.32);transition:all 0.2s}
-.btn-submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 26px rgba(36,96,232,0.4)}
-.btn-submit:disabled{opacity:0.65;cursor:not-allowed;transform:none}
-.submit-trust{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:14px}
-.trust-item{display:flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--gray-400)}
-.trust-item svg{color:var(--green)}
+.con-hdr{padding:16px 22px 14px;background:var(--sky);border-bottom:1px solid rgba(36,96,232,0.1)}
+.con-hdr h4{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.con-hdr p{font-size:0.75rem;color:var(--gray-500)}
+.ph-row{display:flex}
+.ph-cc{padding:11px 12px;background:var(--gray-100);border:1.5px solid var(--gray-200);border-right:none;border-radius:10px 0 0 10px;font-size:0.88rem;color:var(--gray-500);white-space:nowrap;display:flex;align-items:center}
+.ph-row .fi{border-radius:0 10px 10px 0}
+.ph-why{display:inline-flex;align-items:center;gap:3px;font-size:0.72rem;color:var(--blue);cursor:pointer;margin-left:6px;font-weight:500;border:none;background:none;font-family:'DM Sans',sans-serif;padding:0;text-decoration:underline;text-underline-offset:2px}
+.ph-tip{display:none;background:var(--navy);color:white;font-size:0.73rem;padding:10px 13px;border-radius:9px;margin-top:7px;line-height:1.5;position:relative}
+.ph-tip::before{content:'';position:absolute;top:-5px;left:16px;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:5px solid var(--navy)}
+.ph-tip.on{display:block;animation:fUp 0.15s ease}
+.consent-lbl{display:flex;align-items:flex-start;gap:10px;background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:10px;padding:12px;cursor:pointer;transition:border-color 0.15s;margin-bottom:14px}
+.consent-lbl:hover{border-color:var(--gray-300)}
+.consent-lbl.chk{border-color:var(--blue);background:var(--sky)}
+.consent-box{width:18px;height:18px;border-radius:5px;flex-shrink:0;margin-top:1px;border:2px solid var(--gray-300);background:white;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.consent-lbl.chk .consent-box{background:var(--blue);border-color:var(--blue)}
+.consent-box svg{display:none}
+.consent-lbl.chk .consent-box svg{display:block}
+.consent-txt{font-size:0.75rem;color:var(--gray-500);line-height:1.5}
+.btn-sub{width:100%;background:linear-gradient(135deg,var(--blue),#1a4fd8);color:white;font-weight:700;font-size:0.95rem;padding:14px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(36,96,232,0.32);transition:all 0.2s}
+.btn-sub:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 26px rgba(36,96,232,0.4)}
+.btn-sub:disabled{opacity:0.65;cursor:not-allowed;transform:none}
+.trust-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:14px}
+.ti{display:flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--gray-400)}
+.ti svg{color:var(--green)}
+
+/* SOCIAL PROOF */
+.sp-strip{display:flex;align-items:center;gap:10px;background:var(--green-soft);border:1px solid #86efac;border-radius:10px;padding:11px 14px;margin-bottom:16px}
+.sp-avs{display:flex;flex-shrink:0}
+.sp-av{width:24px;height:24px;border-radius:50%;border:2px solid white;margin-right:-7px;background:linear-gradient(135deg,#4f7ef5,#1a3a7c);display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;color:white}
+.sp-txt{font-size:0.75rem;color:var(--green);font-weight:500;margin-left:12px;line-height:1.4}
+.sp-txt strong{display:block;font-size:0.8rem}
 
 /* STEP PANELS */
-.step-panel{display:none}
-.step-panel.active{display:block;animation:fadeUp 0.25s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sp{display:none}
+.sp.on{display:block;animation:fUp 0.25s ease}
+@keyframes fUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scIn{from{transform:scale(0.88);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* FEATURES */
-.section-features{padding:72px 20px;background:white;border-top:1px solid var(--gray-100)}
-.section-inner{max-width:1080px;margin:0 auto}
-.section-eyebrow{text-align:center;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.section-title{text-align:center;font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:44px}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.feature-card{border:1px solid var(--gray-200);border-radius:16px;padding:24px 20px;transition:transform 0.2s,box-shadow 0.2s}
-.feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.feature-icon{width:40px;height:40px;border-radius:10px;background:var(--sky);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.feature-card h4{font-size:0.95rem;font-weight:600;color:var(--navy);margin-bottom:7px}
-.feature-card p{font-size:0.83rem;color:var(--gray-500);line-height:1.65}
+.sec-feat{padding:72px 20px;background:white;border-top:1px solid var(--gray-100)}
+.sec-in{max-width:1080px;margin:0 auto}
+.sec-ey{text-align:center;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.sec-ttl{text-align:center;font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:44px}
+.feat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-c{border:1px solid var(--gray-200);border-radius:16px;padding:24px 20px;transition:transform 0.2s,box-shadow 0.2s}
+.feat-c:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.feat-ic{width:40px;height:40px;border-radius:10px;background:var(--sky);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat-c h4{font-size:0.95rem;font-weight:600;color:var(--navy);margin-bottom:7px}
+.feat-c p{font-size:0.83rem;color:var(--gray-500);line-height:1.65}
 
 /* REVIEWS */
-.section-reviews{padding:64px 20px;background:var(--gray-50);border-top:1px solid var(--gray-100)}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.review-card{background:white;border:1px solid var(--gray-200);border-radius:14px;padding:20px}
-.review-stars{color:#f59e0b;font-size:0.85rem;margin-bottom:8px}
-.review-body{font-size:0.83rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px;font-style:italic}
-.review-author{font-size:0.75rem;font-weight:600;color:var(--gray-500)}
+.sec-rev{padding:64px 20px;background:var(--gray-50);border-top:1px solid var(--gray-100)}
+.rev-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rev-c{background:white;border:1px solid var(--gray-200);border-radius:14px;padding:20px}
+.rev-stars{color:#f59e0b;font-size:0.85rem;margin-bottom:8px}
+.rev-body{font-size:0.83rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px;font-style:italic}
+.rev-auth{font-size:0.75rem;font-weight:600;color:var(--gray-500)}
 
 /* FOOTER */
 footer{background:var(--navy);color:rgba(255,255,255,0.4);text-align:center;padding:36px 20px;font-size:0.75rem;line-height:1.8}
 footer strong{color:rgba(255,255,255,0.7);font-family:'Fraunces',serif;font-size:1rem;font-weight:600;display:block;margin-bottom:6px}
 footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,20,40,0.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
-.modal-overlay.open{display:flex;animation:fadeUp 0.2s ease}
-.modal-box{background:white;border-radius:22px;padding:44px 36px;max-width:440px;width:100%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.22);animation:scaleIn 0.28s cubic-bezier(0.34,1.56,0.64,1)}
-@keyframes scaleIn{from{transform:scale(0.88);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-check{width:68px;height:68px;border-radius:50%;background:var(--green-soft);margin:0 auto 18px;display:flex;align-items:center;justify-content:center}
+/* OVERLAYS / MODALS */
+.ov{display:none;position:fixed;inset:0;z-index:998;background:rgba(10,20,40,0.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex;animation:fUp 0.22s ease}
+.ov-box{background:white;border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.2);animation:scIn 0.26s cubic-bezier(0.34,1.56,0.64,1)}
+.ov-emoji{font-size:2rem;margin-bottom:10px;text-align:center}
+.ov-box h3{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;letter-spacing:-0.02em;text-align:center}
+.ov-box p{font-size:0.83rem;color:var(--gray-500);line-height:1.6;margin-bottom:18px;text-align:center}
+.btn-ov-main{width:100%;padding:13px;background:linear-gradient(135deg,var(--blue),#1a4fd8);color:white;font-weight:700;font-size:0.92rem;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:10px;transition:all 0.2s;box-shadow:0 3px 12px rgba(36,96,232,0.28)}
+.btn-ov-main:hover{transform:translateY(-1px)}
+.btn-ov-sec{width:100%;padding:10px;background:none;border:1.5px solid var(--gray-200);color:var(--gray-500);font-weight:500;font-size:0.85rem;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.btn-ov-sec:hover{border-color:var(--gray-300);color:var(--gray-700)}
+.btn-ov-ghost{background:none;border:none;color:var(--gray-400);font-size:0.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;padding:4px;display:block;margin:0 auto}
+
+/* PRIVACY MODAL */
+.priv-box{background:white;border-radius:20px;padding:32px;max-width:520px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.2);animation:scIn 0.26s cubic-bezier(0.34,1.56,0.64,1);text-align:left}
+.priv-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.priv-hdr h3{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--navy)}
+.priv-close-x{background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:1.2rem;line-height:1}
+.priv-body{font-size:0.81rem;color:var(--gray-500);line-height:1.7;max-height:340px;overflow-y:auto;padding-right:4px;margin-bottom:16px}
+.priv-body p{margin-bottom:12px}
+.priv-body strong{color:var(--navy);display:block;margin-bottom:2px}
+
+/* MODAL SUCCESS */
+.modal-box{background:white;border-radius:22px;padding:44px 36px;max-width:440px;width:100%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.22);animation:scIn 0.28s cubic-bezier(0.34,1.56,0.64,1)}
+.modal-chk{width:68px;height:68px;border-radius:50%;background:var(--green-soft);margin:0 auto 18px;display:flex;align-items:center;justify-content:center}
 .modal-box h2{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--navy);margin-bottom:10px}
 .modal-box p{color:var(--gray-500);font-size:0.88rem;line-height:1.65;margin-bottom:22px}
 .btn-modal-done{background:var(--navy);color:white;font-family:'DM Sans',sans-serif;font-weight:600;padding:12px 28px;border-radius:100px;border:none;cursor:pointer;font-size:0.9rem;transition:background 0.2s}
 .btn-modal-done:hover{background:var(--navy-mid)}
-.modal-next-step{margin-top:16px;padding:14px;background:var(--gray-50);border-radius:12px;font-size:0.78rem;color:var(--gray-500)}
-.modal-next-step strong{display:block;color:var(--navy);margin-bottom:3px;font-size:0.83rem}
+.modal-next{margin-top:16px;padding:14px;background:var(--gray-50);border-radius:12px;font-size:0.78rem;color:var(--gray-500)}
+.modal-next strong{display:block;color:var(--navy);margin-bottom:3px;font-size:0.83rem}
 
 /* MOBILE */
 @media(max-width:860px){
   .hero-inner{grid-template-columns:1fr;gap:32px}
   .hero{padding-top:76px;min-height:auto;padding-bottom:40px}
   .hero h1{font-size:1.9rem}
-  .hero-sub{font-size:0.93rem}
-  .features-grid,.reviews-grid{grid-template-columns:1fr}
-  .grid2{grid-template-columns:1fr}
+  .feat-g,.rev-g{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .hero-stats,.hero-reviews{display:none}
-  .calc-body{padding:16px 16px 20px}
-  .step-indicator{padding:12px 16px 0}
-  .step-title-row{padding:8px 16px 12px}
-  .results-hero{padding:14px 16px}
-  .result-ratios{padding:14px 16px}
-  .result-numbers{margin:0 16px}
-  .results-cta-area{padding:0 16px 18px}
-  .contact-header{padding:14px 16px}
-  .chip-half{flex:1 0 100%}
-  .purpose-group{grid-template-columns:1fr 1fr}
+  .c-body{padding:16px 16px 20px}
+  .c-ind{padding:12px 16px 0}
+  .c-title-row{padding:8px 16px 12px}
+  .res-hero{padding:14px 16px}
+  .res-ratios{padding:14px 16px}
+  .res-nums{margin:0 16px}
+  .res-cta{padding:0 16px 18px}
+  .con-hdr{padding:14px 16px}
+  .ch-h{flex:1 0 100%}
   .nav-pill{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Mortgage<span>IQ</span></div>
-  <div class="nav-pill" id="navPill">Licensed Quebec Broker</div>
-  <div class="lang-switcher">
+  <div class="nav-pill" id="navPill"></div>
+  <div class="lang-sw">
     <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
     <button class="lang-btn" id="btnFR" onclick="setLang('fr')">FR</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span><span data-t="eyebrow"></span></div>
-      <h1 data-t="h1"></h1>
-      <p class="hero-sub" data-t="sub"></p>
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span id="hEyebrow"></span></div>
+      <h1 id="hH1"></h1>
+      <p class="hero-sub" id="hSub"></p>
       <div class="hero-cta-row">
-        <a href="#calculator" class="btn-hero" onclick="scrollToCalc(event)">
-          <span data-t="cta"></span>
+        <a href="#calc" class="btn-hero" onclick="scrollCalc(event)">
+          <span id="hCta"></span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <span class="hero-reassure" data-t="noCredit"></span>
+        <span class="hero-reassure" id="hNoCredit"></span>
       </div>
       <div class="hero-reviews">
-        <div class="review-avatars">
-          <div class="review-avatar">ML</div>
-          <div class="review-avatar">SP</div>
-          <div class="review-avatar">KT</div>
-          <div class="review-avatar">JR</div>
-        </div>
-        <div class="review-text-sm">
-          <span class="review-stars-sm">★★★★★</span>
-          <span data-t="reviewCount"></span>
-        </div>
+        <div class="rev-avatars"><div class="rev-av">ML</div><div class="rev-av">SP</div><div class="rev-av">KT</div><div class="rev-av">JR</div></div>
+        <div class="rev-txt"><span class="rev-stars">★★★★★</span><span id="hRevCount"></span></div>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>30+</strong><span data-t="stat1"></span></div>
-        <div class="hero-stat"><strong>24h</strong><span data-t="stat2"></span></div>
-        <div class="hero-stat"><strong>$0</strong><span data-t="stat3"></span></div>
+        <div class="hero-stat"><strong>30+</strong><span id="hStat1"></span></div>
+        <div class="hero-stat"><strong>24h</strong><span id="hStat2"></span></div>
+        <div class="hero-stat"><strong>$0</strong><span id="hStat3"></span></div>
       </div>
     </div>
 
-    <!-- CALCULATOR CARD -->
-    <div id="calculator">
+    <div id="calc">
       <div class="calc-card">
-        <div class="calc-progress"><div class="calc-progress-fill" id="progressFill" style="width:20%"></div></div>
-        <div class="step-indicator">
-          <div class="step-dots">
-            <div class="step-dot active" id="dot1"></div>
-            <div class="step-dot" id="dot2"></div>
-            <div class="step-dot" id="dot3"></div>
-            <div class="step-dot" id="dot4"></div>
-            <div class="step-dot" id="dot5"></div>
+        <div class="c-prog"><div class="c-prog-fill" id="progFill" style="width:20%"></div></div>
+        <div class="c-ind">
+          <div class="c-dots">
+            <div class="c-dot active" id="d1"></div><div class="c-dot" id="d2"></div>
+            <div class="c-dot" id="d3"></div><div class="c-dot" id="d4"></div><div class="c-dot" id="d5"></div>
           </div>
-          <div class="step-counter" id="stepCounter"></div>
+          <div class="c-counter" id="stepCtr"></div>
         </div>
 
-        <!-- STEP 1: Property + Purpose -->
-        <div class="step-panel active" id="step1">
-          <div class="step-title-row">
-            <div class="step-title" data-t="s1title"></div>
-            <div class="step-hint" data-t="s1hint"></div>
-          </div>
-          <div class="calc-body">
-            <!-- PURPOSE TOGGLE -->
-            <div class="form-group">
-              <label class="form-label" data-t="purposeLabel"></label>
-              <div class="purpose-group" id="purposeGroup">
-                <div class="purpose-chip selected" onclick="pickPurpose(this,'purchase')" id="chipPurchase">
-                  <div class="purpose-chip-icon">🏠</div>
-                  <span class="purpose-chip-label" data-t="purposePurchase"></span>
-                  <span class="purpose-chip-sub" data-t="purposePurchaseSub"></span>
+        <!-- STEP 1 -->
+        <div class="sp on" id="step1">
+          <div class="c-title-row"><div class="c-title" id="s1t"></div><div class="c-hint" id="s1h"></div></div>
+          <div class="c-body">
+            <div class="fg">
+              <label class="fl" id="purLbl"></label>
+              <div class="pur-g">
+                <div class="pur-ch sel" onclick="setPurpose(this,'purchase')" id="cpPurchase">
+                  <div class="pur-icon">🏠</div>
+                  <span class="pur-lbl" id="purPurchLbl"></span>
+                  <span class="pur-sub" id="purPurchSub"></span>
                 </div>
-                <div class="purpose-chip" onclick="pickPurpose(this,'renewal')" id="chipRenewal">
-                  <div class="purpose-chip-icon">🔄</div>
-                  <span class="purpose-chip-label" data-t="purposeRenewal"></span>
-                  <span class="purpose-chip-sub" data-t="purposeRenewalSub"></span>
+                <div class="pur-ch" onclick="setPurpose(this,'renewal')" id="cpRenewal">
+                  <div class="pur-icon">🔄</div>
+                  <span class="pur-lbl" id="purRenLbl"></span>
+                  <span class="pur-sub" id="purRenSub"></span>
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <label class="form-label" data-t="propPriceLabel"></label>
-              <div class="input-with-prefix">
-                <span class="input-prefix">$</span>
-                <input type="text" class="form-input" id="propPrice" oninput="fmtCurrency(this);updateDownHint()" inputmode="numeric" data-ph="propPricePh">
-              </div>
-              <div class="err" id="errPrice" data-t="errPrice"></div>
+            <div class="fg">
+              <label class="fl" id="lPropPrice"></label>
+              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="propPrice" oninput="fmtC(this);updDown()" inputmode="numeric" placeholder="450,000"></div>
+              <div class="err" id="ePropPrice"></div>
             </div>
-
-            <!-- PURCHASE-only: down payment -->
-            <div class="form-group" id="downPayGroup">
-              <label class="form-label" data-t="downLabel"></label>
-              <div class="input-with-prefix">
-                <span class="input-prefix">$</span>
-                <input type="text" class="form-input" id="downPay" oninput="fmtCurrency(this);updateDownHint()" inputmode="numeric" data-ph="downPh">
+            <div class="fg" id="downGrp">
+              <label class="fl" id="lDown"></label>
+              <div class="cg" id="downPctG" style="margin-bottom:8px">
+                <div class="ch" onclick="applyPct(5)" data-p="5">5%</div>
+                <div class="ch" onclick="applyPct(10)" data-p="10">10%</div>
+                <div class="ch" onclick="applyPct(15)" data-p="15">15%</div>
+                <div class="ch" onclick="applyPct(20)" data-p="20">20%+</div>
               </div>
+              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="downPay" oninput="fmtC(this);updDown();clearPctCh()" inputmode="numeric" placeholder="90,000"></div>
               <div class="down-hint" id="downHint"></div>
-              <div class="err" id="errDown" data-t="errDown"></div>
+              <div class="err" id="eDown"></div>
             </div>
-
-            <!-- RENEWAL-only: remaining balance -->
-            <div class="form-group renewal-field" id="balanceGroup">
-              <label class="form-label" data-t="balanceLabel"></label>
-              <div class="input-with-prefix">
-                <span class="input-prefix">$</span>
-                <input type="text" class="form-input" id="remainBal" oninput="fmtCurrency(this)" inputmode="numeric" data-ph="balancePh">
-              </div>
-              <div class="err" id="errBalance" data-t="errBalance"></div>
+            <div class="fg renew-f" id="balGrp">
+              <label class="fl" id="lBal"></label>
+              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="remainBal" oninput="fmtC(this)" inputmode="numeric" placeholder="280,000"></div>
+              <div class="err" id="eBal"></div>
             </div>
-
-            <!-- RENEWAL-only: current lender -->
-            <div class="form-group renewal-field" id="lenderGroup">
-              <label class="form-label" data-t="lenderLabel"></label>
-              <select class="form-input form-select" id="currentLender">
-                <option value="" data-t="lenderPh"></option>
-                <option value="bmo">BMO</option>
-                <option value="rbc">RBC</option>
-                <option value="td">TD Bank</option>
-                <option value="scotiabank">Scotiabank</option>
-                <option value="cibc">CIBC</option>
-                <option value="desjardins">Desjardins</option>
-                <option value="national">Banque Nationale</option>
-                <option value="other" data-t="lenderOther"></option>
+            <div class="fg renew-f" id="lenderGrp">
+              <label class="fl" id="lLender"></label>
+              <select class="fi fsel" id="curLender">
+                <option value="" id="lenderPh"></option>
+                <option value="bmo">BMO</option><option value="rbc">RBC</option>
+                <option value="td">TD Bank</option><option value="scotiabank">Scotiabank</option>
+                <option value="cibc">CIBC</option><option value="desjardins">Desjardins</option>
+                <option value="national">Banque Nationale</option><option value="other" id="lenderOtherOpt"></option>
               </select>
             </div>
-
-            <div class="form-group">
-              <label class="form-label" data-t="locationLabel"></label>
-              <select class="form-input form-select" id="location">
-                <option value="" data-t="locationPh"></option>
-                <option value="montreal">Montréal</option>
-                <option value="laval">Laval</option>
-                <option value="longueuil">Longueuil</option>
-                <option value="brossard">Brossard</option>
-                <option value="west-island">West Island</option>
-                <option value="south-shore">South Shore</option>
-                <option value="other" data-t="locationOther"></option>
+            <div class="fg">
+              <label class="fl" id="lLocation"></label>
+              <select class="fi fsel" id="location">
+                <option value="" id="locPh"></option>
+                <option value="montreal">Montréal</option><option value="laval">Laval</option>
+                <option value="longueuil">Longueuil</option><option value="brossard">Brossard</option>
+                <option value="west-island">West Island</option><option value="south-shore">South Shore</option>
+                <option value="other" id="locOtherOpt"></option>
               </select>
-              <div class="err" id="errLocation" data-t="errLocation"></div>
+              <div class="err" id="eLoc"></div>
             </div>
-            <div class="step-nav">
-              <div></div>
-              <button class="btn-next" onclick="goTo(2)"><span data-t="continue"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="snav"><div></div>
+              <button class="btn-next" onclick="goTo(2)"><span id="btnCont1"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 2: Terms -->
-        <div class="step-panel" id="step2">
-          <div class="step-title-row">
-            <div class="step-title" data-t="s2title"></div>
-            <div class="step-hint" data-t="s2hint"></div>
-          </div>
-          <div class="calc-body">
-            <div class="form-group">
-              <label class="form-label" data-t="rateLabel"></label>
+        <!-- STEP 2 -->
+        <div class="sp" id="step2">
+          <div class="c-title-row"><div class="c-title" id="s2t"></div><div class="c-hint" id="s2h"></div></div>
+          <div class="c-body">
+            <div class="fg">
+              <label class="fl" id="lRate"></label>
               <div class="rate-pill">
-                <div style="display:flex;align-items:baseline;gap:6px">
-                  <div class="rate-val">5.25%</div>
-                  <div class="rate-label" data-t="rateDesc"></div>
-                </div>
-                <div class="rate-locked">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  <span data-t="rateLocked"></span>
-                </div>
+                <div style="display:flex;align-items:baseline;gap:6px"><div class="rate-val">5.25%</div><div class="rate-lbl" id="rateDesc"></div></div>
+                <div class="rate-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span id="rateLock"></span></div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="amortLabel"></label>
-              <div class="chip-group" id="amortGroup">
-                <div class="chip chip-half selected" onclick="pick('amortGroup',this,'25')" data-t="amort25"></div>
-                <div class="chip chip-half" onclick="pick('amortGroup',this,'30')" data-t="amort30"></div>
+            <div class="fg">
+              <label class="fl" id="lAmort"></label>
+              <div class="cg" id="amortG">
+                <div class="ch ch-h sel" onclick="pick('amortG',this,'25')" id="am25"></div>
+                <div class="ch ch-h" onclick="pick('amortG',this,'30')" id="am30"></div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="freqLabel"></label>
-              <div class="chip-group" id="freqGroup">
-                <div class="chip chip-half selected" onclick="pick('freqGroup',this,'monthly')" data-t="freqMonthly"></div>
-                <div class="chip chip-half" onclick="pick('freqGroup',this,'biweekly')" data-t="freqBiweekly"></div>
-                <div class="chip chip-full" onclick="pick('freqGroup',this,'accel')" data-t="freqAccel"></div>
+            <div class="fg">
+              <label class="fl" id="lFreq"></label>
+              <div class="cg" id="freqG">
+                <div class="ch ch-h sel" onclick="pick('freqG',this,'monthly')" id="fqMo"></div>
+                <div class="ch ch-h" onclick="pick('freqG',this,'biweekly')" id="fqBi"></div>
+                <div class="ch ch-f" onclick="pick('freqG',this,'accel')" id="fqAc"></div>
               </div>
             </div>
-            <div class="step-nav">
-              <button class="btn-back" onclick="goTo(1)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="back"></span></button>
-              <button class="btn-next" onclick="goTo(3)"><span data-t="continue"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="snav">
+              <button class="btn-back" onclick="goTo(1)">← <span id="btnBack2"></span></button>
+              <button class="btn-next" onclick="goTo(3)"><span id="btnCont2"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 3: Income & debts -->
-        <div class="step-panel" id="step3">
-          <div class="step-title-row">
-            <div class="step-title" data-t="s3title"></div>
-            <div class="step-hint" data-t="s3hint"></div>
-          </div>
-          <div class="calc-body">
-            <div class="form-group">
-              <label class="form-label" data-t="empLabel"></label>
-              <div class="chip-group" id="empGroup">
-                <div class="chip chip-half selected" onclick="pick('empGroup',this,'employed')" data-t="empEmployed"></div>
-                <div class="chip chip-half" onclick="pick('empGroup',this,'self')" data-t="empSelf"></div>
-                <div class="chip chip-half" onclick="pick('empGroup',this,'contract')" data-t="empContract"></div>
-                <div class="chip chip-half" onclick="pick('empGroup',this,'other')" data-t="empOther"></div>
+        <!-- STEP 3 -->
+        <div class="sp" id="step3">
+          <div class="c-title-row"><div class="c-title" id="s3t"></div><div class="c-hint" id="s3h"></div></div>
+          <div class="c-body">
+            <div class="fg">
+              <label class="fl" id="lEmp"></label>
+              <div class="cg" id="empG">
+                <div class="ch ch-h sel" onclick="pick('empG',this,'employed')" id="empE"></div>
+                <div class="ch ch-h" onclick="pick('empG',this,'self')" id="empS"></div>
+                <div class="ch ch-h" onclick="pick('empG',this,'contract')" id="empC"></div>
+                <div class="ch ch-h" onclick="pick('empG',this,'other')" id="empO"></div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="incomeLabel"></label>
-              <select class="form-input form-select" id="incomeBracket">
-                <option value="" data-t="incomePh"></option>
-                <option value="under50" data-t="incomeU50"></option>
-                <option value="50to100" data-t="income50to100"></option>
-                <option value="100to150" data-t="income100to150"></option>
-                <option value="150plus" data-t="income150plus"></option>
+            <div class="fg">
+              <label class="fl" id="lIncome"></label>
+              <select class="fi fsel" id="incomeBracket">
+                <option value="" id="incPh"></option>
+                <option value="under50" id="incU50"></option>
+                <option value="50to75" id="inc50_75"></option>
+                <option value="75to100" id="inc75_100"></option>
+                <option value="100to125" id="inc100_125"></option>
+                <option value="125to150" id="inc125_150"></option>
+                <option value="150to175" id="inc150_175"></option>
+                <option value="175to200" id="inc175_200"></option>
+                <option value="200plus" id="inc200plus"></option>
               </select>
-              <div class="err" id="errIncome" data-t="errIncome"></div>
+              <div class="err" id="eIncome"></div>
             </div>
-            <div class="grid2">
-              <div class="form-group">
-                <label class="form-label"><span data-t="carLabel"></span> <span class="opt" data-t="optional"></span></label>
-                <div class="input-with-prefix">
-                  <span class="input-prefix">$</span>
-                  <input type="text" class="form-input" id="carPay" placeholder="0" oninput="fmtCurrency(this)" inputmode="numeric">
-                </div>
+            <div class="g2">
+              <div class="fg">
+                <label class="fl"><span id="lCar"></span> <span class="opt" id="lOpt1"></span></label>
+                <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="carPay" placeholder="0" oninput="fmtC(this)" inputmode="numeric"></div>
               </div>
-              <div class="form-group">
-                <label class="form-label"><span data-t="debtsLabel"></span> <span class="opt" data-t="optional"></span></label>
-                <div class="input-with-prefix">
-                  <span class="input-prefix">$</span>
-                  <input type="text" class="form-input" id="otherDebts" placeholder="0" oninput="fmtCurrency(this)" inputmode="numeric">
-                </div>
+              <div class="fg">
+                <label class="fl"><span id="lDebts"></span> <span class="opt" id="lOpt2"></span></label>
+                <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="otherDebts" placeholder="0" oninput="fmtC(this)" inputmode="numeric"></div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label"><span data-t="creditLabel"></span> <span class="opt" data-t="optional"></span></label>
-              <div class="chip-group" id="creditGroup">
-                <div class="chip chip-half" onclick="pick('creditGroup',this,'720+')" data-t="credit720"></div>
-                <div class="chip chip-half" onclick="pick('creditGroup',this,'680-719')" data-t="credit680"></div>
-                <div class="chip chip-half" onclick="pick('creditGroup',this,'600-679')" data-t="credit600"></div>
-                <div class="chip chip-half" onclick="pick('creditGroup',this,'under600')" data-t="creditU600"></div>
+            <div class="fg">
+              <label class="fl"><span id="lCredit"></span> <span class="opt" id="lOpt3"></span></label>
+              <div class="cg" id="creditG">
+                <div class="ch ch-h" onclick="pick('creditG',this,'720+')" id="cr720"></div>
+                <div class="ch ch-h" onclick="pick('creditG',this,'680-719')" id="cr680"></div>
+                <div class="ch ch-h" onclick="pick('creditG',this,'600-679')" id="cr600"></div>
+                <div class="ch ch-h" onclick="pick('creditG',this,'under600')" id="crU600"></div>
               </div>
             </div>
-            <div class="step-nav">
-              <button class="btn-back" onclick="goTo(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="back"></span></button>
-              <button class="btn-next" onclick="goTo(4)"><span data-t="getMyResults"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="snav">
+              <button class="btn-back" onclick="goTo(2)">← <span id="btnBack3"></span></button>
+              <button class="btn-next" onclick="goTo(4)"><span id="btnGetRes"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 4: Contact (now before results) -->
-        <div class="step-panel" id="step4">
-          <div class="contact-header">
-            <h4 data-t="contactTitle"></h4>
-            <p data-t="contactSub"></p>
-          </div>
-          <div class="calc-body">
-            <div class="form-group">
-              <label class="form-label" data-t="nameLabel"></label>
-              <input type="text" class="form-input" id="fullName" autocomplete="name" data-ph="namePh">
-              <div class="err" id="errName" data-t="errName"></div>
+        <!-- STEP 4: CONTACT -->
+        <div class="sp" id="step4">
+          <div class="con-hdr"><h4 id="conTitle"></h4><p id="conSub"></p></div>
+          <div class="c-body">
+            <div class="sp-strip">
+              <div class="sp-avs"><div class="sp-av">ML</div><div class="sp-av">SP</div><div class="sp-av">KT</div></div>
+              <div class="sp-txt"><strong id="spStrong"></strong><span id="spSub"></span></div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="emailLabel"></label>
-              <input type="email" class="form-input" id="emailAddr" autocomplete="email" inputmode="email" data-ph="emailPh">
-              <div class="err" id="errEmail" data-t="errEmail"></div>
+            <div class="fg">
+              <label class="fl" id="lName"></label>
+              <input type="text" class="fi" id="fullName" autocomplete="name" placeholder="Jean Tremblay">
+              <div class="err" id="eName"></div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="phoneLabel"></label>
-              <div class="phone-row">
-                <span class="phone-cc">🇨🇦 +1</span>
-                <input type="tel" class="form-input" id="phoneNum" oninput="fmtPhone(this)" autocomplete="tel" inputmode="tel" placeholder="(514) 000-0000">
-              </div>
-              <div class="err" id="errPhone" data-t="errPhone"></div>
+            <div class="fg">
+              <label class="fl" id="lEmail"></label>
+              <input type="email" class="fi" id="emailAddr" autocomplete="email" inputmode="email" placeholder="vous@exemple.com">
+              <div class="err" id="eEmail"></div>
             </div>
-            <div class="form-group">
-              <label class="form-label" data-t="timelineLabel"></label>
-              <div class="chip-group" id="timelineGroup">
-                <div class="chip chip-half selected" onclick="pick('timelineGroup',this,'asap')" data-t="tlASAP"></div>
-                <div class="chip chip-half" onclick="pick('timelineGroup',this,'0-3m')" data-t="tl3m"></div>
-                <div class="chip chip-half" onclick="pick('timelineGroup',this,'3-6m')" data-t="tl6m"></div>
-                <div class="chip chip-half" onclick="pick('timelineGroup',this,'6m+')" data-t="tl6plus"></div>
+            <div class="fg">
+              <label class="fl" id="lTimeline"></label>
+              <div class="cg" id="tlG">
+                <div class="ch ch-h sel" onclick="pick('tlG',this,'asap')" id="tlASAP"></div>
+                <div class="ch ch-h" onclick="pick('tlG',this,'0-3m')" id="tl3m"></div>
+                <div class="ch ch-h" onclick="pick('tlG',this,'3-6m')" id="tl6m"></div>
+                <div class="ch ch-h" onclick="pick('tlG',this,'6m+')" id="tl6plus"></div>
               </div>
             </div>
-            <label class="consent-label" id="consentLabel" onclick="toggleConsent()">
-              <div class="consent-box-check" id="consentCheck">
+            <div class="fg">
+              <label class="fl">
+                <span id="lPhone"></span>
+                <button class="ph-why" onclick="toggleTip(event)" id="whyBtn"></button>
+              </label>
+              <div class="ph-row">
+                <span class="ph-cc">🇨🇦 +1</span>
+                <input type="tel" class="fi" id="phoneNum" oninput="fmtPhone(this)" autocomplete="tel" inputmode="tel" placeholder="(514) 000-0000">
+              </div>
+              <div class="ph-tip" id="phTip"></div>
+              <div class="err" id="ePhone"></div>
+            </div>
+            <label class="consent-lbl" id="consentLbl" onclick="toggleConsent()">
+              <div class="consent-box" id="consentBox">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
-              <div class="consent-text" data-t="consentText"></div>
+              <div class="consent-txt" id="consentTxt"></div>
             </label>
-            <div class="err" id="errConsent" style="margin-bottom:10px" data-t="errConsent"></div>
-            <button class="btn-submit" id="submitBtn" onclick="submitForm()">
+            <div class="err" id="eConsent" style="margin-bottom:10px"></div>
+            <button class="btn-sub" id="submitBtn" onclick="submitForm()">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span id="submitBtnText" data-t="submitBtn"></span>
+              <span id="submitTxt"></span>
             </button>
-            <div class="submit-trust">
-              <div class="trust-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <span data-t="trust1"></span></div>
-              <div class="trust-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> <span data-t="trust2"></span></div>
-              <div class="trust-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span data-t="trust3"></span></div>
+            <div class="trust-row">
+              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span id="tr1"></span></div>
+              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span id="tr2"></span></div>
+              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="tr3"></span></div>
             </div>
             <div style="text-align:center;margin-top:10px">
-              <button class="btn-back" onclick="goTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <span data-t="back"></span></button>
+              <button class="btn-back" onclick="goTo(3)">← <span id="btnBack4"></span></button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 5: Results (unlocked after contact submitted) -->
-        <div class="step-panel" id="step5">
-          <div class="results-hero" id="resultsHero"></div>
-          <div class="result-numbers" id="resultNumbers"></div>
-          <div class="result-ratios" id="resultRatios"></div>
-          <div class="results-cta-area">
-            <div class="result-teaser" id="resultTeaser"></div>
-            <div class="disclaimer" data-t="unlockDisclaimer"></div>
+        <!-- STEP 5: RESULTS -->
+        <div class="sp" id="step5">
+          <div class="res-hero" id="resHero"></div>
+          <div class="res-nums" id="resNums"></div>
+          <div class="res-ratios" id="resRatios"></div>
+          <div class="res-cta">
+            <div class="res-teaser" id="resTeaser"></div>
+            <div class="disc" id="resDisc"></div>
           </div>
         </div>
 
       </div><!-- /calc-card -->
     </div>
-  </div><!-- /hero-inner -->
+  </div>
 </section>
 
 <!-- FEATURES -->
-<section class="section-features">
-  <div class="section-inner">
-    <div class="section-eyebrow" data-t="featEyebrow"></div>
-    <h2 class="section-title" data-t="featTitle"></h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h4 data-t="feat1title"></h4>
-        <p data-t="feat1body"></p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h4 data-t="feat2title"></h4>
-        <p data-t="feat2body"></p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h4 data-t="feat3title"></h4>
-        <p data-t="feat3body"></p>
-      </div>
+<section class="sec-feat">
+  <div class="sec-in">
+    <div class="sec-ey" id="featEy"></div>
+    <h2 class="sec-ttl" id="featTtl"></h2>
+    <div class="feat-g">
+      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4 id="f1t"></h4><p id="f1b"></p></div>
+      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4 id="f2t"></h4><p id="f2b"></p></div>
+      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4 id="f3t"></h4><p id="f3b"></p></div>
     </div>
   </div>
 </section>
 
 <!-- REVIEWS -->
-<section class="section-reviews">
-  <div class="section-inner">
-    <div class="section-eyebrow" data-t="revEyebrow"></div>
-    <h2 class="section-title" data-t="revTitle"></h2>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-body" data-t="rev1body"></div>
-        <div class="review-author" data-t="rev1author"></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-body" data-t="rev2body"></div>
-        <div class="review-author" data-t="rev2author"></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-body" data-t="rev3body"></div>
-        <div class="review-author" data-t="rev3author"></div>
-      </div>
+<section class="sec-rev">
+  <div class="sec-in">
+    <div class="sec-ey" id="revEy"></div>
+    <h2 class="sec-ttl" id="revTtl"></h2>
+    <div class="rev-g">
+      <div class="rev-c"><div class="rev-stars">★★★★★</div><div class="rev-body" id="rv1b"></div><div class="rev-auth" id="rv1a"></div></div>
+      <div class="rev-c"><div class="rev-stars">★★★★★</div><div class="rev-body" id="rv2b"></div><div class="rev-auth" id="rv2a"></div></div>
+      <div class="rev-c"><div class="rev-stars">★★★★★</div><div class="rev-body" id="rv3b"></div><div class="rev-auth" id="rv3a"></div></div>
     </div>
   </div>
 </section>
 
 <footer>
   <strong>MortgageIQ</strong>
-  <p data-t="footerLicense"></p>
-  <p style="margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto" data-t="footerDisclaimer"></p>
-  <p style="margin-top:12px"><a href="#" data-t="footerPrivacy"></a> &nbsp;·&nbsp; <a href="#" data-t="footerTerms"></a> &nbsp;·&nbsp; <a href="#" data-t="footerOACIQ"></a></p>
-  <p style="margin-top:10px" data-t="footerCopy"></p>
+  <p id="ftLicense"></p>
+  <p style="margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto" id="ftDisc"></p>
+  <p style="margin-top:12px"><a href="#" onclick="openPrivacy(event)" id="ftPriv"></a> &nbsp;·&nbsp; <a href="#" id="ftTerms"></a> &nbsp;·&nbsp; <a href="#" id="ftOACIQ"></a></p>
+  <p style="margin-top:10px" id="ftCopy"></p>
 </footer>
 
-<!-- SUCCESS MODAL -->
-<div class="modal-overlay" id="successModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <div class="modal-check">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <h2 data-t="modalTitle"></h2>
-    <p><span data-t="modalThanks"></span> <strong id="modalName"></strong>. <span data-t="modalBody"></span></p>
-    <button class="btn-modal-done" onclick="closeModal()" data-t="modalClose"></button>
-    <div class="modal-next-step">
-      <strong data-t="modalNextTitle"></strong>
-      <span data-t="modalNextBody"></span>
-    </div>
+<!-- EXIT INTENT -->
+<div class="ov" id="exitOv">
+  <div class="ov-box">
+    <div class="ov-emoji">⏳</div>
+    <h3 id="exitTitle"></h3><p id="exitBody"></p>
+    <button class="btn-ov-main" onclick="closeExit()" id="exitStay"></button>
+    <button class="btn-ov-ghost" onclick="dismissExit()" id="exitLeave"></button>
+  </div>
+</div>
+
+<!-- QUAL GATE -->
+<div class="ov" id="gateOv">
+  <div class="ov-box">
+    <div class="ov-emoji">💡</div>
+    <h3 id="gateTitle"></h3><p id="gateBody"></p>
+    <button class="btn-ov-main" onclick="closeGate(true)" id="gateCont"></button>
+    <button class="btn-ov-sec" onclick="closeGate(false)" id="gateBack"></button>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="ov" id="privOv" onclick="if(event.target===this)closePrivacy()">
+  <div class="priv-box">
+    <div class="priv-hdr"><h3 id="privTitle"></h3><button class="priv-close-x" onclick="closePrivacy()">✕</button></div>
+    <div class="priv-body" id="privBody"></div>
+    <button class="btn-sub" onclick="closePrivacy()" id="privClose" style="max-width:200px;margin:0 auto;padding:11px"></button>
   </div>
 </div>
 
 <script>
-// ─── TRANSLATIONS ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════
+// TRANSLATIONS
+// ═══════════════════════════════════════════════════════
 const T = {
-  en: {
-    navPill: 'Licensed Quebec Broker',
-    eyebrow: 'Free · No obligation · 2 minutes',
-    h1: 'Find Out <em>Exactly</em><br>What You Can Afford',
-    sub: 'Answer a few quick questions and get an instant estimate — then a licensed mortgage expert will reach out with real options.',
-    cta: 'Start My Estimate',
-    noCredit: 'No credit check required',
-    reviewCount: 'Trusted by 400+ Quebec homebuyers this year',
-    stat1: 'Lenders we work with',
-    stat2: 'Response time',
-    stat3: 'Broker fee to you',
-    stepOf: 'Step',
-    of: 'of',
-    s1title: 'Tell us about the property',
-    s1hint: 'Approximate values are fine — you can refine later.',
-    purposeLabel: "What's this for?",
-    purposePurchase: 'Purchase',
-    purposePurchaseSub: 'Buying a property',
-    purposeRenewal: 'Renewal',
-    purposeRenewalSub: 'Renewing my mortgage',
-    propPriceLabel: 'Property value',
-    propPricePh: '450,000',
-    errPrice: 'Please enter a valid amount (min $100,000).',
-    downLabel: 'Down payment',
-    downPh: '90,000',
-    errDown: 'Minimum down payment is 5% of the purchase price.',
-    balanceLabel: 'Remaining mortgage balance',
-    balancePh: '280,000',
-    errBalance: 'Please enter your remaining balance.',
-    lenderLabel: 'Current lender',
-    lenderPh: 'Select your lender...',
-    lenderOther: 'Other',
-    locationLabel: 'Area',
-    locationPh: 'Where is the property?',
-    locationOther: 'Other Quebec area',
-    errLocation: 'Please select an area.',
-    continue: 'Continue',
-    back: 'Back',
-    s2title: 'Mortgage preferences',
-    s2hint: 'These affect your monthly payment estimate.',
-    rateLabel: 'Interest rate',
-    rateDesc: '5-year fixed',
-    rateLocked: 'Current best rate',
-    amortLabel: 'Amortization',
-    amort25: '25 years',
-    amort30: '30 years',
-    freqLabel: 'Payment frequency',
-    freqMonthly: 'Monthly',
-    freqBiweekly: 'Biweekly',
-    freqAccel: 'Accelerated Biweekly',
-    s3title: 'Income & debts',
-    s3hint: 'Used to calculate your qualification ratios — nothing else.',
-    empLabel: 'Employment type',
-    empEmployed: 'Employed',
-    empSelf: 'Self-employed',
-    empContract: 'Contract',
-    empOther: 'Other',
-    incomeLabel: 'Household income',
-    incomePh: 'Select range...',
-    incomeU50: 'Under $50,000',
-    income50to100: '$50,000 – $100,000',
-    income100to150: '$100,000 – $150,000',
-    income150plus: '$150,000+',
-    errIncome: 'Please select your income range.',
-    carLabel: 'Car payment',
-    debtsLabel: 'Other debts',
-    optional: '(optional)',
-    creditLabel: 'Credit score',
-    credit720: '720+ Excellent',
-    credit680: '680–719 Good',
-    credit600: '600–679 Fair',
-    creditU600: 'Under 600',
-    seeResults: 'See My Results',
-    getMyResults: 'Get My Results',
-    unlockBtn: 'Get a Better Rate — Free',
-    unlockDisclaimer: 'Free consultation · No obligation · Response within 24 hours',
-    adjustNumbers: 'Adjust my numbers',
-    qualGreenLabel: 'Looking strong',
-    qualGreenMsg: 'Based on the information provided, you appear to be within qualification range.',
-    qualYellowLabel: 'Close to the limit',
-    qualYellowMsg: "You're near the qualification threshold. A broker may be able to structure your application to improve your odds.",
-    qualRedLabel: 'Worth exploring options',
-    qualRedMsg: 'Your ratios are above standard guidelines, but there may still be lenders who can help — especially with a broker in your corner.',
-    teaserGreen: '<strong>Good news.</strong> Your profile looks solid. A licensed broker can help you secure a better rate than what\'s publicly listed — sometimes by as much as 0.4%.',
-    teaserYellow: '<strong>Don\'t give up.</strong> Standard online tools may show you don\'t qualify — but brokers have access to lenders with more flexible programs. It\'s worth a conversation.',
-    teaserRed: '<strong>There may still be options.</strong> Even with higher ratios, some lenders specialize in non-standard situations. A broker can assess whether alternative financing works for you.',
-    teaserRenewalGreen: '<strong>Good news.</strong> Your renewal profile looks solid. A broker can often beat your current lender\'s renewal offer — sometimes significantly.',
-    teaserRenewalYellow: '<strong>Worth reviewing.</strong> Even if your ratios are close to the limit, renewal situations have more flexibility than new purchases. A broker can help.',
-    teaserRenewalRed: '<strong>Don\'t just accept your bank\'s offer.</strong> Brokers have access to lenders who evaluate renewals differently. Your situation may be better than you think.',
-    lbl_payment: 'Est. payment',
-    lbl_taxes: 'Est. monthly taxes',
-    lbl_total: 'Total monthly cost',
-    lbl_max: 'Est. max purchase',
-    lbl_balance: 'Remaining balance',
-    lbl_newPayment: 'New est. payment',
-    contactTitle: 'One last step — enter your info to see your results',
-    contactSub: 'Your personalized estimate is ready. Enter your details to unlock it — a mortgage expert will also follow up within 24 hours.',
-    nameLabel: 'Your name',
-    namePh: 'First and last name',
-    errName: 'Please enter your full name.',
-    emailLabel: 'Email',
-    emailPh: 'you@example.com',
-    errEmail: 'Please enter a valid email address.',
-    phoneLabel: 'Phone number',
-    errPhone: 'Please enter a valid 10-digit phone number.',
-    timelineLabel: 'When are you looking to proceed?',
-    tlASAP: 'As soon as possible',
-    tl3m: 'Within 3 months',
-    tl6m: '3–6 months',
-    tl6plus: '6+ months',
-    consentText: 'I agree to be contacted by a licensed mortgage professional. My information will be used solely to provide mortgage advice. <a href="#" onclick="return false;" style="color:var(--blue)">Privacy Policy</a>.',
-    errConsent: 'Please check the consent box to continue.',
-    submitBtn: 'Show My Results',
-    trust1: 'Secure & encrypted',
-    trust2: 'No obligation',
-    trust3: 'Response in 24h',
-    backToResults: 'Back to results',
-    featEyebrow: 'Why MortgageIQ',
-    featTitle: 'The broker advantage',
-    feat1title: 'OACIQ Licensed Broker',
-    feat1body: 'Not a call centre, not a bank. A real licensed professional in Quebec who works for you — not the lender.',
-    feat2title: 'Access to 30+ Lenders',
-    feat2body: "We compare rates across major banks, credit unions, and private lenders to find options your bank won't offer.",
-    feat3title: 'No Fees. Ever.',
-    feat3body: 'Our service is completely free to you. Lenders compensate us. You get better rates without paying more.',
-    revEyebrow: 'Client experiences',
-    revTitle: 'What Quebec homebuyers say',
-    rev1body: '"I was skeptical at first, but they came back with a rate 0.4% lower than my bank offered. That\'s thousands of dollars over the life of my mortgage."',
-    rev1author: 'Marc L. — Laval, first-time buyer',
-    rev2body: '"Super simple process. I filled out the form, got a call the next morning, and had my pre-approval in two days. Very professional team."',
-    rev2author: 'Sophie P. — Brossard, renewal',
-    rev3body: '"As a self-employed person I thought it would be difficult. They found a lender who understood my situation and got me approved at a great rate."',
-    rev3author: 'Kevin T. — Montréal, self-employed',
-    footerLicense: 'Licensed Quebec Mortgage Broker · OACIQ Regulated · AMF Registered',
-    footerDisclaimer: 'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
-    footerPrivacy: 'Privacy Policy',
-    footerTerms: 'Terms of Use',
-    footerOACIQ: 'OACIQ Disclosure',
-    footerCopy: '© 2025 MortgageIQ. All rights reserved.',
-    modalTitle: 'Request Received',
-    modalThanks: 'Thanks,',
-    modalBody: 'A licensed mortgage expert will review your profile and reach out within the next 24 hours.',
-    modalClose: 'Got it, thank you',
-    modalNextTitle: 'What happens next?',
-    modalNextBody: "We'll compare options from 30+ lenders and contact you with a personalized rate — no obligation to proceed.",
-    gdsMax: 'max 39%',
-    tdsMax: 'max 44%',
-  },
-  fr: {
-    navPill: 'Courtier hypothécaire agréé',
-    eyebrow: 'Gratuit · Sans engagement · 2 minutes',
-    h1: 'Découvrez <em>Exactement</em><br>Ce Que Vous Pouvez Vous Permettre',
-    sub: 'Répondez à quelques questions rapides et obtenez une estimation instantanée — un expert hypothécaire agréé vous contactera avec de vraies options.',
-    cta: 'Commencer mon estimation',
-    noCredit: 'Aucune vérification de crédit requise',
-    reviewCount: 'Fait confiance par 400+ acheteurs québécois cette année',
-    stat1: 'Prêteurs partenaires',
-    stat2: 'Délai de réponse',
-    stat3: 'Frais de courtage',
-    stepOf: 'Étape',
-    of: 'sur',
-    s1title: 'Parlez-nous de la propriété',
-    s1hint: 'Des valeurs approximatives suffisent — vous pourrez préciser plus tard.',
-    purposeLabel: 'Quel est l\'objectif ?',
-    purposePurchase: 'Achat',
-    purposePurchaseSub: 'J\'achète une propriété',
-    purposeRenewal: 'Renouvellement',
-    purposeRenewalSub: 'Je renouvelle mon hypothèque',
-    propPriceLabel: 'Valeur de la propriété',
-    propPricePh: '450 000',
-    errPrice: 'Veuillez entrer un montant valide (min 100 000 $).',
-    downLabel: 'Mise de fonds',
-    downPh: '90 000',
-    errDown: 'La mise de fonds minimale est de 5 % du prix d\'achat.',
-    balanceLabel: 'Solde hypothécaire restant',
-    balancePh: '280 000',
-    errBalance: 'Veuillez entrer votre solde restant.',
-    lenderLabel: 'Prêteur actuel',
-    lenderPh: 'Sélectionnez votre prêteur...',
-    lenderOther: 'Autre',
-    locationLabel: 'Région',
-    locationPh: 'Où se situe la propriété ?',
-    locationOther: 'Autre région du Québec',
-    errLocation: 'Veuillez sélectionner une région.',
-    continue: 'Continuer',
-    back: 'Retour',
-    s2title: 'Préférences hypothécaires',
-    s2hint: 'Ces choix affectent l\'estimation de votre paiement mensuel.',
-    rateLabel: 'Taux d\'intérêt',
-    rateDesc: 'Fixe 5 ans',
-    rateLocked: 'Meilleur taux actuel',
-    amortLabel: 'Amortissement',
-    amort25: '25 ans',
-    amort30: '30 ans',
-    freqLabel: 'Fréquence de paiement',
-    freqMonthly: 'Mensuel',
-    freqBiweekly: 'Aux deux semaines',
-    freqAccel: 'Bihebdomadaire accéléré',
-    s3title: 'Revenu et dettes',
-    s3hint: 'Utilisé uniquement pour calculer vos ratios d\'admissibilité.',
-    empLabel: 'Type d\'emploi',
-    empEmployed: 'Salarié',
-    empSelf: 'Travailleur autonome',
-    empContract: 'Contrat',
-    empOther: 'Autre',
-    incomeLabel: 'Revenu du ménage',
-    incomePh: 'Sélectionnez une tranche...',
-    incomeU50: 'Moins de 50 000 $',
-    income50to100: '50 000 $ – 100 000 $',
-    income100to150: '100 000 $ – 150 000 $',
-    income150plus: '150 000 $+',
-    errIncome: 'Veuillez sélectionner votre tranche de revenu.',
-    carLabel: 'Paiement auto',
-    debtsLabel: 'Autres dettes',
-    optional: '(optionnel)',
-    creditLabel: 'Cote de crédit',
-    credit720: '720+ Excellent',
-    credit680: '680–719 Bon',
-    credit600: '600–679 Passable',
-    creditU600: 'Moins de 600',
-    seeResults: 'Voir mes résultats',
-    getMyResults: 'Voir mes résultats',
-    unlockBtn: 'Obtenir un meilleur taux — Gratuit',
-    unlockDisclaimer: 'Consultation gratuite · Sans engagement · Réponse dans les 24 heures',
-    adjustNumbers: 'Ajuster mes chiffres',
-    qualGreenLabel: 'Situation favorable',
-    qualGreenMsg: 'Selon les informations fournies, vous semblez être dans la fourchette d\'admissibilité.',
-    qualYellowLabel: 'Proche de la limite',
-    qualYellowMsg: "Vous êtes près du seuil d'admissibilité. Un courtier peut structurer votre dossier pour améliorer vos chances.",
-    qualRedLabel: 'Des options existent',
-    qualRedMsg: 'Vos ratios dépassent les normes standards, mais certains prêteurs peuvent vous aider — surtout avec l\'aide d\'un courtier.',
-    teaserGreen: '<strong>Bonne nouvelle.</strong> Votre profil est solide. Un courtier agréé peut vous obtenir un meilleur taux que ce qui est affiché publiquement — parfois jusqu\'à 0,4 % de moins.',
-    teaserYellow: '<strong>Ne baissez pas les bras.</strong> Les outils en ligne standards peuvent indiquer que vous n\'êtes pas admissible — mais les courtiers ont accès à des prêteurs plus flexibles. Ça vaut la peine d\'en discuter.',
-    teaserRed: '<strong>Des options existent peut-être encore.</strong> Même avec des ratios plus élevés, certains prêteurs se spécialisent dans des situations non standards. Un courtier peut évaluer si un financement alternatif vous convient.',
-    teaserRenewalGreen: '<strong>Bonne nouvelle.</strong> Votre profil de renouvellement est solide. Un courtier peut souvent surpasser l\'offre de renouvellement de votre prêteur actuel.',
-    teaserRenewalYellow: '<strong>Ça vaut la peine de vérifier.</strong> Même si vos ratios sont proches de la limite, les renouvellements offrent plus de flexibilité. Un courtier peut vous aider.',
-    teaserRenewalRed: '<strong>N\'acceptez pas simplement l\'offre de votre banque.</strong> Les courtiers ont accès à des prêteurs qui évaluent les renouvellements différemment. Votre situation est peut-être meilleure que vous ne le pensez.',
-    lbl_payment: 'Paiement est.',
-    lbl_taxes: 'Taxes mensuelles est.',
-    lbl_total: 'Coût mensuel total',
-    lbl_max: 'Prix max. estimé',
-    lbl_balance: 'Solde restant',
-    lbl_newPayment: 'Nouveau paiement est.',
-    contactTitle: 'Dernière étape — entrez vos coordonnées pour voir vos résultats',
-    contactSub: 'Votre estimation personnalisée est prête. Entrez vos coordonnées pour la déverrouiller — un expert vous contactera aussi dans les 24 heures.',
-    nameLabel: 'Votre nom',
-    namePh: 'Prénom et nom de famille',
-    errName: 'Veuillez entrer votre nom complet.',
-    emailLabel: 'Courriel',
-    emailPh: 'vous@exemple.com',
-    errEmail: 'Veuillez entrer une adresse courriel valide.',
-    phoneLabel: 'Numéro de téléphone',
-    errPhone: 'Veuillez entrer un numéro valide à 10 chiffres.',
-    timelineLabel: 'Dans quel délai souhaitez-vous procéder ?',
-    tlASAP: 'Dès que possible',
-    tl3m: 'Dans les 3 mois',
-    tl6m: '3 à 6 mois',
-    tl6plus: '6 mois et plus',
-    consentText: 'J\'accepte d\'être contacté par un professionnel hypothécaire agréé. Mes informations seront utilisées uniquement pour me fournir des conseils hypothécaires. <a href="#" onclick="return false;" style="color:var(--blue)">Politique de confidentialité</a>.',
-    errConsent: 'Veuillez cocher la case de consentement pour continuer.',
-    submitBtn: 'Afficher mes résultats',
-    trust1: 'Sécurisé et chiffré',
-    trust2: 'Sans engagement',
-    trust3: 'Réponse en 24h',
-    backToResults: 'Retour aux résultats',
-    featEyebrow: 'Pourquoi MortgageIQ',
-    featTitle: 'L\'avantage du courtier',
-    feat1title: 'Courtier agréé OACIQ',
-    feat1body: 'Pas un centre d\'appels, pas une banque. Un vrai professionnel agréé au Québec qui travaille pour vous — pas pour le prêteur.',
-    feat2title: 'Accès à 30+ prêteurs',
-    feat2body: 'Nous comparons les taux des grandes banques, caisses populaires et prêteurs privés pour trouver des options que votre banque ne vous proposera pas.',
-    feat3title: 'Aucun frais. Jamais.',
-    feat3body: 'Notre service est entièrement gratuit pour vous. Les prêteurs nous rémunèrent. Vous obtenez de meilleurs taux sans payer davantage.',
-    revEyebrow: 'Témoignages clients',
-    revTitle: 'Ce que disent les acheteurs québécois',
-    rev1body: '« J\'étais sceptique au départ, mais ils ont trouvé un taux 0,4 % inférieur à celui de ma banque. Des milliers de dollars d\'économies sur la durée de mon hypothèque. »',
-    rev1author: 'Marc L. — Laval, premier acheteur',
-    rev2body: '« Processus très simple. J\'ai rempli le formulaire, reçu un appel le lendemain matin et obtenu ma pré-approbation en deux jours. Équipe très professionnelle. »',
-    rev2author: 'Sophie P. — Brossard, renouvellement',
-    rev3body: '« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation et j\'ai été approuvé à un excellent taux. »',
-    rev3author: 'Kevin T. — Montréal, travailleur autonome',
-    footerLicense: 'Courtier hypothécaire agréé au Québec · Réglementé par l\'OACIQ · Inscrit à l\'AMF',
-    footerDisclaimer: 'Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l\'approbation de crédit du prêteur. Les estimations de taxes sont approximatives et varient selon la municipalité.',
-    footerPrivacy: 'Politique de confidentialité',
-    footerTerms: 'Conditions d\'utilisation',
-    footerOACIQ: 'Divulgation OACIQ',
-    footerCopy: '© 2025 MortgageIQ. Tous droits réservés.',
-    modalTitle: 'Demande reçue',
-    modalThanks: 'Merci,',
-    modalBody: 'Un expert hypothécaire agréé examinera votre profil et vous contactera dans les 24 heures.',
-    modalClose: 'Compris, merci',
-    modalNextTitle: 'Quelle est la prochaine étape ?',
-    modalNextBody: 'Nous comparerons les options de 30+ prêteurs et vous contacterons avec un taux personnalisé — sans engagement.',
-    gdsMax: 'max 39 %',
-    tdsMax: 'max 44 %',
-  }
-};
+en:{
+  navPill:'Licensed Quebec Broker',
+  eyebrow:'Free · No obligation · 2 minutes',
+  h1:'Find Out <em>Exactly</em><br>What You Can Afford',
+  sub:'Answer a few quick questions and get an instant estimate — then a licensed mortgage expert will reach out with real options.',
+  cta:'Start My Estimate',
+  noCredit:'No credit check required',
+  revCount:'Trusted by 400+ Quebec homebuyers this year',
+  stat1:'Lenders we work with',stat2:'Response time',stat3:'Broker fee to you',
+  s1t:'Tell us about the property',s1h:'Approximate values are fine — you can refine later.',
+  purLbl:"What's this for?",
+  purPurchLbl:'Purchase',purPurchSub:'Buying a property',
+  purRenLbl:'Renewal',purRenSub:'Renewing my mortgage',
+  lPropPrice:'Property value',lDown:'Down payment',
+  lBal:'Remaining mortgage balance',lLender:'Current lender',
+  lenderPh:'Select your lender...',lenderOther:'Other',
+  lLoc:'Area',locPh:'Where is the property?',locOther:'Other Quebec area',
+  ePrice:'Please enter a valid amount (min $100,000).',
+  eDown:'Minimum down payment is 5% of the purchase price.',
+  eBal:'Please enter your remaining balance.',
+  eLoc:'Please select an area.',
+  cont:'Continue',back:'Back',
+  s2t:'Mortgage preferences',s2h:'These affect your monthly payment estimate.',
+  lRate:'Interest rate',rateDesc:'5-year fixed',rateLock:'Current best rate',
+  amort25:'25 years',amort30:'30 years',lAmort:'Amortization',
+  lFreq:'Payment frequency',freqMo:'Monthly',freqBi:'Biweekly',freqAc:'Accelerated Biweekly',
+  s3t:'Income & debts',s3h:'Used to calculate your qualification ratios — nothing else.',
+  lEmp:'Employment type',empE:'Employed',empS:'Self-employed',empC:'Contract',empO:'Other',
+  lIncome:'Household income',
+  incPh:'Select range...',incU50:'Under $50,000',
+  inc50_75:'$50,000 – $75,000',inc75_100:'$75,000 – $100,000',
+  inc100_125:'$100,000 – $125,000',inc125_150:'$125,000 – $150,000',
+  inc150_175:'$150,000 – $175,000',inc175_200:'$175,000 – $200,000',inc200plus:'$200,000+',
+  eIncome:'Please select your income range.',
+  lCar:'Car payment',lDebts:'Other debts',opt:'(optional)',
+  lCredit:'Credit score',cr720:'720+ Excellent',cr680:'680–719 Good',cr600:'600–679 Fair',crU600:'Under 600',
+  getRes:'Get My Results',
+  conTitle:'One last step — enter your info to see your results',
+  conSub:'Your personalized estimate is ready. Enter your details to unlock it — a mortgage expert will also follow up within 24 hours.',
+  spStrong:'Marc from Laval saved $14,200',spSub:'over his mortgage term by switching lenders.',
+  lName:'Your name',lEmail:'Email',lPhone:'Phone number',
+  lTimeline:'When are you looking to proceed?',
+  tlASAP:'As soon as possible',tl3m:'Within 3 months',tl6m:'3–6 months',tl6plus:'6+ months',
+  whyBtn:'Why do we need this?',
+  phTip:'Your broker needs to call you personally to discuss your options. We never share your number with third parties.',
+  consentTxt:'I agree to be contacted by a licensed mortgage professional. My information will be used solely to provide mortgage advice.',
+  privacyLink:'Privacy Policy',
+  eConsent:'Please check the consent box to continue.',
+  ePhone:'Please enter a valid 10-digit phone number.',
+  eName:'Please enter your full name.',
+  eEmail:'Please enter a valid email address.',
+  submitBtn:'Show My Results',tr1:'Secure & encrypted',tr2:'No obligation',tr3:'Response in 24h',
+  backToRes:'Back',
+  disc:'Free consultation · No obligation · Response within 24 hours',
+  qualGreenLbl:'Looking strong',qualGreenMsg:'Based on the information provided, you appear to be within qualification range.',
+  qualYellowLbl:'Close to the limit',qualYellowMsg:"You're near the qualification threshold. A broker may be able to structure your application to improve your odds.",
+  qualRedLbl:'Worth exploring options',qualRedMsg:'Your ratios are above standard guidelines, but there may still be lenders who can help — especially with a broker in your corner.',
+  tPurGreen:'<strong>Good news.</strong> Your profile looks solid. A licensed broker can help you secure a better rate than what\'s publicly listed — sometimes by as much as 0.4%.',
+  tPurYellow:'<strong>Don\'t give up.</strong> Standard online tools may show you don\'t qualify — but brokers have access to lenders with more flexible programs. It\'s worth a conversation.',
+  tPurRed:'<strong>There may still be options.</strong> Even with higher ratios, some lenders specialize in non-standard situations. A broker can assess whether alternative financing works for you.',
+  tRenGreen:'<strong>Good news.</strong> Your renewal profile looks solid. A broker can often beat your current lender\'s renewal offer — sometimes significantly.',
+  tRenYellow:'<strong>Worth reviewing.</strong> Even if your ratios are close to the limit, renewal situations have more flexibility. A broker can help.',
+  tRenRed:'<strong>Don\'t just accept your bank\'s offer.</strong> Brokers have access to lenders who evaluate renewals differently. Your situation may be better than you think.',
+  lblPay:'Est. payment',lblTax:'Est. monthly taxes',lblTotal:'Total monthly cost',lblMax:'Est. max purchase',lblBal:'Remaining balance',lblNewPay:'New est. payment',
+  gdsMax:'max 39%',tdsMax:'max 44%',
+  featEy:'Why MortgageIQ',featTtl:'The broker advantage',
+  f1t:'OACIQ Licensed Broker',f1b:'Not a call centre, not a bank. A real licensed professional in Quebec who works for you — not the lender.',
+  f2t:'Access to 30+ Lenders',f2b:"We compare rates across major banks, credit unions, and private lenders to find options your bank won't offer.",
+  f3t:'No Fees. Ever.',f3b:'Our service is completely free to you. Lenders compensate us. You get better rates without paying more.',
+  revEy:'Client experiences',revTtl:'What Quebec homebuyers say',
+  rv1b:'"I was skeptical at first, but they came back with a rate 0.4% lower than my bank offered. That\'s thousands of dollars over the life of my mortgage."',
+  rv1a:'Marc L. — Laval, first-time buyer',
+  rv2b:'"Super simple process. I filled out the form, got a call the next morning, and had my pre-approval in two days. Very professional team."',
+  rv2a:'Sophie P. — Brossard, renewal',
+  rv3b:'"As a self-employed person I thought it would be difficult. They found a lender who understood my situation and got me approved at a great rate."',
+  rv3a:'Kevin T. — Montréal, self-employed',
+  ftLicense:'Licensed Quebec Mortgage Broker · OACIQ Regulated · AMF Registered',
+  ftDisc:'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
+  ftPriv:'Privacy Policy',ftTerms:'Terms of Use',ftOACIQ:'OACIQ Disclosure',ftCopy:'© 2025 MortgageIQ. All rights reserved.',
+  exitTitle:'Wait — your estimate is almost ready',
+  exitBody:"You're only a few seconds away from seeing what you qualify for. Don't lose your progress.",
+  exitStay:'Continue My Estimate',exitLeave:"No thanks, I'll leave",
+  gateTitle:'A quick note before you continue',
+  gateBody:'Based on the income and property value you entered, the standard qualification ratios may be tight. A broker can still explore options — but we want to set the right expectations.',
+  gateCont:'I understand — continue anyway',gateBack:'Go back and adjust',
+  privTitle:'Privacy Policy',privClose:'Close',
+  privBody:`<p><strong>Information collected</strong>We collect your name, email, phone number, and mortgage details for the sole purpose of connecting you with a licensed mortgage broker.</p><p><strong>How it's used</strong>Your information is used exclusively to provide you with personalized mortgage options. It will never be sold, rented, or shared with third parties outside of our licensed broker network.</p><p><strong>Who sees your data</strong>Only the licensed Quebec mortgage broker associated with this platform will have access to your submitted information.</p><p><strong>Your rights</strong>You may request to view, correct, or delete your information at any time by contacting us. You can also withdraw your consent at any time prior to being contacted.</p><p><strong>Compliance</strong>This platform operates in compliance with Quebec's Act Respecting the Protection of Personal Information in the Private Sector (Law 25) and applicable federal PIPEDA regulations.</p>`,
+  cmhcNote:'Canada Mortgage and Housing Corporation — insurance required when down payment is under 20%',
+},
+fr:{
+  navPill:'Courtier hypothécaire agréé',
+  eyebrow:'Gratuit · Sans engagement · 2 minutes',
+  h1:'Découvrez <em>Exactement</em><br>Ce Que Vous Pouvez Vous Permettre',
+  sub:'Répondez à quelques questions rapides et obtenez une estimation instantanée — un expert hypothécaire agréé vous contactera avec de vraies options.',
+  cta:'Commencer mon estimation',noCredit:'Aucune vérification de crédit requise',
+  revCount:'Fait confiance par 400+ acheteurs québécois cette année',
+  stat1:'Prêteurs partenaires',stat2:'Délai de réponse',stat3:'Frais de courtage',
+  s1t:'Parlez-nous de la propriété',s1h:'Des valeurs approximatives suffisent — vous pourrez préciser plus tard.',
+  purLbl:"Quel est l'objectif ?",
+  purPurchLbl:'Achat',purPurchSub:"J'achète une propriété",
+  purRenLbl:'Renouvellement',purRenSub:'Je renouvelle mon hypothèque',
+  lPropPrice:'Valeur de la propriété',lDown:'Mise de fonds',
+  lBal:'Solde hypothécaire restant',lLender:'Prêteur actuel',
+  lenderPh:'Sélectionnez votre prêteur...',lenderOther:'Autre',
+  lLoc:'Région',locPh:'Où se situe la propriété ?',locOther:'Autre région du Québec',
+  ePrice:'Veuillez entrer un montant valide (min 100 000 $).',
+  eDown:"La mise de fonds minimale est de 5 % du prix d'achat.",
+  eBal:'Veuillez entrer votre solde restant.',eLoc:'Veuillez sélectionner une région.',
+  cont:'Continuer',back:'Retour',
+  s2t:'Préférences hypothécaires',s2h:"Ces choix affectent l'estimation de votre paiement mensuel.",
+  lRate:"Taux d'intérêt",rateDesc:'Fixe 5 ans',rateLock:'Meilleur taux actuel',
+  amort25:'25 ans',amort30:'30 ans',lAmort:'Amortissement',
+  lFreq:'Fréquence de paiement',freqMo:'Mensuel',freqBi:'Aux deux semaines',freqAc:'Bihebdomadaire accéléré',
+  s3t:'Revenu et dettes',s3h:"Utilisé uniquement pour calculer vos ratios d'admissibilité.",
+  lEmp:"Type d'emploi",empE:'Salarié',empS:'Travailleur autonome',empC:'Contrat',empO:'Autre',
+  lIncome:'Revenu du ménage',
+  incPh:'Sélectionnez une tranche...',incU50:'Moins de 50 000 $',
+  inc50_75:'50 000 $ – 75 000 $',inc75_100:'75 000 $ – 100 000 $',
+  inc100_125:'100 000 $ – 125 000 $',inc125_150:'125 000 $ – 150 000 $',
+  inc150_175:'150 000 $ – 175 000 $',inc175_200:'175 000 $ – 200 000 $',inc200plus:'200 000 $+',
+  eIncome:'Veuillez sélectionner votre tranche de revenu.',
+  lCar:'Paiement auto',lDebts:'Autres dettes',opt:'(optionnel)',
+  lCredit:'Cote de crédit',cr720:'720+ Excellent',cr680:'680–719 Bon',cr600:'600–679 Passable',crU600:'Moins de 600',
+  getRes:'Voir mes résultats',
+  conTitle:'Dernière étape — entrez vos coordonnées pour voir vos résultats',
+  conSub:'Votre estimation personnalisée est prête. Entrez vos coordonnées pour la déverrouiller — un expert vous contactera aussi dans les 24 heures.',
+  spStrong:'Marc de Laval a économisé 14 200 $',spSub:'sur la durée de son hypothèque en changeant de prêteur.',
+  lName:'Votre nom',lEmail:'Courriel',lPhone:'Numéro de téléphone',
+  lTimeline:'Dans quel délai souhaitez-vous procéder ?',
+  tlASAP:'Dès que possible',tl3m:'Dans les 3 mois',tl6m:'3 à 6 mois',tl6plus:'6 mois et plus',
+  whyBtn:'Pourquoi avez-vous besoin de ça ?',
+  phTip:'Votre courtier doit vous appeler personnellement pour discuter de vos options. Nous ne partageons jamais votre numéro avec des tiers.',
+  consentTxt:"J'accepte d'être contacté par un professionnel hypothécaire agréé. Mes informations seront utilisées uniquement pour me fournir des conseils hypothécaires.",
+  privacyLink:'Politique de confidentialité',
+  eConsent:'Veuillez cocher la case de consentement pour continuer.',
+  ePhone:'Veuillez entrer un numéro valide à 10 chiffres.',
+  eName:'Veuillez entrer votre nom complet.',
+  eEmail:'Veuillez entrer une adresse courriel valide.',
+  submitBtn:'Afficher mes résultats',tr1:'Sécurisé et chiffré',tr2:'Sans engagement',tr3:'Réponse en 24h',
+  backToRes:'Retour',
+  disc:'Consultation gratuite · Sans engagement · Réponse dans les 24 heures',
+  qualGreenLbl:'Situation favorable',qualGreenMsg:"Selon les informations fournies, vous semblez être dans la fourchette d'admissibilité.",
+  qualYellowLbl:'Proche de la limite',qualYellowMsg:"Vous êtes près du seuil d'admissibilité. Un courtier peut structurer votre dossier pour améliorer vos chances.",
+  qualRedLbl:'Des options existent',qualRedMsg:'Vos ratios dépassent les normes standards, mais certains prêteurs peuvent vous aider — surtout avec l\'aide d\'un courtier.',
+  tPurGreen:"<strong>Bonne nouvelle.</strong> Votre profil est solide. Un courtier agréé peut vous obtenir un meilleur taux que ce qui est affiché publiquement — parfois jusqu'à 0,4 % de moins.",
+  tPurYellow:"<strong>Ne baissez pas les bras.</strong> Les outils en ligne standards peuvent indiquer que vous n'êtes pas admissible — mais les courtiers ont accès à des prêteurs plus flexibles.",
+  tPurRed:"<strong>Des options existent peut-être encore.</strong> Même avec des ratios plus élevés, certains prêteurs se spécialisent dans des situations non standards.",
+  tRenGreen:"<strong>Bonne nouvelle.</strong> Votre profil de renouvellement est solide. Un courtier peut souvent surpasser l'offre de renouvellement de votre prêteur actuel.",
+  tRenYellow:"<strong>Ça vaut la peine de vérifier.</strong> Même si vos ratios sont proches de la limite, les renouvellements offrent plus de flexibilité. Un courtier peut vous aider.",
+  tRenRed:"<strong>N'acceptez pas simplement l'offre de votre banque.</strong> Les courtiers ont accès à des prêteurs qui évaluent les renouvellements différemment.",
+  lblPay:'Paiement est.',lblTax:'Taxes mensuelles est.',lblTotal:'Coût mensuel total',lblMax:'Prix max. estimé',lblBal:'Solde restant',lblNewPay:'Nouveau paiement est.',
+  gdsMax:'max 39 %',tdsMax:'max 44 %',
+  featEy:'Pourquoi MortgageIQ',featTtl:"L'avantage du courtier",
+  f1t:'Courtier agréé OACIQ',f1b:"Pas un centre d'appels, pas une banque. Un vrai professionnel agréé au Québec qui travaille pour vous — pas pour le prêteur.",
+  f2t:'Accès à 30+ prêteurs',f2b:"Nous comparons les taux des grandes banques, caisses populaires et prêteurs privés pour trouver des options que votre banque ne vous proposera pas.",
+  f3t:'Aucun frais. Jamais.',f3b:'Notre service est entièrement gratuit pour vous. Les prêteurs nous rémunèrent. Vous obtenez de meilleurs taux sans payer davantage.',
+  revEy:'Témoignages clients',revTtl:'Ce que disent les acheteurs québécois',
+  rv1b:'« J\'étais sceptique au départ, mais ils ont trouvé un taux 0,4 % inférieur à celui de ma banque. Des milliers de dollars d\'économies sur la durée de mon hypothèque. »',
+  rv1a:'Marc L. — Laval, premier acheteur',
+  rv2b:'« Processus très simple. J\'ai rempli le formulaire, reçu un appel le lendemain matin et obtenu ma pré-approbation en deux jours. »',
+  rv2a:'Sophie P. — Brossard, renouvellement',
+  rv3b:'« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »',
+  rv3a:'Kevin T. — Montréal, travailleur autonome',
+  ftLicense:"Courtier hypothécaire agréé au Québec · Réglementé par l'OACIQ · Inscrit à l'AMF",
+  ftDisc:"Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
+  ftPriv:'Politique de confidentialité',ftTerms:"Conditions d'utilisation",ftOACIQ:'Divulgation OACIQ',ftCopy:'© 2025 MortgageIQ. Tous droits réservés.',
+  exitTitle:'Attendez — votre estimation est presque prête',
+  exitBody:"Vous êtes à quelques secondes de voir ce à quoi vous êtes admissible. Ne perdez pas votre progression.",
+  exitStay:'Continuer mon estimation',exitLeave:'Non merci, je pars',
+  gateTitle:'Une note avant de continuer',
+  gateBody:"Selon le revenu et la valeur de la propriété que vous avez entrés, les ratios d'admissibilité standards pourraient être serrés. Un courtier peut encore explorer des options.",
+  gateCont:'Je comprends — continuer quand même',gateBack:'Retour pour ajuster',
+  privTitle:'Politique de confidentialité',privClose:'Fermer',
+  privBody:`<p><strong>Informations collectées</strong>Nous collectons votre nom, courriel, numéro de téléphone et vos détails hypothécaires dans le seul but de vous mettre en contact avec un courtier hypothécaire agréé.</p><p><strong>Utilisation</strong>Vos informations sont utilisées exclusivement pour vous fournir des options hypothécaires personnalisées. Elles ne seront jamais vendues, louées ou partagées avec des tiers en dehors de notre réseau de courtiers agréés.</p><p><strong>Accès à vos données</strong>Seul le courtier hypothécaire agréé associé à cette plateforme aura accès à vos informations soumises.</p><p><strong>Vos droits</strong>Vous pouvez demander à consulter, corriger ou supprimer vos informations à tout moment. Vous pouvez également retirer votre consentement avant d'être contacté.</p><p><strong>Conformité</strong>Cette plateforme est conforme à la Loi sur la protection des renseignements personnels dans le secteur privé du Québec (Loi 25) et aux réglementations fédérales PIPEDA applicables.</p>`,
+  cmhcNote:"Société canadienne d'hypothèques et de logement — assurance requise si la mise de fonds est inférieure à 20 %",
+}};
 
-// ─── STATE ───────────────────────────────────────────────────────
-let lang = 'en';
-let currentStep = 1;
-let consentGiven = false;
-let purpose = 'purchase'; // 'purchase' | 'renewal'
-const picks = {
-  amortGroup: '25',
-  freqGroup: 'monthly',
-  empGroup: 'employed',
-  creditGroup: '',
-  timelineGroup: 'asap'
-};
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let lang='en', step=1, consent=false, purpose='purchase', gateOk=false, exitShown=false, exitDismissed=false;
+let submitting=false, lastSub=0;
+const picks={amortG:'25',freqG:'monthly',empG:'employed',creditG:'',tlG:'asap'};
 
-// ─── LANGUAGE ────────────────────────────────────────────────────
-function setLang(l) {
-  lang = l;
-  document.getElementById('htmlRoot').lang = l;
-  document.getElementById('btnEN').classList.toggle('active', l === 'en');
-  document.getElementById('btnFR').classList.toggle('active', l === 'fr');
-  applyTranslations();
-  // Re-render results if on step 4
-  if (currentStep === 4) renderResults();
-}
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+const t=k=>T[lang][k]||k;
+const $=id=>document.getElementById(id);
+const fmtC=el=>{const r=el.value.replace(/[^0-9]/g,'');el.value=r?Number(r).toLocaleString('en-CA'):''};
+const parseMoney=s=>parseInt((s||'0').replace(/[^0-9]/g,''))||0;
+const fmtPhone=el=>{let d=el.value.replace(/\D/g,'').slice(0,10);if(d.length>=7)d='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);else if(d.length>=4)d='('+d.slice(0,3)+') '+d.slice(3);el.value=d};
+const showErr=(id,show)=>$(id).classList.toggle('on',show);
 
-function applyTranslations() {
-  const t = T[lang];
-  // data-t elements
-  document.querySelectorAll('[data-t]').forEach(el => {
-    const key = el.getAttribute('data-t');
-    if (!(key in t)) return;
-    if (el.tagName === 'OPTION') { el.textContent = t[key]; return; }
-    // For h1 we allow innerHTML
-    if (el.tagName === 'H1') { el.innerHTML = t[key]; return; }
-    el.innerHTML = t[key];
+// ═══════════════════════════════════════════════════════
+// APPLY TRANSLATIONS
+// ═══════════════════════════════════════════════════════
+function applyT(){
+  const tl=T[lang];
+  // Simple text mappings id→key
+  const map={
+    navPill:'navPill',hEyebrow:'eyebrow',hH1:'h1',hSub:'sub',hCta:'cta',hNoCredit:'noCredit',
+    hRevCount:'revCount',hStat1:'stat1',hStat2:'stat2',hStat3:'stat3',
+    s1t:'s1t',s1h:'s1h',purLbl:'purLbl',purPurchLbl:'purPurchLbl',purPurchSub:'purPurchSub',
+    purRenLbl:'purRenLbl',purRenSub:'purRenSub',lPropPrice:'lPropPrice',lDown:'lDown',
+    lBal:'lBal',lLender:'lLender',lenderPh:'lenderPh',lenderOtherOpt:'lenderOther',
+    lLocation:'lLoc',locPh:'locPh',locOtherOpt:'locOther',
+    ePropPrice:'ePrice',eDown:'eDown',eBal:'eBal',eLoc:'eLoc',
+    btnCont1:'cont',btnCont2:'cont',btnBack2:'back',btnBack3:'back',btnBack4:'backToRes',
+    s2t:'s2t',s2h:'s2h',lRate:'lRate',rateDesc:'rateDesc',rateLock:'rateLock',
+    am25:'amort25',am30:'amort30',lAmort:'lAmort',lFreq:'lFreq',
+    fqMo:'freqMo',fqBi:'freqBi',fqAc:'freqAc',
+    s3t:'s3t',s3h:'s3h',lEmp:'lEmp',
+    empE:'empE',empS:'empS',empC:'empC',empO:'empO',
+    lIncome:'lIncome',incPh:'incPh',incU50:'incU50',
+    inc50_75:'inc50_75',inc75_100:'inc75_100',inc100_125:'inc100_125',inc125_150:'inc125_150',
+    inc150_175:'inc150_175',inc175_200:'inc175_200',inc200plus:'inc200plus',
+    eIncome:'eIncome',lCar:'lCar',lDebts:'lDebts',
+    lOpt1:'opt',lOpt2:'opt',lOpt3:'opt',lCredit:'lCredit',
+    cr720:'cr720',cr680:'cr680',cr600:'cr600',crU600:'crU600',
+    btnGetRes:'getRes',
+    conTitle:'conTitle',conSub:'conSub',spStrong:'spStrong',spSub:'spSub',
+    lName:'lName',lEmail:'lEmail',lTimeline:'lTimeline',
+    tlASAP:'tlASAP',tl3m:'tl3m',tl6m:'tl6m',tl6plus:'tl6plus',
+    lPhone:'lPhone',whyBtn:'whyBtn',phTip:'phTip',
+    eConsent:'eConsent',ePhone:'ePhone',eName:'eName',eEmail:'eEmail',
+    submitTxt:'submitBtn',tr1:'tr1',tr2:'tr2',tr3:'tr3',
+    resDisc:'disc',
+    featEy:'featEy',featTtl:'featTtl',f1t:'f1t',f1b:'f1b',f2t:'f2t',f2b:'f2b',f3t:'f3t',f3b:'f3b',
+    revEy:'revEy',revTtl:'revTtl',rv1b:'rv1b',rv1a:'rv1a',rv2b:'rv2b',rv2a:'rv2a',rv3b:'rv3b',rv3a:'rv3a',
+    ftLicense:'ftLicense',ftDisc:'ftDisc',ftPriv:'ftPriv',ftTerms:'ftTerms',ftOACIQ:'ftOACIQ',ftCopy:'ftCopy',
+    exitTitle:'exitTitle',exitBody:'exitBody',exitStay:'exitStay',exitLeave:'exitLeave',
+    gateTitle:'gateTitle',gateBody:'gateBody',gateCont:'gateCont',gateBack:'gateBack',
+    privTitle:'privTitle',privClose:'privClose',privBody:'privBody',
+  };
+  Object.entries(map).forEach(([id,key])=>{
+    const el=$(id); if(!el||!(key in tl)) return;
+    el.innerHTML=tl[key];
   });
-  // data-ph placeholders
-  document.querySelectorAll('[data-ph]').forEach(el => {
-    const key = el.getAttribute('data-ph');
-    if (key in t) el.placeholder = t[key];
-  });
+  // h1 special
+  $('hH1').innerHTML=tl.h1;
+  // Consent with working privacy link
+  $('consentTxt').innerHTML=tl.consentTxt+' <a href="#" onclick="openPrivacy(event)" style="color:var(--blue)">'+tl.privacyLink+'</a>.';
   // Step counter
-  updateStepCounter();
-  // Nav pill text
-  document.getElementById('navPill').textContent = t.navPill;
+  updStepCtr();
 }
 
-function t(key) { return T[lang][key] || key; }
-
-// ─── PURPOSE ─────────────────────────────────────────────────────
-function pickPurpose(el, val) {
-  purpose = val;
-  document.querySelectorAll('.purpose-chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  // Toggle fields
-  const isPurchase = val === 'purchase';
-  document.getElementById('downPayGroup').style.display = isPurchase ? '' : 'none';
-  document.getElementById('balanceGroup').classList.toggle('show', !isPurchase);
-  document.getElementById('lenderGroup').classList.toggle('show', !isPurchase);
+function setLang(l){
+  lang=l;
+  document.getElementById('htmlRoot').lang=l;
+  $('btnEN').classList.toggle('active',l==='en');
+  $('btnFR').classList.toggle('active',l==='fr');
+  applyT();
+  if(step===5) renderResults();
 }
 
-// ─── SCROLL ──────────────────────────────────────────────────────
-function scrollToCalc(e) {
-  e.preventDefault();
-  document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ─── FORMATTING ──────────────────────────────────────────────────
-function fmtCurrency(el) {
-  const raw = el.value.replace(/[^0-9]/g, '');
-  el.value = raw ? Number(raw).toLocaleString('en-CA') : '';
-}
-function parseMoney(s) { return parseInt((s || '0').replace(/[^0-9]/g, '')) || 0; }
-function fmtPhone(el) {
-  let d = el.value.replace(/\D/g, '').slice(0, 10);
-  if (d.length >= 7) d = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
-  else if (d.length >= 4) d = '(' + d.slice(0,3) + ') ' + d.slice(3);
-  el.value = d;
-}
-
-// ─── DOWN HINT ───────────────────────────────────────────────────
-function updateDownHint() {
-  const price = parseMoney(document.getElementById('propPrice').value);
-  const down = parseMoney(document.getElementById('downPay').value);
-  const el = document.getElementById('downHint');
-  if (!price || !down) { el.textContent = ''; return; }
-  const pct = (down / price * 100).toFixed(1);
-  const ok = down >= price * 0.05;
-  const noCMHC = down >= price * 0.2 ? (lang === 'fr' ? ' — pas d\'assurance SCHL requise ✓' : ' — no CMHC insurance required ✓') : '';
-  el.textContent = pct + '% ' + (lang === 'fr' ? 'du prix d\'achat' : 'of purchase price') + noCMHC;
-  el.style.color = ok ? 'var(--green)' : 'var(--red)';
-}
-
-// ─── CHIPS ───────────────────────────────────────────────────────
-function pick(groupId, el, val) {
-  document.querySelectorAll('#' + groupId + ' .chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  picks[groupId] = val;
-}
-
-// ─── CONSENT ─────────────────────────────────────────────────────
-function toggleConsent() {
-  consentGiven = !consentGiven;
-  document.getElementById('consentLabel').classList.toggle('checked', consentGiven);
-}
-
-// ─── STEP COUNTER ────────────────────────────────────────────────
-function updateStepCounter() {
-  document.getElementById('stepCounter').textContent = t('stepOf') + ' ' + currentStep + ' ' + t('of') + ' 5';
-}
-
-// ─── NAVIGATION ──────────────────────────────────────────────────
-function goTo(n) {
-  if (n > currentStep && !validate(currentStep)) return;
-  currentStep = n;
-  document.querySelectorAll('.step-panel').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
-  for (let i = 1; i <= 5; i++) {
-    const d = document.getElementById('dot' + i);
-    d.classList.remove('active', 'done');
-    if (i === n) d.classList.add('active');
-    else if (i < n) d.classList.add('done');
+// ═══════════════════════════════════════════════════════
+// DOWN PAYMENT
+// ═══════════════════════════════════════════════════════
+function updDown(){
+  const price=parseMoney($('propPrice').value);
+  const down=parseMoney($('downPay').value);
+  const el=$('downHint');
+  if(!price||!down){el.innerHTML='';return;}
+  const pct=(down/price*100).toFixed(1);
+  const ok=down>=price*0.05;
+  const over20=down>=price*0.2;
+  const tl=T[lang];
+  let html=`<span style="font-weight:600">${pct}%</span> `+(lang==='fr'?"du prix d'achat":"of purchase price");
+  if(over20){
+    html+=` <span style="color:var(--green)">— `+(lang==='fr'?"pas d'assurance SCHL requise ✓":"no CMHC insurance required ✓")+`</span>`;
+  } else {
+    html+=` <span style="color:var(--gray-400);font-size:0.7rem">— `+(lang==='fr'?"assurance SCHL s'applique":"CMHC insurance applies")+` <span title="${tl.cmhcNote}" style="cursor:help;text-decoration:underline dotted">(?)${lang==='fr'?'':''}</span></span>`;
   }
-  updateStepCounter();
-  document.getElementById('progressFill').style.width = (n / 5 * 100) + '%';
-  if (n === 4) renderResults();
-  setTimeout(() => document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  el.innerHTML=html;
+  el.style.color=ok?'var(--gray-700)':'var(--red)';
 }
 
-// ─── VALIDATION ──────────────────────────────────────────────────
-function showErr(id, show) { document.getElementById(id).classList.toggle('visible', show); }
+function applyPct(pct){
+  const price=parseMoney($('propPrice').value);
+  if(!price){showErr('ePropPrice',true);return;}
+  $('downPay').value=Math.round(price*pct/100).toLocaleString('en-CA');
+  document.querySelectorAll('#downPctG .ch').forEach(c=>c.classList.toggle('sel',parseInt(c.getAttribute('data-p'))===pct));
+  updDown();
+}
+function clearPctCh(){document.querySelectorAll('#downPctG .ch').forEach(c=>c.classList.remove('sel'));}
 
-function validate(s) {
-  let ok = true;
-  if (s === 1) {
-    const price = parseMoney(document.getElementById('propPrice').value);
-    const loc = document.getElementById('location').value;
-    showErr('errPrice', price < 100000); if (price < 100000) ok = false;
-    showErr('errLocation', !loc); if (!loc) ok = false;
-    if (purpose === 'purchase') {
-      const down = parseMoney(document.getElementById('downPay').value);
-      showErr('errDown', !down || down < price * 0.05); if (!down || down < price * 0.05) ok = false;
+// ═══════════════════════════════════════════════════════
+// PURPOSE
+// ═══════════════════════════════════════════════════════
+function setPurpose(el,val){
+  purpose=val;
+  document.querySelectorAll('.pur-ch').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const isPur=val==='purchase';
+  $('downGrp').style.display=isPur?'':'none';
+  document.querySelectorAll('.renew-f').forEach(f=>f.classList.toggle('on',!isPur));
+}
+
+// ═══════════════════════════════════════════════════════
+// CHIP PICKER
+// ═══════════════════════════════════════════════════════
+function pick(gId,el,val){
+  document.querySelectorAll('#'+gId+' .ch').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');picks[gId]=val;
+}
+
+// ═══════════════════════════════════════════════════════
+// CONSENT
+// ═══════════════════════════════════════════════════════
+function toggleConsent(){
+  consent=!consent;
+  $('consentLbl').classList.toggle('chk',consent);
+}
+
+// ═══════════════════════════════════════════════════════
+// STEP COUNTER & NAVIGATION
+// ═══════════════════════════════════════════════════════
+function updStepCtr(){$('stepCtr').textContent=(lang==='fr'?'Étape ':'Step ')+step+(lang==='fr'?' sur ':' of ')+5;}
+
+function goTo(n){
+  if(n>step&&!validate(step))return;
+  if(n===4&&step===3&&!gateOk){if(!checkGate())return;}
+  step=n;
+  document.querySelectorAll('.sp').forEach((p,i)=>p.classList.toggle('on',i+1===n));
+  for(let i=1;i<=5;i++){const d=$('d'+i);d.classList.remove('active','done');if(i===n)d.classList.add('active');else if(i<n)d.classList.add('done');}
+  updStepCtr();
+  $('progFill').style.width=(n/5*100)+'%';
+  if(n===5)renderResults();
+  saveProgress();
+  setTimeout(()=>$('calc').scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+
+// ═══════════════════════════════════════════════════════
+// VALIDATION
+// ═══════════════════════════════════════════════════════
+function validate(s){
+  let ok=true;
+  if(s===1){
+    const price=parseMoney($('propPrice').value);
+    const loc=$('location').value;
+    showErr('ePropPrice',price<100000);if(price<100000)ok=false;
+    showErr('eLoc',!loc);if(!loc)ok=false;
+    if(purpose==='purchase'){
+      const down=parseMoney($('downPay').value);
+      showErr('eDown',!down||down<price*0.05);if(!down||down<price*0.05)ok=false;
     } else {
-      const bal = parseMoney(document.getElementById('remainBal').value);
-      showErr('errBalance', !bal); if (!bal) ok = false;
+      const bal=parseMoney($('remainBal').value);
+      showErr('eBal',!bal);if(!bal)ok=false;
     }
-  } else if (s === 3) {
-    const income = document.getElementById('incomeBracket').value;
-    showErr('errIncome', !income); if (!income) ok = false;
+  } else if(s===3){
+    const inc=$('incomeBracket').value;
+    showErr('eIncome',!inc);if(!inc)ok=false;
   }
   return ok;
 }
 
-// ─── MORTGAGE CALC ───────────────────────────────────────────────
-function calcMortgage() {
-  const price = parseMoney(document.getElementById('propPrice').value);
-  const loc = document.getElementById('location').value;
-  const amort = parseInt(picks.amortGroup);
-  const freq = picks.freqGroup;
-  const incomeBracket = document.getElementById('incomeBracket').value;
-  const car = parseMoney(document.getElementById('carPay').value);
-  const debts = parseMoney(document.getElementById('otherDebts').value);
-  const r = 0.0525 / 12;
-  const n = amort * 12;
+// ═══════════════════════════════════════════════════════
+// CALC ENGINE
+// ═══════════════════════════════════════════════════════
+const incMap={under50:40000,'50to75':62500,'75to100':87500,'100to125':112500,'125to150':137500,'150to175':162500,'175to200':187500,'200plus':220000};
+const taxR={montreal:0.01085,laval:0.01073,longueuil:0.01053,brossard:0.00924,'west-island':0.01085,'south-shore':0.00980,other:0.01000};
 
-  let principal;
-  if (purpose === 'purchase') {
-    const down = parseMoney(document.getElementById('downPay').value);
-    principal = price - down;
-  } else {
-    principal = parseMoney(document.getElementById('remainBal').value);
-  }
-
-  const monthlyMtg = principal * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n) - 1);
-  let displayPay, payLabel;
-  if (freq === 'monthly') { displayPay = monthlyMtg; payLabel = '/mo'; }
-  else { displayPay = monthlyMtg * 12 / 26; payLabel = freq === 'biweekly' ? '/2wk' : '/2wk (accel.)'; }
-
-  const taxRates = { montreal:0.01085, laval:0.01073, longueuil:0.01053, brossard:0.00924, 'west-island':0.01085, 'south-shore':0.00980, other:0.01000 };
-  const totalTax = (price * (taxRates[loc] || 0.01) / 12) + (price * 0.00154 / 12);
-  const heating = 150;
-  const totalHousing = monthlyMtg + totalTax + heating;
-
-  const incomeMap = { under50:45000, '50to100':75000, '100to150':125000, '150plus':175000 };
-  const monthlyIncome = (incomeMap[incomeBracket] || 75000) / 12;
-  const GDSR = totalHousing / monthlyIncome * 100;
-  const TDSR = (totalHousing + car + debts) / monthlyIncome * 100;
-
-  let qualColor, qualEmoji;
-  if (GDSR <= 39 && TDSR <= 44) { qualColor = 'green'; qualEmoji = '✓'; }
-  else if (GDSR <= 43 || TDSR <= 48) { qualColor = 'yellow'; qualEmoji = '~'; }
-  else { qualColor = 'red'; qualEmoji = '!'; }
-
-  const maxMtgPayment = monthlyIncome * 0.39 - totalTax - heating;
-  const maxPrincipal = maxMtgPayment > 0 ? maxMtgPayment * (Math.pow(1+r,n)-1) / (r * Math.pow(1+r,n)) : 0;
-  const down = purpose === 'purchase' ? parseMoney(document.getElementById('downPay').value) : 0;
-  const maxPrice = maxPrincipal + down;
-
-  return { displayPay, payLabel, totalTax, totalHousing, GDSR, TDSR, qualColor, qualEmoji, maxPrice, principal };
+function calcMtg(){
+  const price=parseMoney($('propPrice').value);
+  const loc=$('location').value;
+  const amort=parseInt(picks.amortG);
+  const freq=picks.freqG;
+  const inc=incMap[$('incomeBracket').value]||75000;
+  const car=parseMoney($('carPay').value);
+  const debts=parseMoney($('otherDebts').value);
+  const r=0.0525/12, n=amort*12;
+  const principal=purpose==='purchase'?price-parseMoney($('downPay').value):parseMoney($('remainBal').value);
+  const mMtg=principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  let disPay,payLbl;
+  if(freq==='monthly'){disPay=mMtg;payLbl='/mo';}
+  else{disPay=mMtg*12/26;payLbl=freq==='biweekly'?'/2wk':'/2wk (accel.)';}
+  const tax=(price*(taxR[loc]||0.01)/12)+(price*0.00154/12);
+  const heat=150;
+  const totHousing=mMtg+tax+heat;
+  const mInc=inc/12;
+  const GDS=totHousing/mInc*100;
+  const TDS=(totHousing+car+debts)/mInc*100;
+  let col,emoji;
+  if(GDS<=39&&TDS<=44){col='green';emoji='✓';}
+  else if(GDS<=43||TDS<=48){col='yellow';emoji='~';}
+  else{col='red';emoji='!';}
+  const maxMPay=mInc*0.39-tax-heat;
+  const maxPrin=maxMPay>0?maxMPay*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n)):0;
+  const down=purpose==='purchase'?parseMoney($('downPay').value):0;
+  return{disPay,payLbl,tax,totHousing,GDS,TDS,col,emoji,maxPrice:maxPrin+down,principal,mMtg};
 }
 
-function fmt(n) { return '$' + Math.round(Math.max(n, 0)).toLocaleString('en-CA'); }
-
-const colorMap = {
-  green: { bar:'#15803d', bg:'#dcfce7', txt:'#15803d' },
-  yellow: { bar:'#d97706', bg:'#fef3c7', txt:'#b45309' },
-  red: { bar:'#dc2626', bg:'#fee2e2', txt:'#b91c1c' }
-};
-
-function renderResults() {
-  const res = calcMortgage();
-  const c = colorMap[res.qualColor];
-
-  const qualLabel = t('qual' + res.qualColor.charAt(0).toUpperCase() + res.qualColor.slice(1) + 'Label');
-  const qualMsg = t('qual' + res.qualColor.charAt(0).toUpperCase() + res.qualColor.slice(1) + 'Msg');
-
-  document.getElementById('resultsHero').innerHTML = `
-    <div class="result-color-bar" style="background:${c.bar}"></div>
-    <div class="result-status">
-      <div class="result-status-icon" style="background:${c.bg};color:${c.txt}">${res.qualEmoji}</div>
-      <div class="result-status-text">
-        <h4 style="color:${c.txt}">${qualLabel}</h4>
-        <p>${qualMsg}</p>
-      </div>
-    </div>`;
-
-  // Number cards differ for renewal vs purchase
-  let numCards;
-  if (purpose === 'purchase') {
-    numCards = `
-      <div class="result-num"><div class="result-num-val">${fmt(res.displayPay)}</div><div class="result-num-lbl">${t('lbl_payment')} ${res.payLabel}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.totalTax)}</div><div class="result-num-lbl">${t('lbl_taxes')}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.totalHousing)}</div><div class="result-num-lbl">${t('lbl_total')}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.maxPrice)}</div><div class="result-num-lbl">${t('lbl_max')}</div></div>`;
-  } else {
-    numCards = `
-      <div class="result-num"><div class="result-num-val">${fmt(res.displayPay)}</div><div class="result-num-lbl">${t('lbl_newPayment')} ${res.payLabel}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.totalTax)}</div><div class="result-num-lbl">${t('lbl_taxes')}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.totalHousing)}</div><div class="result-num-lbl">${t('lbl_total')}</div></div>
-      <div class="result-num"><div class="result-num-val">${fmt(res.principal)}</div><div class="result-num-lbl">${t('lbl_balance')}</div></div>`;
-  }
-  document.getElementById('resultNumbers').innerHTML = numCards;
-
-  const gW = Math.min(res.GDSR / 50 * 100, 100);
-  const tW = Math.min(res.TDSR / 55 * 100, 100);
-  const gC = res.GDSR <= 39 ? '#15803d' : res.GDSR <= 43 ? '#d97706' : '#dc2626';
-  const tC = res.TDSR <= 44 ? '#15803d' : res.TDSR <= 48 ? '#d97706' : '#dc2626';
-  document.getElementById('resultRatios').innerHTML = `
-    <div class="ratio-item">
-      <div class="ratio-label">GDS</div>
-      <div class="ratio-bar-wrap"><div class="ratio-bar" style="width:${gW}%;background:${gC}"></div></div>
-      <div class="ratio-val" style="color:${gC}">${res.GDSR.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${t('gdsMax')})</span></div>
-    </div>
-    <div class="ratio-item">
-      <div class="ratio-label">TDS</div>
-      <div class="ratio-bar-wrap"><div class="ratio-bar" style="width:${tW}%;background:${tC}"></div></div>
-      <div class="ratio-val" style="color:${tC}">${res.TDSR.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${t('tdsMax')})</span></div>
-    </div>`;
-
-  // Teaser copy — purchase vs renewal variants
-  const teaserKey = purpose === 'renewal'
-    ? 'teaserRenewal' + res.qualColor.charAt(0).toUpperCase() + res.qualColor.slice(1)
-    : 'teaser' + res.qualColor.charAt(0).toUpperCase() + res.qualColor.slice(1);
-  document.getElementById('resultTeaser').innerHTML = t(teaserKey);
+// ═══════════════════════════════════════════════════════
+// COUNT-UP
+// ═══════════════════════════════════════════════════════
+function countUp(el,target,dur){
+  const start=performance.now();
+  (function step(now){
+    const p=Math.min((now-start)/dur,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent='$'+Math.round(target*e).toLocaleString('en-CA');
+    if(p<1)requestAnimationFrame(step);
+  })(start);
 }
 
-// ─── VALIDATION STEP 5 ───────────────────────────────────────────
-const FAKE_EMAILS = ['test@test.com','fake@email.com','test@email.com','example@example.com'];
-const DISP_DOMAINS = ['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','yopmail.com','trashmail.com'];
-function validEmail(e) {
-  if (!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return false;
-  if (FAKE_EMAILS.includes(e)) return false;
-  return !DISP_DOMAINS.includes(e.split('@')[1]);
+// ═══════════════════════════════════════════════════════
+// RENDER RESULTS
+// ═══════════════════════════════════════════════════════
+const cMap={green:{bar:'#15803d',bg:'#dcfce7',txt:'#15803d'},yellow:{bar:'#d97706',bg:'#fef3c7',txt:'#b45309'},red:{bar:'#dc2626',bg:'#fee2e2',txt:'#b91c1c'}};
+const fmt=n=>'$'+Math.round(Math.max(n,0)).toLocaleString('en-CA');
+
+function renderResults(){
+  const r=calcMtg();const c=cMap[r.col];const tl=T[lang];
+  const qLbl=tl['qual'+r.col.charAt(0).toUpperCase()+r.col.slice(1)+'Lbl'];
+  const qMsg=tl['qual'+r.col.charAt(0).toUpperCase()+r.col.slice(1)+'Msg'];
+  $('resHero').innerHTML=`<div class="res-bar" style="background:${c.bar}"></div><div class="res-status"><div class="res-icon" style="background:${c.bg};color:${c.txt}">${r.emoji}</div><div class="res-status-txt"><h4 style="color:${c.txt}">${qLbl}</h4><p>${qMsg}</p></div></div>`;
+  const n1=purpose==='purchase'?tl.lblPay:tl.lblNewPay;
+  const n4=purpose==='purchase'?tl.lblMax:tl.lblBal;
+  const v4=purpose==='purchase'?r.maxPrice:r.principal;
+  $('resNums').innerHTML=`<div class="res-num"><div class="res-num-val" id="rv1">$0</div><div class="res-num-lbl">${n1} ${r.payLbl}</div></div><div class="res-num"><div class="res-num-val" id="rv2">$0</div><div class="res-num-lbl">${tl.lblTax}</div></div><div class="res-num"><div class="res-num-val" id="rv3">$0</div><div class="res-num-lbl">${tl.lblTotal}</div></div><div class="res-num"><div class="res-num-val" id="rv4">$0</div><div class="res-num-lbl">${n4}</div></div>`;
+  setTimeout(()=>{countUp($('rv1'),r.disPay,900);countUp($('rv2'),r.tax,900);countUp($('rv3'),r.totHousing,900);countUp($('rv4'),v4,900);},100);
+  const gW=Math.min(r.GDS/50*100,100),tW=Math.min(r.TDS/55*100,100);
+  const gC=r.GDS<=39?'#15803d':r.GDS<=43?'#d97706':'#dc2626';
+  const tC=r.TDS<=44?'#15803d':r.TDS<=48?'#d97706':'#dc2626';
+  $('resRatios').innerHTML=`<div class="ratio-i"><div class="ratio-lbl">GDS</div><div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div><div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.gdsMax})</span></div></div><div class="ratio-i"><div class="ratio-lbl">TDS</div><div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div><div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.tdsMax})</span></div></div>`;
+  const tk=purpose==='renewal'?'tRen':'tPur';
+  const col=r.col.charAt(0).toUpperCase()+r.col.slice(1);
+  $('resTeaser').innerHTML=tl[tk+col]||'';
 }
-function validPhone(p) { return p.replace(/\D/g,'').length === 10; }
 
-// ─── SUBMIT ──────────────────────────────────────────────────────
-let submitting = false, lastSub = 0;
+// ═══════════════════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════════════════
+const FAKE=['test@test.com','fake@email.com','test@email.com','example@example.com'];
+const DISP=['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','yopmail.com','trashmail.com'];
+const validEmail=e=>{if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return false;if(FAKE.includes(e))return false;return!DISP.includes(e.split('@')[1]);};
+const validPhone=p=>p.replace(/\D/g,'').length===10;
+const suspicious=(n,e,p)=>['test','fake','asdf'].includes(n.toLowerCase())||/^(.)\1{3,}/.test(n)||/^(\d)\1{9}$/.test(p.replace(/\D/g,''));
 
-function submitForm() {
-  if (submitting) return;
-  const now = Date.now();
-  if (now - lastSub < 30000) { alert(lang === 'fr' ? 'Veuillez patienter avant de soumettre à nouveau.' : 'Please wait before submitting again.'); return; }
-  const name = document.getElementById('fullName').value.trim();
-  const email = document.getElementById('emailAddr').value.trim().toLowerCase();
-  const phone = document.getElementById('phoneNum').value;
-  let ok = true;
-  showErr('errName', !name || name.length < 2); if (!name || name.length < 2) ok = false;
-  showErr('errEmail', !validEmail(email)); if (!validEmail(email)) ok = false;
-  showErr('errPhone', !validPhone(phone)); if (!validPhone(phone)) ok = false;
-  showErr('errConsent', !consentGiven); if (!consentGiven) ok = false;
-  if (!ok) return;
-  submitting = true; lastSub = now;
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  document.getElementById('submitBtnText').textContent = lang === 'fr' ? 'Envoi en cours...' : 'Sending...';
-  const res = calcMortgage();
-  const lead = {
-    timestamp: new Date().toISOString(), lang, purpose, name, email, phone,
-    location: document.getElementById('location').value,
-    propertyValue: parseMoney(document.getElementById('propPrice').value),
-    downPayment: purpose === 'purchase' ? parseMoney(document.getElementById('downPay').value) : null,
-    remainingBalance: purpose === 'renewal' ? parseMoney(document.getElementById('remainBal').value) : null,
-    currentLender: purpose === 'renewal' ? document.getElementById('currentLender').value : null,
-    amortization: picks.amortGroup, frequency: picks.freqGroup,
-    employmentType: picks.empGroup,
-    incomeBracket: document.getElementById('incomeBracket').value,
-    carPayment: parseMoney(document.getElementById('carPay').value),
-    otherDebts: parseMoney(document.getElementById('otherDebts').value),
-    creditScore: picks.creditGroup, timeline: picks.timelineGroup,
-    GDSR: res.GDSR.toFixed(2), TDSR: res.TDSR.toFixed(2),
-    qualificationColor: res.qualColor,
-    consent: true, consentTimestamp: new Date().toISOString(),
-    isSuspicious: isSuspicious(name, email, phone)
-  };
-  console.log('LEAD:', JSON.stringify(lead, null, 2));
-  setTimeout(() => {
-    submitting = false; btn.disabled = false;
-    document.getElementById('submitBtnText').textContent = t('submitBtn');
-    // Reveal results step
-    currentStep = 5;
-    document.querySelectorAll('.step-panel').forEach((p, i) => p.classList.toggle('active', i + 1 === 5));
-    for (let i = 1; i <= 5; i++) {
-      const d = document.getElementById('dot' + i);
-      d.classList.remove('active', 'done');
-      if (i === 5) d.classList.add('active');
-      else d.classList.add('done');
-    }
-    updateStepCounter();
-    document.getElementById('progressFill').style.width = '100%';
+function submitForm(){
+  if(submitting)return;
+  const now=Date.now();
+  if(now-lastSub<30000){alert(lang==='fr'?'Veuillez patienter avant de soumettre à nouveau.':'Please wait before submitting again.');return;}
+  const name=$('fullName').value.trim();
+  const email=$('emailAddr').value.trim().toLowerCase();
+  const phone=$('phoneNum').value;
+  let ok=true;
+  showErr('eName',!name||name.length<2);if(!name||name.length<2)ok=false;
+  showErr('eEmail',!validEmail(email));if(!validEmail(email))ok=false;
+  showErr('ePhone',!validPhone(phone));if(!validPhone(phone))ok=false;
+  showErr('eConsent',!consent);if(!consent)ok=false;
+  if(!ok)return;
+  submitting=true;lastSub=now;
+  const btn=$('submitBtn');btn.disabled=true;
+  $('submitTxt').textContent=lang==='fr'?'Envoi en cours...':'Sending...';
+  const res=calcMtg();
+  const lead={ts:new Date().toISOString(),lang,purpose,name,email,phone,
+    location:$('location').value,propVal:parseMoney($('propPrice').value),
+    downPay:purpose==='purchase'?parseMoney($('downPay').value):null,
+    remainBal:purpose==='renewal'?parseMoney($('remainBal').value):null,
+    curLender:purpose==='renewal'?$('curLender').value:null,
+    amort:picks.amortG,freq:picks.freqG,empType:picks.empG,
+    income:$('incomeBracket').value,car:parseMoney($('carPay').value),
+    debts:parseMoney($('otherDebts').value),credit:picks.creditG,timeline:picks.tlG,
+    GDS:res.GDS.toFixed(2),TDS:res.TDS.toFixed(2),qual:res.col,
+    consent:true,consentTs:new Date().toISOString(),suspicious:suspicious(name,email,phone)};
+  console.log('LEAD:',JSON.stringify(lead,null,2));
+  setTimeout(()=>{
+    submitting=false;btn.disabled=false;$('submitTxt').textContent=t('submitBtn');
+    step=5;
+    document.querySelectorAll('.sp').forEach((p,i)=>p.classList.toggle('on',i+1===5));
+    for(let i=1;i<=5;i++){const d=$('d'+i);d.classList.remove('active','done');if(i===5)d.classList.add('active');else d.classList.add('done');}
+    updStepCtr();$('progFill').style.width='100%';
     renderResults();
-    setTimeout(() => document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-  }, 1200);
+    setTimeout(()=>$('calc').scrollIntoView({behavior:'smooth',block:'start'}),50);
+    try{localStorage.removeItem('mqiq');}catch(e){}
+  },1200);
 }
 
-function isSuspicious(name, email, phone) {
-  if (['test','fake','asdf','qwerty'].includes(name.toLowerCase())) return true;
-  if (/^(.)\1{3,}/.test(name)) return true;
-  if (/^(\d)\1{9}$/.test(phone.replace(/\D/g,''))) return true;
-  return false;
+// ═══════════════════════════════════════════════════════
+// EXIT INTENT
+// ═══════════════════════════════════════════════════════
+function initExit(){
+  document.addEventListener('mouseleave',e=>{
+    if(e.clientY<20&&!exitShown&&!exitDismissed&&step>=2&&step<5){
+      exitShown=true;$('exitOv').classList.add('on');saveProgress();
+    }
+  });
+  let idle;
+  const ri=()=>{clearTimeout(idle);if(step>=2&&step<5&&!exitDismissed)idle=setTimeout(()=>{if(!exitShown){exitShown=true;$('exitOv').classList.add('on');}},45000);};
+  ['touchstart','click'].forEach(ev=>document.addEventListener(ev,ri,{passive:true}));
+}
+function closeExit(){$('exitOv').classList.remove('on');$('calc').scrollIntoView({behavior:'smooth',block:'start'});}
+function dismissExit(){exitDismissed=true;$('exitOv').classList.remove('on');}
+
+// ═══════════════════════════════════════════════════════
+// QUAL GATE
+// ═══════════════════════════════════════════════════════
+function checkGate(){
+  if(gateOk)return true;
+  const price=parseMoney($('propPrice').value);
+  const inc=incMap[$('incomeBracket').value]||0;
+  if(!inc||!price)return true;
+  const maxApprox=(inc/12*0.39*12)/0.04;
+  if(price>maxApprox*1.4){$('gateOv').classList.add('on');return false;}
+  return true;
+}
+function closeGate(go){$('gateOv').classList.remove('on');if(go){gateOk=true;goTo(4);}}
+
+// ═══════════════════════════════════════════════════════
+// PHONE TOOLTIP
+// ═══════════════════════════════════════════════════════
+function toggleTip(e){e.preventDefault();e.stopPropagation();$('phTip').classList.toggle('on');}
+document.addEventListener('click',()=>$('phTip')&&$('phTip').classList.remove('on'));
+
+// ═══════════════════════════════════════════════════════
+// PRIVACY MODAL
+// ═══════════════════════════════════════════════════════
+function openPrivacy(e){e.preventDefault();e.stopPropagation();$('privOv').classList.add('on');}
+function closePrivacy(){$('privOv').classList.remove('on');}
+
+// ═══════════════════════════════════════════════════════
+// LOCALSTORAGE
+// ═══════════════════════════════════════════════════════
+function saveProgress(){
+  try{localStorage.setItem('mqiq',JSON.stringify({
+    lang,purpose,
+    propPrice:$('propPrice').value,downPay:$('downPay').value,
+    remainBal:$('remainBal').value,curLender:$('curLender').value,
+    location:$('location').value,incomeBracket:$('incomeBracket').value,
+    carPay:$('carPay').value,otherDebts:$('otherDebts').value,
+    picks:JSON.stringify(picks),step
+  }));}catch(e){}
+}
+function restoreProgress(){
+  try{
+    const raw=localStorage.getItem('mqiq');if(!raw)return;
+    const d=JSON.parse(raw);
+    if(d.lang)setLang(d.lang);
+    if(d.purpose&&d.purpose==='renewal')setPurpose($('cpRenewal'),'renewal');
+    if(d.propPrice)$('propPrice').value=d.propPrice;
+    if(d.downPay)$('downPay').value=d.downPay;
+    if(d.remainBal)$('remainBal').value=d.remainBal;
+    if(d.curLender)$('curLender').value=d.curLender;
+    if(d.location)$('location').value=d.location;
+    if(d.incomeBracket)$('incomeBracket').value=d.incomeBracket;
+    if(d.carPay)$('carPay').value=d.carPay;
+    if(d.otherDebts)$('otherDebts').value=d.otherDebts;
+    if(d.picks){const p=JSON.parse(d.picks);Object.assign(picks,p);}
+    updDown();
+  }catch(e){}
 }
 
-function closeModal() { document.getElementById('successModal').classList.remove('open'); }
+// ═══════════════════════════════════════════════════════
+// SCROLL
+// ═══════════════════════════════════════════════════════
+function scrollCalc(e){e.preventDefault();$('calc').scrollIntoView({behavior:'smooth',block:'start'});}
 
-// ─── INIT ────────────────────────────────────────────────────────
-applyTranslations();
-updateStepCounter();
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+applyT();
+restoreProgress();
+initExit();
 </script>
 </body>
 </html>
