@@ -211,7 +211,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   bottom:100%;left:50%;transform:translateX(-50%);
   border-bottom-color:var(--navy);
 }
-.row-cat{display:flex;align-items:center;gap:0}
 
 /* STEP PANELS */
 .sp{display:none}
@@ -279,45 +278,20 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
 
 /* RESULTS SUMMARY TABLE + CHART */
 .res-summary{padding:0 22px 20px}
-.res-section-title{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:600;color:var(--navy);margin:18px 0 10px;letter-spacing:-0.01em}
-.sum-table{width:100%;border-collapse:collapse;font-size:0.78rem;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
-.sum-table th{background:var(--navy);color:white;padding:9px 12px;text-align:left;font-weight:600;font-size:0.72rem;letter-spacing:0.03em}
-.sum-table th:not(:first-child){text-align:right}
-.sum-table td{padding:9px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-700)}
-.sum-table td:not(:first-child){text-align:right;font-weight:500;color:var(--navy);font-family:'Fraunces',serif;font-size:0.82rem}
-.sum-table tr:last-child td{border-bottom:none;font-weight:700;background:var(--gray-50)}
-.sum-table tr:hover td{background:var(--sky)}
-.sum-table .row-cat{color:var(--gray-500);font-size:0.74rem}
 
 /* DONUT CHART */
-.chart-wrap{display:flex;align-items:center;gap:20px;padding:4px 0 8px}
-.donut-svg{flex-shrink:0}
-.chart-legend{display:flex;flex-direction:column;gap:8px}
-.legend-item{display:flex;align-items:center;gap:8px;font-size:0.78rem}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.legend-label{color:var(--gray-500)}
-.legend-val{font-weight:600;color:var(--navy);font-family:'Fraunces',serif;margin-left:auto}
 
 /* NARRATIVE */
-.res-narrative{background:var(--gray-50);border-radius:12px;padding:14px 16px;font-size:0.8rem;color:var(--gray-600);line-height:1.7;margin-top:4px}
 .res-narrative p{margin-bottom:8px}
 .res-narrative p:last-child{margin-bottom:0}
-.res-narrative .nar-icon{margin-right:5px}
-.res-narrative strong{color:var(--navy)}
+.res-narrative .res-narrative strong{color:var(--navy)}
 
 /* BROKER CTA at bottom of results */
-.res-broker-cta{margin:16px 22px 20px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:14px;padding:18px 20px;color:white;text-align:center}
 .res-broker-cta h4{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:5px}
 .res-broker-cta p{font-size:0.75rem;color:rgba(255,255,255,0.65);margin-bottom:12px}
-.btn-broker-cta{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy);font-weight:700;font-size:0.85rem;padding:10px 22px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.btn-broker-cta:hover{background:#dbb958;transform:translateY(-1px)}
 
 @media(max-width:480px){
   .res-summary{padding:0 16px 16px}
-  .res-broker-cta{margin:12px 16px 16px}
-  .chart-wrap{flex-direction:column;align-items:flex-start}
-  .sum-table td,.sum-table th{padding:7px 9px}
-}
 
 /* MOBILE */
 @media(max-width:860px){
@@ -340,6 +314,37 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
   .ch-h{flex:1 0 100%}
   .nav-pill{display:none}
 }
+
+/* VIRTUAL BUSINESS CARD MODAL */
+.vcard-ov{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,20,40,0.72);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;padding:0}
+.vcard-ov.on{display:flex;animation:fadeIn 0.22s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.vcard-sheet{background:white;width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:0 0 32px;box-shadow:0 -12px 48px rgba(0,0,0,0.22);animation:slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.vcard-drag{width:40px;height:4px;border-radius:4px;background:var(--gray-200);margin:12px auto 0}
+.vcard-card{margin:20px 20px 0;background:linear-gradient(135deg,#0f1e3c 0%,#1a3a7c 60%,#2460e8 100%);border-radius:18px;padding:28px 24px 24px;position:relative;overflow:hidden}
+.vcard-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.05)}
+.vcard-card::after{content:'';position:absolute;bottom:-30px;left:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.vcard-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:-0.02em;margin-bottom:20px}
+.vcard-logo span{color:rgba(255,255,255,0.9)}
+.vcard-name{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:-0.02em;line-height:1.2;margin-bottom:4px}
+.vcard-title{font-size:0.78rem;color:rgba(255,255,255,0.55);font-weight:400;margin-bottom:18px;letter-spacing:0.02em}
+.vcard-creds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.vcard-badge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.75);font-size:0.65rem;font-weight:600;padding:3px 8px;border-radius:100px;letter-spacing:0.04em}
+.vcard-divider{height:1px;background:rgba(255,255,255,0.1);margin-bottom:18px}
+.vcard-contact-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.vcard-contact-icon{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vcard-contact-row a{color:rgba(255,255,255,0.8);font-size:0.82rem;text-decoration:none;font-weight:500}
+.vcard-contact-row a:hover{color:white}
+.vcard-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 20px 0}
+.vcard-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.88rem;transition:all 0.18s}
+.vcard-btn-call{background:var(--blue);color:white;box-shadow:0 3px 12px rgba(36,96,232,0.3)}
+.vcard-btn-call:hover{background:#1a4fd8;transform:translateY(-1px)}
+.vcard-btn-save{background:var(--gray-100);color:var(--navy)}
+.vcard-btn-save:hover{background:var(--gray-200)}
+.vcard-close-row{text-align:center;margin-top:16px;padding:0 20px}
+.vcard-close-btn{background:none;border:none;color:var(--gray-400);font-size:0.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;padding:8px}
+
 </style>
 </head>
 <body>
@@ -429,6 +434,17 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
               <label class="fl" id="lBal"></label>
               <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="remainBal" oninput="fmtC(this)" inputmode="numeric" placeholder="280,000"></div>
               <div class="err" id="eBal"></div>
+            </div>
+            <div class="fg renew-f" id="renewAmortGrp">
+              <label class="fl" id="lRenewAmort"></label>
+              <select class="fi fsel" id="renewAmort">
+                <option value="5">5 years</option>
+                <option value="10">10 years</option>
+                <option value="15">15 years</option>
+                <option value="20">20 years</option>
+                <option value="25" selected>25 years</option>
+                <option value="30">30 years</option>
+              </select>
             </div>
             <div class="fg renew-f" id="lenderGrp">
               <label class="fl" id="lLender"></label>
@@ -697,7 +713,7 @@ en:{
   navPill:'Licensed Quebec Broker',
   eyebrow:'Free · No obligation · 2 minutes',
   h1:'Find Out <em>Exactly</em><br>What You Can Afford',
-  sub:'Answer a few quick questions and get an instant estimate — then a licensed mortgage expert will reach out with real options.',
+  sub:'Complete a brief questionnaire and receive an instant affordability estimate — a licensed mortgage professional will follow up with personalized options tailored to your profile.',
   cta:'Start My Estimate',
   noCredit:'No credit check required',
   revCount:'Trusted by 400+ Quebec homebuyers this year',
@@ -707,7 +723,8 @@ en:{
   purPurchLbl:'Purchase',purPurchSub:'Buying a property',
   purRenLbl:'Renewal',purRenSub:'Renewing my mortgage',
   lPropPrice:'Property value',lDown:'Down payment',
-  lBal:'Remaining mortgage balance',lLender:'Current lender',
+  lBal:'Remaining Mortgage Balance',
+  lRenewAmort:'Remaining Amortization Period',lLender:'Current lender',
   lenderPh:'Select your lender...',lenderOther:'Other',
   lLoc:'Area',locPh:'Where is the property?',locOther:'Other Quebec area',
   ePrice:'Please enter a valid amount (min $100,000).',
@@ -730,9 +747,9 @@ en:{
   lCar:'Car payment',lDebts:'Other debts',opt:'(optional)',
   lCredit:'Credit score',cr720:'720+ Excellent',cr680:'680–719 Good',cr600:'600–679 Fair',crU600:'Under 600',
   getRes:'Get My Results',
-  conTitle:'One last step — enter your info to see your results',
-  conSub:'Your personalized estimate is ready. Enter your details to unlock it — a mortgage expert will also follow up within 24 hours.',
-  spStrong:'Marc from Laval saved $14,200',spSub:'over his mortgage term by switching lenders.',
+  conTitle:'One final step — provide your contact details to receive your results',
+  conSub:'Your personalized affordability estimate is ready. A licensed mortgage professional will review your profile and follow up within 24 hours.',
+  spStrong:'Marc from Laval saved $14,200 in interest',spSub:'by switching lenders through a mortgage broker.',
   lName:'Your name',lEmail:'Email',lPhone:'Phone number',
   lTimeline:'When are you looking to proceed?',
   tlASAP:'As soon as possible',tl3m:'Within 3 months',tl6m:'3–6 months',tl6plus:'6+ months',
@@ -758,25 +775,25 @@ en:{
   tRenRed:'<strong>Don\'t just accept your bank\'s offer.</strong> Brokers have access to lenders who evaluate renewals differently. Your situation may be better than you think.',
   lblPay:'Est. payment',lblTax:'Est. monthly taxes',lblTotal:'Total monthly cost',lblMax:'Est. max purchase',lblBal:'Remaining balance',lblNewPay:'New est. payment',
   gdsMax:'max 39%',tdsMax:'max 44%',
-  featEy:'Why MortgageIQ',featTtl:'The broker advantage',
-  f1t:'OACIQ Licensed Broker',f1b:'Not a call centre, not a bank. A real licensed professional in Quebec who works for you — not the lender.',
-  f2t:'Access to 30+ Lenders',f2b:"We compare rates across major banks, credit unions, and private lenders to find options your bank won't offer.",
-  f3t:'No Fees. Ever.',f3b:'Our service is completely free to you. Lenders compensate us. You get better rates without paying more.',
-  revEy:'Client experiences',revTtl:'What Quebec homebuyers say',
+  featEy:'Why MortgageIQ',featTtl:'The Professional Difference',
+  f1t:'Regulated & Licensed Professional',f1b:'A licensed mortgage professional regulated by the Autorité des marchés financiers (AMF) and the OACIQ. We act exclusively in your interest — not the lender\'s.',
+  f2t:'Access to an Extensive Lender Network',f2b:"We compare rates across major banks, alternative lenders, and private institutions to find solutions your bank may not offer.",
+  f3t:'No Brokerage Fees.*',f3b:'Our brokerage services are provided at no cost to you — lenders compensate us directly. You receive professional guidance and access to competitive rates. <em>*Note: Alternative and private lending solutions may include processing or administrative fees, which will always be disclosed in advance.</em>',
+  revEy:'Client Testimonials',revTtl:'Trusted by Quebec Homebuyers',
   rv1b:'"I was skeptical at first, but they came back with a rate 0.4% lower than my bank offered. That\'s thousands of dollars over the life of my mortgage."',
   rv1a:'Marc L. — Laval, first-time buyer',
   rv2b:'"Super simple process. I filled out the form, got a call the next morning, and had my pre-approval in two days. Very professional team."',
   rv2a:'Sophie P. — Brossard, renewal',
   rv3b:'"As a self-employed person I thought it would be difficult. They found a lender who understood my situation and got me approved at a great rate."',
   rv3a:'Kevin T. — Montréal, self-employed',
-  ftLicense:'Licensed Quebec Mortgage Broker · OACIQ Regulated · AMF Registered',
+  ftLicense:'Licensed Mortgage Broker · Regulated by the AMF (Autorité des marchés financiers) · OACIQ Member',
   ftDisc:'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
-  ftPriv:'Privacy Policy',ftTerms:'Terms of Use',ftOACIQ:'OACIQ Disclosure',ftCopy:'© 2025 MortgageIQ. All rights reserved.',
+  ftPriv:'Privacy Policy',ftTerms:'Terms of Use',ftOACIQ:'Regulatory Disclosures',ftCopy:'© 2025 MortgageIQ. All rights reserved.',
   exitTitle:'Wait — your estimate is almost ready',
   exitBody:"You're only a few seconds away from seeing what you qualify for. Don't lose your progress.",
   exitStay:'Continue My Estimate',exitLeave:"No thanks, I'll leave",
   gateTitle:'A quick note before you continue',
-  gateBody:'Based on the income and property value you entered, the standard qualification ratios may be tight. A broker can still explore options — but we want to set the right expectations.',
+  gateBody:'Based on the income and property value provided, your qualification ratios may exceed standard lending guidelines. A mortgage professional can still review your file and explore available solutions — including alternative programs.',
   gateCont:'I understand — continue anyway',gateBack:'Go back and adjust',
   privTitle:'Privacy Policy',privClose:'Close',
   privBody:`<p><strong>Information collected</strong>We collect your name, email, phone number, and mortgage details for the sole purpose of connecting you with a licensed mortgage broker.</p><p><strong>How it's used</strong>Your information is used exclusively to provide you with personalized mortgage options. It will never be sold, rented, or shared with third parties outside of our licensed broker network.</p><p><strong>Who sees your data</strong>Only the licensed Quebec mortgage broker associated with this platform will have access to your submitted information.</p><p><strong>Your rights</strong>You may request to view, correct, or delete your information at any time by contacting us. You can also withdraw your consent at any time prior to being contacted.</p><p><strong>Compliance</strong>This platform operates in compliance with Quebec's Act Respecting the Protection of Personal Information in the Private Sector (Law 25) and applicable federal PIPEDA regulations.</p>`,
@@ -786,7 +803,7 @@ fr:{
   navPill:'Courtier hypothécaire agréé',
   eyebrow:'Gratuit · Sans engagement · 2 minutes',
   h1:'Découvrez <em>Exactement</em><br>Ce Que Vous Pouvez Vous Permettre',
-  sub:'Répondez à quelques questions rapides et obtenez une estimation instantanée — un expert hypothécaire agréé vous contactera avec de vraies options.',
+  sub:'Répondez à quelques questions et obtenez une estimation instantanée de votre capacité hypothécaire — un courtier agréé vous contactera avec des options personnalisées.',
   cta:'Commencer mon estimation',noCredit:'Aucune vérification de crédit requise',
   revCount:'Fait confiance par 400+ acheteurs québécois cette année',
   stat1:'Prêteurs partenaires',stat2:'Délai de réponse',stat3:'Frais de courtage',
@@ -795,7 +812,8 @@ fr:{
   purPurchLbl:'Achat',purPurchSub:"J'achète une propriété",
   purRenLbl:'Renouvellement',purRenSub:'Je renouvelle mon hypothèque',
   lPropPrice:'Valeur de la propriété',lDown:'Mise de fonds',
-  lBal:'Solde hypothécaire restant',lLender:'Prêteur actuel',
+  lBal:'Solde hypothécaire restant',
+  lRenewAmort:'Période d\'amortissement restante',lLender:'Prêteur actuel',
   lenderPh:'Sélectionnez votre prêteur...',lenderOther:'Autre',
   lLoc:'Région',locPh:'Où se situe la propriété ?',locOther:'Autre région du Québec',
   ePrice:'Veuillez entrer un montant valide (min 100 000 $).',
@@ -817,9 +835,9 @@ fr:{
   lCar:'Paiement auto',lDebts:'Autres dettes',opt:'(optionnel)',
   lCredit:'Cote de crédit',cr720:'720+ Excellent',cr680:'680–719 Bon',cr600:'600–679 Passable',crU600:'Moins de 600',
   getRes:'Voir mes résultats',
-  conTitle:'Dernière étape — entrez vos coordonnées pour voir vos résultats',
-  conSub:'Votre estimation personnalisée est prête. Entrez vos coordonnées pour la déverrouiller — un expert vous contactera aussi dans les 24 heures.',
-  spStrong:'Marc de Laval a économisé 14 200 $',spSub:'sur la durée de son hypothèque en changeant de prêteur.',
+  conTitle:'Dernière étape — fournissez vos coordonnées pour recevoir vos résultats',
+  conSub:'Votre estimation personnalisée est prête. Un courtier hypothécaire agréé examinera votre profil et vous contactera dans les 24 heures.',
+  spStrong:'Marc de Laval a économisé 14 200 $ en intérêts',spSub:'en changeant de prêteur grâce à un courtier hypothécaire.',
   lName:'Votre nom',lEmail:'Courriel',lPhone:'Numéro de téléphone',
   lTimeline:'Dans quel délai souhaitez-vous procéder ?',
   tlASAP:'Dès que possible',tl3m:'Dans les 3 mois',tl6m:'3 à 6 mois',tl6plus:'6 mois et plus',
@@ -845,25 +863,25 @@ fr:{
   tRenRed:"<strong>N'acceptez pas simplement l'offre de votre banque.</strong> Les courtiers ont accès à des prêteurs qui évaluent les renouvellements différemment.",
   lblPay:'Paiement est.',lblTax:'Taxes mensuelles est.',lblTotal:'Coût mensuel total',lblMax:'Prix max. estimé',lblBal:'Solde restant',lblNewPay:'Nouveau paiement est.',
   gdsMax:'max 39 %',tdsMax:'max 44 %',
-  featEy:'Pourquoi MortgageIQ',featTtl:"L'avantage du courtier",
-  f1t:'Courtier agréé OACIQ',f1b:"Pas un centre d'appels, pas une banque. Un vrai professionnel agréé au Québec qui travaille pour vous — pas pour le prêteur.",
-  f2t:'Accès à 30+ prêteurs',f2b:"Nous comparons les taux des grandes banques, caisses populaires et prêteurs privés pour trouver des options que votre banque ne vous proposera pas.",
-  f3t:'Aucun frais. Jamais.',f3b:'Notre service est entièrement gratuit pour vous. Les prêteurs nous rémunèrent. Vous obtenez de meilleurs taux sans payer davantage.',
-  revEy:'Témoignages clients',revTtl:'Ce que disent les acheteurs québécois',
+  featEy:'Pourquoi MortgageIQ',featTtl:"L'avantage du courtier professionnel",
+  f1t:'Professionnel réglementé et agréé',f1b:"Un professionnel hypothécaire agréé, réglementé par l'Autorité des marchés financiers (AMF) et l'OACIQ. Nous agissons exclusivement dans votre intérêt — pas celui du prêteur.",
+  f2t:'Accès à un vaste réseau de prêteurs',f2b:"Nous comparons les taux des grandes banques, des prêteurs alternatifs et des institutions privées pour trouver des solutions que votre banque ne vous proposera pas.",
+  f3t:'Aucun frais de courtage.*',f3b:'Nos services de courtage sont entièrement gratuits pour vous — les prêteurs nous rémunèrent directement. Vous bénéficiez d\'un accompagnement professionnel et de taux compétitifs. <em>*Note : Les solutions de financement alternatif ou privé peuvent inclure des frais de traitement ou d\'administration, qui seront toujours divulgués à l\'avance.</em>',
+  revEy:'Témoignages de nos clients',revTtl:'La confiance des acheteurs québécois',
   rv1b:'« J\'étais sceptique au départ, mais ils ont trouvé un taux 0,4 % inférieur à celui de ma banque. Des milliers de dollars d\'économies sur la durée de mon hypothèque. »',
   rv1a:'Marc L. — Laval, premier acheteur',
   rv2b:'« Processus très simple. J\'ai rempli le formulaire, reçu un appel le lendemain matin et obtenu ma pré-approbation en deux jours. »',
   rv2a:'Sophie P. — Brossard, renouvellement',
   rv3b:'« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »',
   rv3a:'Kevin T. — Montréal, travailleur autonome',
-  ftLicense:"Courtier hypothécaire agréé au Québec · Réglementé par l'OACIQ · Inscrit à l'AMF",
+  ftLicense:"Courtier hypothécaire agréé · Réglementé par l'AMF (Autorité des marchés financiers) · Membre de l'OACIQ",
   ftDisc:"Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
-  ftPriv:'Politique de confidentialité',ftTerms:"Conditions d'utilisation",ftOACIQ:'Divulgation OACIQ',ftCopy:'© 2025 MortgageIQ. Tous droits réservés.',
+  ftPriv:'Politique de confidentialité',ftTerms:"Conditions d'utilisation",ftOACIQ:'Divulgations réglementaires',ftCopy:'© 2025 MortgageIQ. Tous droits réservés.',
   exitTitle:'Attendez — votre estimation est presque prête',
   exitBody:"Vous êtes à quelques secondes de voir ce à quoi vous êtes admissible. Ne perdez pas votre progression.",
   exitStay:'Continuer mon estimation',exitLeave:'Non merci, je pars',
   gateTitle:'Une note avant de continuer',
-  gateBody:"Selon le revenu et la valeur de la propriété que vous avez entrés, les ratios d'admissibilité standards pourraient être serrés. Un courtier peut encore explorer des options.",
+  gateBody:"Selon le revenu et la valeur de la propriété fournis, vos ratios d'admissibilité pourraient dépasser les normes conventionnelles. Un courtier hypothécaire peut tout de même examiner votre dossier et explorer les solutions disponibles, y compris les programmes alternatifs.",
   gateCont:'Je comprends — continuer quand même',gateBack:'Retour pour ajuster',
   privTitle:'Politique de confidentialité',privClose:'Fermer',
   privBody:`<p><strong>Informations collectées</strong>Nous collectons votre nom, courriel, numéro de téléphone et vos détails hypothécaires dans le seul but de vous mettre en contact avec un courtier hypothécaire agréé.</p><p><strong>Utilisation</strong>Vos informations sont utilisées exclusivement pour vous fournir des options hypothécaires personnalisées. Elles ne seront jamais vendues, louées ou partagées avec des tiers en dehors de notre réseau de courtiers agréés.</p><p><strong>Accès à vos données</strong>Seul le courtier hypothécaire agréé associé à cette plateforme aura accès à vos informations soumises.</p><p><strong>Vos droits</strong>Vous pouvez demander à consulter, corriger ou supprimer vos informations à tout moment. Vous pouvez également retirer votre consentement avant d'être contacté.</p><p><strong>Conformité</strong>Cette plateforme est conforme à la Loi sur la protection des renseignements personnels dans le secteur privé du Québec (Loi 25) et aux réglementations fédérales PIPEDA applicables.</p>`,
@@ -898,8 +916,8 @@ function applyT(){
     hRevCount:'revCount',hStat1:'stat1',hStat2:'stat2',hStat3:'stat3',
     s1t:'s1t',s1h:'s1h',purLbl:'purLbl',purPurchLbl:'purPurchLbl',purPurchSub:'purPurchSub',
     purRenLbl:'purRenLbl',purRenSub:'purRenSub',lPropPrice:'lPropPrice',lDown:'lDown',
-    lBal:'lBal',lLender:'lLender',lenderPh:'lenderPh',lenderOtherOpt:'lenderOther',
-    lLocation:'lLoc',locPh:'locPh',locOtherOpt:'locOther',
+    lBal:'lBal',lRenewAmort:'lRenewAmort',lLender:'lLender',lenderPh:'lenderPh',lenderOtherOpt:'lenderOther',
+    lRenewAmort:'lRenewAmort',lLocation:'lLoc',locPh:'locPh',locOtherOpt:'locOther',
     ePropPrice:'ePrice',eDown:'eDown',eBal:'eBal',eLoc:'eLoc',
     btnCont1:'cont',btnCont2:'cont',btnBack2:'back',btnBack3:'back',btnBack4:'backToRes',
     s2t:'s2t',s2h:'s2h',lRate:'lRate',rateDesc:'rateDesc',rateLock:'rateLock',
@@ -1188,27 +1206,6 @@ const cMap={green:{bar:'#15803d',bg:'#dcfce7',txt:'#15803d'},yellow:{bar:'#d9770
 const fmt=n=>'$'+(Math.max(n,0)).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtR=n=>'$'+Math.round(Math.max(n,0)).toLocaleString('en-CA');
 
-function donutSVG(principal, interest, size){
-  const total = principal + interest;
-  const r = size/2 - 8;
-  const cx = size/2, cy = size/2;
-  const circumference = 2 * Math.PI * r;
-  const principalFrac = principal / total;
-  const principalDash = circumference * principalFrac;
-  const interestDash  = circumference - principalDash;
-  // Interest arc first (starts at top), then principal
-  return `<svg class="donut-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e4e7ee" stroke-width="14"/>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#2460e8" stroke-width="14"
-      stroke-dasharray="${principalDash} ${interestDash}"
-      stroke-dashoffset="${circumference * 0.25}"
-      stroke-linecap="round" style="transition:stroke-dasharray 1s ease"/>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#c9a84c" stroke-width="14"
-      stroke-dasharray="${interestDash} ${principalDash}"
-      stroke-dashoffset="${circumference * 0.25 - principalDash}"
-      stroke-linecap="round" style="transition:stroke-dasharray 1s ease"/>
-  </svg>`;
-}
 
 function renderResults(){
   const r   = calcMtg();
@@ -1324,12 +1321,6 @@ function renderResults(){
       <td>${row[2]}</td>
     </tr>`).join('');
 
-  // Donut: principal vs interest over full amortization
-  const donut = donutSVG(r.principal, r.fullInterest, 110);
-  const totalCost = r.principal + r.fullInterest;
-  const principalPct = (r.principal/totalCost*100).toFixed(0);
-  const interestPct  = (r.fullInterest/totalCost*100).toFixed(0);
-
   // Narrative
   const freqWord = r.payFreqLabel;
   const nar = isFR ? `
@@ -1345,38 +1336,6 @@ function renderResults(){
   `;
 
   $('resSummary').innerHTML = `
-    <div class="res-section-title">${isFR?'Répartition principal / intérêts':'Principal vs. Interest Breakdown'}</div>
-    <div class="chart-wrap">
-      ${donut}
-      <div class="chart-legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background:#2460e8"></div>
-          <span class="legend-label">${isFR?'Capital':'Principal'}</span>
-          <span class="legend-val">${fmtR(r.principal)} (${principalPct}%)</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background:#c9a84c"></div>
-          <span class="legend-label">${isFR?'Intérêts':'Interest'}</span>
-          <span class="legend-val">${fmtR(r.fullInterest)} (${interestPct}%)</span>
-        </div>
-        <div class="legend-item" style="padding-top:4px;border-top:1px solid var(--gray-200);margin-top:4px">
-          <div class="legend-dot" style="background:var(--gray-300)"></div>
-          <span class="legend-label">${isFR?'Coût total':'Total cost'}</span>
-          <span class="legend-val">${fmtR(totalCost)}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="res-section-title">${isFR?'Sommaire des paiements':'Payment Summary'}</div>
-    <table class="sum-table">
-      <thead><tr>
-        <th>${isFR?'Catégorie':'Category'}</th>
-        <th>${termLbl} <span class="info-i" data-tip="${isFR?'Période où votre taux est garanti — généralement 5 ans au Canada.':'The period your rate is locked in — typically 5 years in Canada.'}" tabindex="0" role="button" aria-label="More info">i</span></th>
-        <th>${amortLbl} <span class="info-i" data-tip="${isFR?'Durée totale pour rembourser entièrement votre hypothèque.':'Total time to fully pay off your mortgage.'}" tabindex="0" role="button" aria-label="More info">i</span></th>
-      </tr></thead>
-      <tbody>${tableRows}</tbody>
-    </table>
-
     <div class="res-section-title">${isFR?'Résumé hypothécaire':'Mortgage Summary'}</div>
     <div class="res-narrative">${nar}</div>`;
 
@@ -1385,9 +1344,9 @@ function renderResults(){
     <div class="res-broker-cta">
       <h4>${isFR?'Un courtier peut vous faire économiser des milliers $':'A broker could save you thousands'}</h4>
       <p>${isFR?`Même une réduction de 0,25 % sur votre taux vous économiserait environ ${fmtR(r.fullInterest*0.05)} en intérêts.`:`Even a 0.25% rate reduction could save you approximately ${fmtR(r.fullInterest*0.05)} in interest.`}</p>
-      <button class="btn-broker-cta" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <button class="btn-broker-cta" onclick="openVcard()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        ${isFR?'Parler à un courtier — Gratuit':'Talk to a Broker — Free'}
+        ${isFR?'Contacter mon courtier':'Talk to a Broker — Free'}
       </button>
     </div>`;
 }
@@ -1428,7 +1387,24 @@ function submitForm(){
     debts:parseMoney($('otherDebts').value),credit:picks.creditG,timeline:picks.tlG,
     GDS:res.GDS.toFixed(2),TDS:res.TDS.toFixed(2),qual:res.col,
     consent:true,consentTs:new Date().toISOString(),suspicious:suspicious(name,email,phone)};
-  console.log('LEAD:',JSON.stringify(lead,null,2));
+  console.log('LEAD:', JSON.stringify(lead, null, 2));
+
+  // ─── VELOCITY API IN INTEGRATION ─────────────────────────────────
+  // Newton Velocity API IN — submits a lead/contact directly into your
+  // Velocity dashboard. Docs: http://developer.newton.ca/velocity/v1/
+  //
+  // HOW TO ACTIVATE:
+  //   1. Log into Velocity → Settings → Request API Key
+  //   2. Paste your key and domain into VELOCITY_CONFIG below
+  //   3. Remove the `if (false)` wrapper to go live
+  //
+  // The Velocity API IN endpoint accepts a JSON payload with borrower
+  // contact + lead data and creates a new lead record in your dashboard.
+  // ─────────────────────────────────────────────────────────────────
+
+  if (false) { // ← Change to: if (VELOCITY_CONFIG.apiKey) {
+    sendToVelocity(lead);
+  }
   setTimeout(()=>{
     submitting=false;btn.disabled=false;$('submitTxt').textContent=t('submitBtn');
     step=5;
@@ -1604,6 +1580,250 @@ function scrollCalc(e){e.preventDefault();$('calc').scrollIntoView({behavior:'sm
 applyT();
 restoreProgress();
 initExit();
+
+// ═══════════════════════════════════════════════════════
+// VELOCITY CRM CONFIGURATION
+// Fill in your API key and domain from Velocity → Settings
+// ═══════════════════════════════════════════════════════
+const VELOCITY_CONFIG = {
+  apiKey: '',          // ← Paste your Velocity API key here
+  domain: '',          // ← Your registered domain (e.g. mortgageiq.ca)
+  endpoint: 'https://velocity.newton.ca/api/v1/contacts/lead',
+};
+
+// Maps our lead object to the Velocity API IN schema
+// Velocity API IN docs: http://developer.newton.ca/velocity/v1/
+function buildVelocityPayload(lead) {
+  // Split full name into first/last
+  const nameParts = (lead.name || '').trim().split(/\s+/);
+  const firstName = nameParts[0] || '';
+  const lastName  = nameParts.slice(1).join(' ') || '';
+
+  // Map income bracket midpoints to annual income
+  const incomeMap = {
+    under50: 40000, '50to75': 62500, '75to100': 87500,
+    '100to125': 112500, '125to150': 137500,
+    '150to175': 162500, '175to200': 187500, '200plus': 220000
+  };
+
+  // Velocity API IN — Lead schema
+  // See: http://developer.newton.ca/velocity/v1/#leads
+  return {
+    // Authentication
+    api_key: VELOCITY_CONFIG.apiKey,
+    domain:  VELOCITY_CONFIG.domain,
+
+    // Contact details
+    first_name: firstName,
+    last_name:  lastName,
+    email:      lead.email,
+    phone:      lead.phone.replace(/\D/g, ''),   // digits only
+    language:   lead.lang === 'fr' ? 'French' : 'English',
+
+    // Lead classification
+    lead_type:  lead.purpose === 'renewal' ? 'Renewal' : 'Purchase',
+    source:     'Website Calculator',
+    notes: [
+      `Qualification: ${lead.qual.toUpperCase()} (GDS ${lead.GDS}% / TDS ${lead.TDS}%)`,
+      `Property Value: $${(lead.propVal||0).toLocaleString('en-CA')}`,
+      lead.purpose === 'purchase'
+        ? `Down Payment: $${(lead.downPay||0).toLocaleString('en-CA')}`
+        : `Remaining Balance: $${(lead.remainBal||0).toLocaleString('en-CA')}`,
+      `Location: ${lead.location}`,
+      `Income Bracket: ${lead.income}`,
+      `Employment: ${lead.empType}`,
+      `Timeline: ${lead.timeline}`,
+      lead.credit ? `Credit Score Range: ${lead.credit}` : '',
+      `Submitted: ${new Date(lead.ts).toLocaleString('en-CA')}`,
+    ].filter(Boolean).join(' | '),
+
+    // Mortgage details
+    purchase_price:  lead.propVal     || 0,
+    down_payment:    lead.downPay     || 0,
+    mortgage_amount: lead.purpose === 'purchase'
+      ? (lead.propVal - lead.downPay)
+      : (lead.remainBal || 0),
+    annual_income:   incomeMap[lead.income] || 0,
+
+    // Consent
+    consent: lead.consent,
+    consent_timestamp: lead.consentTs,
+  };
+}
+
+async function sendToVelocity(lead) {
+  if (!VELOCITY_CONFIG.apiKey) {
+    console.warn('Velocity API key not set — skipping CRM sync.');
+    return;
+  }
+  try {
+    const payload = buildVelocityPayload(lead);
+    const res = await fetch(VELOCITY_CONFIG.endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-API-Key': VELOCITY_CONFIG.apiKey,
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      console.error('Velocity API error:', res.status, err);
+    } else {
+      const data = await res.json();
+      console.log('Velocity lead created:', data);
+    }
+  } catch (err) {
+    console.error('Velocity sync failed:', err);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// VIRTUAL BUSINESS CARD
+// ── Update BROKER_INFO with the real broker's details ──
+// ═══════════════════════════════════════════════════════
+const BROKER = {
+  name:    'Your Name',           // ← Replace with broker full name
+  title_en:'Licensed Mortgage Broker',
+  title_fr:'Courtier hypothécaire agréé',
+  phone:   '+15140000000',        // ← Replace with real phone (no spaces)
+  phoneDisplay: '(514) 000-0000', // ← Display format
+  email:   'info@mortgageiq.ca',  // ← Replace with real email
+  website: 'mortgageiq.ca',       // ← Replace with real domain
+  amfNumber: '',                  // ← Optional: AMF licence number
+};
+
+function openVcard() {
+  const isFR = lang === 'fr';
+  // Update card content with broker info
+  $('vcName').textContent = BROKER.name;
+  $('vcTitle').textContent = (isFR ? BROKER.title_fr : BROKER.title_en)
+    + (BROKER.amfNumber ? ` · ${isFR?'Licence AMF':'AMF Licence'} #${BROKER.amfNumber}` : '');
+  $('vcPhoneLink').textContent = BROKER.phoneDisplay;
+  $('vcPhoneLink').href = 'tel:' + BROKER.phone;
+  $('vcEmailLink').textContent = BROKER.email;
+  $('vcEmailLink').href = 'mailto:' + BROKER.email;
+  $('vcWebLink').textContent = BROKER.website;
+  $('vcWebLink').href = 'https://' + BROKER.website;
+  // Button labels
+  $('vcCallTxt').textContent  = isFR ? 'Appeler maintenant' : 'Call Now';
+  $('vcSaveTxt').textContent  = isFR ? 'Enregistrer le contact' : 'Save Contact';
+  $('vcCloseTxt').textContent = isFR ? 'Fermer' : 'Close';
+  // Show modal
+  $('vcardOv').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVcard() {
+  $('vcardOv').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+function callBroker() {
+  window.location.href = 'tel:' + BROKER.phone;
+}
+
+function saveVcard() {
+  const isFR = lang === 'fr';
+  // Build .vcf file content (vCard 3.0 standard)
+  const vcf = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:' + BROKER.name,
+    'ORG:MortgageIQ',
+    'TITLE:' + (isFR ? BROKER.title_fr : BROKER.title_en),
+    'TEL;TYPE=CELL:' + BROKER.phone,
+    'EMAIL:' + BROKER.email,
+    'URL:https://' + BROKER.website,
+    BROKER.amfNumber ? 'NOTE:AMF Licence #' + BROKER.amfNumber : '',
+    'END:VCARD'
+  ].filter(Boolean).join('\r\n');
+
+  const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = BROKER.name.replace(/\s+/g, '_') + '.vcf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Swipe down to close on mobile
+(function(){
+  const sheet = $('vcardSheet');
+  let startY = 0, isDragging = false;
+  sheet.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }, { passive: true });
+  sheet.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 0) sheet.style.transform = `translateY(${dy}px)`;
+  }, { passive: true });
+  sheet.addEventListener('touchend', e => {
+    isDragging = false;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 80) {
+      closeVcard();
+    }
+    sheet.style.transform = '';
+  });
+})();
+
 </script>
+
+<!-- VIRTUAL BUSINESS CARD MODAL -->
+<div class="vcard-ov" id="vcardOv" onclick="if(event.target===this)closeVcard()">
+  <div class="vcard-sheet" id="vcardSheet">
+    <div class="vcard-drag"></div>
+    <div class="vcard-card">
+      <div class="vcard-logo">Mortgage<span>IQ</span></div>
+      <div class="vcard-name" id="vcName">Your Name</div>
+      <div class="vcard-title" id="vcTitle">Licensed Mortgage Broker · AMF Regulated</div>
+      <div class="vcard-creds">
+        <span class="vcard-badge">AMF Licensed</span>
+        <span class="vcard-badge">OACIQ Member</span>
+        <span class="vcard-badge">Courtier agréé</span>
+      </div>
+      <div class="vcard-divider"></div>
+      <div class="vcard-contact-row">
+        <div class="vcard-contact-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <a href="tel:+15140000000" id="vcPhoneLink">(514) 000-0000</a>
+      </div>
+      <div class="vcard-contact-row">
+        <div class="vcard-contact-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <a href="mailto:info@mortgageiq.ca" id="vcEmailLink">info@mortgageiq.ca</a>
+      </div>
+      <div class="vcard-contact-row">
+        <div class="vcard-contact-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <a href="https://mortgageiq.ca" target="_blank" id="vcWebLink">mortgageiq.ca</a>
+      </div>
+    </div>
+    <div class="vcard-actions">
+      <button class="vcard-btn vcard-btn-call" id="vcCallBtn" onclick="callBroker()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span id="vcCallTxt">Call Now</span>
+      </button>
+      <button class="vcard-btn vcard-btn-save" id="vcSaveBtn" onclick="saveVcard()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="vcSaveTxt">Save Contact</span>
+      </button>
+    </div>
+    <div class="vcard-close-row">
+      <button class="vcard-close-btn" onclick="closeVcard()" id="vcCloseTxt">Close</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
