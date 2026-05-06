@@ -276,22 +276,21 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
 .modal-next strong{display:block;color:var(--navy);margin-bottom:3px;font-size:0.83rem}
 
 
-/* RESULTS SUMMARY TABLE + CHART */
+/* RESULTS — narrative summary */
 .res-summary{padding:0 22px 20px}
-
-/* DONUT CHART */
-
-/* NARRATIVE */
-.res-narrative p{margin-bottom:8px}
+.res-section-title{font-family:'Fraunces',serif;font-size:0.88rem;font-weight:600;color:var(--navy);letter-spacing:-0.01em;margin-bottom:10px;padding-top:4px}
+.res-narrative{font-size:0.82rem;color:var(--gray-600);line-height:1.65}
+.res-narrative p{display:flex;gap:9px;margin-bottom:9px;align-items:flex-start}
 .res-narrative p:last-child{margin-bottom:0}
-.res-narrative .res-narrative strong{color:var(--navy)}
+.res-narrative strong{color:var(--navy)}
+.nar-icon{flex-shrink:0;font-size:0.95rem;margin-top:1px}
 
-/* BROKER CTA at bottom of results */
-.res-broker-cta h4{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:5px}
-.res-broker-cta p{font-size:0.75rem;color:rgba(255,255,255,0.65);margin-bottom:12px}
-
-@media(max-width:480px){
-  .res-summary{padding:0 16px 16px}
+/* BROKER CTA */
+.res-broker-cta{margin:0 22px 22px;border-radius:14px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:20px;color:white}
+.res-broker-cta h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:white;margin-bottom:5px;letter-spacing:-0.01em}
+.res-broker-cta p{font-size:0.76rem;color:rgba(255,255,255,0.6);margin-bottom:14px;line-height:1.5}
+.btn-broker-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.88rem;border:none;border-radius:10px;cursor:pointer;transition:all 0.18s;box-shadow:0 3px 10px rgba(201,168,76,0.3)}
+.btn-broker-cta:hover{background:#dbb958;transform:translateY(-1px)}
 
 /* MOBILE */
 @media(max-width:860px){
@@ -310,6 +309,8 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
   .res-ratios{padding:14px 16px}
   .res-nums{margin:0 16px}
   .res-cta{padding:0 16px 18px}
+  .res-summary{padding:0 16px 16px}
+  .res-broker-cta{margin:0 16px 16px}
   .con-hdr{padding:14px 16px}
   .ch-h{flex:1 0 100%}
   .nav-pill{display:none}
@@ -623,16 +624,19 @@ footer a{color:rgba(255,255,255,0.5);text-decoration:underline}
 
         <!-- STEP 5: RESULTS -->
         <div class="sp" id="step5">
+          <!-- Qualification banner -->
           <div class="res-hero" id="resHero"></div>
+          <!-- 4 key numbers -->
           <div class="res-nums" id="resNums"></div>
+          <!-- GDS / TDS ratio bars -->
           <div class="res-ratios" id="resRatios"></div>
+          <!-- Teaser copy -->
           <div class="res-cta">
             <div class="res-teaser" id="resTeaser"></div>
-            <div class="disc" id="resDisc"></div>
           </div>
-          <!-- SUMMARY TABLE + CHART + NARRATIVE -->
+          <!-- Mortgage narrative summary -->
           <div class="res-summary" id="resSummary"></div>
-          <!-- BROKER CTA -->
+          <!-- Broker CTA -->
           <div id="resBrokerCta"></div>
         </div>
 
@@ -1265,7 +1269,6 @@ function renderResults(){
   // ── Teaser copy ────────────────────────────────────────
   const tk = purpose==='renewal'?'tRen':'tPur';
   $('resTeaser').innerHTML = tl[tk+CAP(r.col)] || '';
-  $('resDisc').textContent = tl.disc;
 
   // ── SUMMARY TABLE + CHART ─────────────────────────────
   const termLbl  = isFR ? `Terme ${r.termYrs} ans`   : `${r.termYrs}-Year Term`;
@@ -1340,13 +1343,17 @@ function renderResults(){
     <div class="res-narrative">${nar}</div>`;
 
   // ── Broker CTA ─────────────────────────────────────────
+  const saving = fmtR(r.fullInterest * 0.05);
   $('resBrokerCta').innerHTML = `
     <div class="res-broker-cta">
-      <h4>${isFR?'Un courtier peut vous faire économiser des milliers $':'A broker could save you thousands'}</h4>
-      <p>${isFR?`Même une réduction de 0,25 % sur votre taux vous économiserait environ ${fmtR(r.fullInterest*0.05)} en intérêts.`:`Even a 0.25% rate reduction could save you approximately ${fmtR(r.fullInterest*0.05)} in interest.`}</p>
+      <h4>${isFR ? 'Un taux plus bas pourrait vous faire économiser des milliers' : 'A better rate could save you thousands'}</h4>
+      <p>${isFR
+        ? `Même une réduction de 0,25 % sur votre taux représente environ ${saving} d'économies en intérêts. Obtenez vos options gratuitement.`
+        : `Even a 0.25% rate reduction could save you approximately ${saving} in interest over your amortization. Get your options at no cost.`
+      }</p>
       <button class="btn-broker-cta" onclick="openVcard()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        ${isFR?'Contacter mon courtier':'Talk to a Broker — Free'}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        ${isFR ? 'Parler à mon courtier — Gratuit' : 'Talk to My Broker — Free'}
       </button>
     </div>`;
 }
