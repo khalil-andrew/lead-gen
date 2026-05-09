@@ -577,22 +577,30 @@
   <div class="vcard-sheet" id="vcardSheet">
     <div class="vcard-drag"></div>
     <div class="vcard-card">
-      <div class="vcard-logo">Mortgage<span>IQ</span></div>
-      <div class="vcard-name"  id="vcName">Your Name</div>
-      <div class="vcard-title" id="vcTitle">Licensed Mortgage Broker · AMF Regulated</div>
+      <!-- Header: powered-by branding -->
+      <div class="vcard-powered">
+        <span>Powered by</span>
+        <span class="vcard-powered-brand">MortgageIQ</span>
+      </div>
+      <!-- Broker identity -->
+      <div class="vcard-name"    id="vcName">Isabelle Khalil</div>
+      <div class="vcard-title"   id="vcTitle">Mortgage Broker · Dominion Lending Centres</div>
+      <div class="vcard-company" id="vcCompany">Real Estate Lending Inc.</div>
+      <!-- Credential badges -->
       <div class="vcard-creds">
         <span class="vcard-badge">AMF Licensed</span>
         <span class="vcard-badge">OACIQ Member</span>
-        <span class="vcard-badge">Courtier agréé</span>
+        <span class="vcard-badge">DLC Network</span>
       </div>
       <div class="vcard-divider"></div>
+      <!-- Contact rows -->
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
         </div>
-        <a href="tel:+15140000000" id="vcPhoneLink">(514) 000-0000</a>
+        <a href="tel:+15143589236" id="vcPhoneLink">514-358-9236</a>
       </div>
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
@@ -601,7 +609,7 @@
             <polyline points="22,6 12,13 2,6"/>
           </svg>
         </div>
-        <a href="mailto:info@mortgageiq.ca" id="vcEmailLink">info@mortgageiq.ca</a>
+        <a href="mailto:info@isabellehypotheque.com" id="vcEmailLink">info@isabellehypotheque.com</a>
       </div>
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
@@ -611,7 +619,7 @@
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
         </div>
-        <a href="https://mortgageiq.ca" target="_blank" id="vcWebLink">mortgageiq.ca</a>
+        <a href="https://isabellehypotheque.com" target="_blank" id="vcWebLink">isabellehypotheque.com</a>
       </div>
     </div>
     <div class="vcard-actions">
@@ -762,7 +770,7 @@ en: {
   rv3a: 'Kevin T. — Montréal, self-employed',
 
   // Footer
-  ftLicense: 'Licensed Mortgage Broker · Regulated by the AMF (Autorité des marchés financiers) · OACIQ Member',
+  ftLicense: 'Isabelle Khalil — Mortgage Broker · Real Estate Lending Inc. · Dominion Lending Centres · OACIQ Member',
   ftDisc:    'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
   ftPriv: 'Privacy Policy',   ftTerms: 'Terms of Use',   ftOACIQ: 'Regulatory Disclosures',
   ftCopy: '© 2025 MortgageIQ. All rights reserved.',
@@ -889,7 +897,7 @@ fr: {
   rv3b: "« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »",
   rv3a: 'Kevin T. — Montréal, travailleur autonome',
 
-  ftLicense: "Courtier hypothécaire agréé · Réglementé par l'AMF (Autorité des marchés financiers) · Membre de l'OACIQ",
+  ftLicense: "Isabelle Khalil — Courtière Hypothécaire · Financement Immobilier Inc. · Dominion Lending Centres · Membre de l'OACIQ",
   ftDisc:    "Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
   ftPriv: 'Politique de confidentialité',   ftTerms: "Conditions d'utilisation",   ftOACIQ: 'Divulgations réglementaires',
   ftCopy: '© 2025 MortgageIQ. Tous droits réservés.',
@@ -1713,14 +1721,16 @@ async function sendToVelocity(lead) {
 // ── Fill in your real broker details below ──
 // ════════════════════════════════════════════════════════════
 const BROKER = {
-  name:         'Your Name',           // ← Replace with broker full name
-  title_en:     'Licensed Mortgage Broker',
-  title_fr:     'Courtier hypothécaire agréé',
-  phone:        '+15140000000',        // ← Replace (no spaces or dashes)
-  phoneDisplay: '(514) 000-0000',      // ← Display format shown on card
-  email:        'info@mortgageiq.ca',  // ← Replace with real email
-  website:      'mortgageiq.ca',       // ← Replace with real domain
-  amfNumber:    '',                    // ← Optional: AMF licence # (e.g. '123456')
+  name:         'Isabelle Khalil',
+  company_en:   'Real Estate Lending Inc.',
+  company_fr:   'Financement Immobilier Inc.',
+  title_en:     'Mortgage Broker · Dominion Lending Centres',
+  title_fr:     'Courtière Hypothécaire · Dominion Lending Centres',
+  phone:        '+15143589236',
+  phoneDisplay: '514-358-9236',
+  email:        'info@isabellehypotheque.com',
+  website:      'isabellehypotheque.com',
+  amfNumber:    '',
 };
 
 function openVcard() {
@@ -1728,6 +1738,8 @@ function openVcard() {
   $('vcName').textContent  = BROKER.name;
   $('vcTitle').textContent = (isFR ? BROKER.title_fr : BROKER.title_en) +
     (BROKER.amfNumber ? ` · ${isFR ? 'Licence AMF' : 'AMF Licence'} #${BROKER.amfNumber}` : '');
+  const compEl = $('vcCompany');
+  if (compEl) compEl.textContent = isFR ? BROKER.company_fr : BROKER.company_en;
   $('vcPhoneLink').textContent = BROKER.phoneDisplay;
   $('vcPhoneLink').href        = 'tel:' + BROKER.phone;
   $('vcEmailLink').textContent = BROKER.email;
@@ -1753,7 +1765,7 @@ function saveVcard() {
   const vcf  = [
     'BEGIN:VCARD', 'VERSION:3.0',
     'FN:'    + BROKER.name,
-    'ORG:MortgageIQ',
+    'ORG:'   + (isFR ? BROKER.company_fr : BROKER.company_en),
     'TITLE:' + (isFR ? BROKER.title_fr : BROKER.title_en),
     'TEL;TYPE=CELL:' + BROKER.phone,
     'EMAIL:' + BROKER.email,
