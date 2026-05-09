@@ -59,11 +59,23 @@ nav {
   font-size: 1.2rem; font-weight: 700;
   color: var(--navy); letter-spacing: -0.03em;
   flex: 1; cursor: pointer;
+  /* No border, no background, no box — pure text branding */
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
   text-decoration: none;
-  transition: opacity 0.15s;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.18s;
 }
-.nav-logo:hover { opacity: 0.75; }
-.nav-logo span { color: var(--blue); }
+.nav-logo:hover  { opacity: 0.7; }
+.nav-logo:focus  { outline: none; }
+.nav-logo:active { opacity: 0.55; }
+.nav-logo span   { color: var(--blue); }
 .nav-pill {
   display: flex; align-items: center; gap: 5px;
   background: var(--green-soft); color: var(--green);
@@ -469,19 +481,33 @@ nav {
 }
 .btn-broker-cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
 
-/* Redo estimate link */
+/* Redo estimate — subtle secondary action */
 .res-redo {
-  text-align: center; padding: 0 18px 18px;
+  text-align: center;
+  padding: 4px 18px 20px;
 }
 .res-redo button {
-  background: none; border: none; cursor: pointer;
-  color: var(--gray-400); font-size: 0.78rem;
+  background: none;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  color: var(--gray-500);
+  font-size: 0.76rem;
+  font-weight: 500;
   font-family: 'DM Sans', sans-serif;
-  padding: 8px; border-radius: 6px;
-  display: inline-flex; align-items: center; gap: 5px;
-  transition: color 0.15s;
+  padding: 8px 16px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s;
+  letter-spacing: 0.01em;
+  -webkit-tap-highlight-color: transparent;
 }
-.res-redo button:hover { color: var(--gray-600); }
+.res-redo button:hover {
+  border-color: var(--gray-400);
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
 
 /* ============================================================
    CONTACT STEP — STEP 4
