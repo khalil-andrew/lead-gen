@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" id="htmlRoot">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MortgageIQ — Free Quebec Mortgage Calculator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MortgageIQ — Free Quebec Mortgage Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
 <nav>
-  <button class="nav-logo" onclick="restartEstimate()" title="Start over" aria-label="MortgageIQ — restart estimate">Mortgage<span>IQ</span></button>
+  <button class="nav-logo" onclick="restartEstimate()" title="Restart estimate" aria-label="MortgageIQ — restart estimate">
+    Mortgage<span>IQ</span>
+  </button>
   <div class="nav-pill" id="navPill"></div>
   <div class="lang-sw">
     <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" id="btnFR" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn"        id="btnFR" onclick="setLang('fr')">FR</button>
   </div>
 </nav>
 
+<!-- ══ HERO ═════════════════════════════════════════════════ -->
 <section class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-inner">
+
+    <!-- Left: copy -->
     <div>
       <div class="eyebrow"><span class="eyebrow-dot"></span><span id="hEyebrow"></span></div>
       <h1 id="hH1"></h1>
@@ -29,13 +35,21 @@
       <div class="hero-cta-row">
         <a href="#calc" class="btn-hero" onclick="scrollCalc(event)">
           <span id="hCta"></span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
         </a>
         <span class="hero-reassure" id="hNoCredit"></span>
       </div>
       <div class="hero-reviews">
-        <div class="rev-avatars"><div class="rev-av">ML</div><div class="rev-av">SP</div><div class="rev-av">KT</div><div class="rev-av">JR</div></div>
-        <div class="rev-txt"><span class="rev-stars">★★★★★</span><span id="hRevCount"></span></div>
+        <div class="rev-avatars">
+          <div class="rev-av">ML</div><div class="rev-av">SP</div>
+          <div class="rev-av">KT</div><div class="rev-av">JR</div>
+        </div>
+        <div class="rev-txt">
+          <span class="rev-stars">★★★★★</span>
+          <span id="hRevCount"></span>
+        </div>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><strong>30+</strong><span id="hStat1"></span></div>
@@ -44,21 +58,34 @@
       </div>
     </div>
 
+    <!-- Right: calculator card -->
     <div id="calc">
       <div class="calc-card">
+
+        <!-- Progress bar -->
         <div class="c-prog"><div class="c-prog-fill" id="progFill" style="width:20%"></div></div>
+
+        <!-- Step dots + counter -->
         <div class="c-ind">
           <div class="c-dots">
-            <div class="c-dot active" id="d1"></div><div class="c-dot" id="d2"></div>
-            <div class="c-dot" id="d3"></div><div class="c-dot" id="d4"></div><div class="c-dot" id="d5"></div>
+            <div class="c-dot active" id="d1"></div>
+            <div class="c-dot" id="d2"></div>
+            <div class="c-dot" id="d3"></div>
+            <div class="c-dot" id="d4"></div>
+            <div class="c-dot" id="d5"></div>
           </div>
           <div class="c-counter" id="stepCtr"></div>
         </div>
 
-        <!-- STEP 1 -->
+        <!-- ── STEP 1: Property ─────────────────────────── -->
         <div class="sp on" id="step1">
-          <div class="c-title-row"><div class="c-title" id="s1t"></div><div class="c-hint" id="s1h"></div></div>
+          <div class="c-title-row">
+            <div class="c-title" id="s1t"></div>
+            <div class="c-hint"  id="s1h"></div>
+          </div>
           <div class="c-body">
+
+            <!-- Purpose toggle -->
             <div class="fg">
               <label class="fl" id="purLbl"></label>
               <div class="pur-g">
@@ -74,180 +101,288 @@
                 </div>
               </div>
             </div>
+
+            <!-- Property value -->
             <div class="fg">
               <label class="fl" id="lPropPrice"></label>
-              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="propPrice" oninput="fmtC(this);updDown()" inputmode="numeric" placeholder="450,000"></div>
+              <div class="pfx">
+                <span class="pfx-lbl">$</span>
+                <input type="text" class="fi" id="propPrice"
+                  oninput="fmtC(this);updDown()" inputmode="numeric" placeholder="450,000">
+              </div>
               <div class="err" id="ePropPrice"></div>
             </div>
+
+            <!-- Purchase: down payment -->
             <div class="fg" id="downGrp">
               <label class="fl" id="lDown"></label>
               <div class="cg" id="downPctG" style="margin-bottom:8px">
-                <div class="ch" onclick="applyPct(5)" data-p="5">5%</div>
+                <div class="ch" onclick="applyPct(5)"  data-p="5">5%</div>
                 <div class="ch" onclick="applyPct(10)" data-p="10">10%</div>
                 <div class="ch" onclick="applyPct(15)" data-p="15">15%</div>
                 <div class="ch" onclick="applyPct(20)" data-p="20">20%+</div>
               </div>
-              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="downPay" oninput="fmtC(this);updDown();clearPctCh()" inputmode="numeric" placeholder="90,000"></div>
+              <div class="pfx">
+                <span class="pfx-lbl">$</span>
+                <input type="text" class="fi" id="downPay"
+                  oninput="fmtC(this);updDown();clearPctCh()" inputmode="numeric" placeholder="90,000">
+              </div>
               <div class="down-hint" id="downHint"></div>
               <div class="err" id="eDown"></div>
             </div>
+
+            <!-- Renewal: remaining balance -->
             <div class="fg renew-f" id="balGrp">
               <label class="fl" id="lBal"></label>
-              <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="remainBal" oninput="fmtC(this)" inputmode="numeric" placeholder="280,000"></div>
+              <div class="pfx">
+                <span class="pfx-lbl">$</span>
+                <input type="text" class="fi" id="remainBal"
+                  oninput="fmtC(this)" inputmode="numeric" placeholder="280,000">
+              </div>
               <div class="err" id="eBal"></div>
             </div>
+
+            <!-- Renewal: amortization period -->
             <div class="fg renew-f" id="renewAmortGrp">
               <label class="fl" id="lRenewAmort"></label>
               <select class="fi fsel" id="renewAmort">
-                <option value="5">5 years</option>
-                <option value="10">10 years</option>
-                <option value="15">15 years</option>
-                <option value="20">20 years</option>
-                <option value="25" selected>25 years</option>
-                <option value="30">30 years</option>
+                <option value="5">5 ans / years</option>
+                <option value="10">10 ans / years</option>
+                <option value="15">15 ans / years</option>
+                <option value="20">20 ans / years</option>
+                <option value="25" selected>25 ans / years</option>
+                <option value="30">30 ans / years</option>
               </select>
             </div>
+
+            <!-- Renewal: current lender -->
             <div class="fg renew-f" id="lenderGrp">
               <label class="fl" id="lLender"></label>
               <select class="fi fsel" id="curLender">
                 <option value="" id="lenderPh"></option>
-                <option value="bmo">BMO</option><option value="rbc">RBC</option>
-                <option value="td">TD Bank</option><option value="scotiabank">Scotiabank</option>
-                <option value="cibc">CIBC</option><option value="desjardins">Desjardins</option>
-                <option value="national">Banque Nationale</option><option value="other" id="lenderOtherOpt"></option>
+                <option value="bmo">BMO</option>
+                <option value="rbc">RBC</option>
+                <option value="td">TD Bank</option>
+                <option value="scotiabank">Scotiabank</option>
+                <option value="cibc">CIBC</option>
+                <option value="desjardins">Desjardins</option>
+                <option value="national">Banque Nationale</option>
+                <option value="other" id="lenderOtherOpt"></option>
               </select>
             </div>
+
+            <!-- Location -->
             <div class="fg">
               <label class="fl" id="lLocation"></label>
               <select class="fi fsel" id="location">
                 <option value="" id="locPh"></option>
-                <option value="montreal">Montréal</option><option value="laval">Laval</option>
-                <option value="longueuil">Longueuil</option><option value="brossard">Brossard</option>
-                <option value="west-island">West Island</option><option value="south-shore">South Shore</option>
+                <option value="montreal">Montréal</option>
+                <option value="laval">Laval</option>
+                <option value="longueuil">Longueuil</option>
+                <option value="brossard">Brossard</option>
+                <option value="west-island">West Island</option>
+                <option value="south-shore">South Shore</option>
                 <option value="other" id="locOtherOpt"></option>
               </select>
               <div class="err" id="eLoc"></div>
             </div>
-            <div class="snav"><div></div>
-              <button class="btn-next" onclick="goTo(2)"><span id="btnCont1"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+
+            <div class="snav">
+              <div></div>
+              <button class="btn-next" onclick="goTo(2)">
+                <span id="btnCont1"></span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
             </div>
           </div>
-        </div>
+        </div><!-- /step1 -->
 
-        <!-- STEP 2 -->
+        <!-- ── STEP 2: Mortgage terms ───────────────────── -->
         <div class="sp" id="step2">
-          <div class="c-title-row"><div class="c-title" id="s2t"></div><div class="c-hint" id="s2h"></div></div>
+          <div class="c-title-row">
+            <div class="c-title" id="s2t"></div>
+            <div class="c-hint"  id="s2h"></div>
+          </div>
           <div class="c-body">
+
+            <!-- Rate (locked) -->
             <div class="fg">
               <label class="fl" id="lRate"></label>
               <div class="rate-pill">
-                <div style="display:flex;align-items:baseline;gap:6px"><div class="rate-val">5.25%</div><div class="rate-lbl" id="rateDesc"></div></div>
-                <div class="rate-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span id="rateLock"></span></div>
+                <div style="display:flex;align-items:baseline;gap:6px">
+                  <div class="rate-val">5.25%</div>
+                  <div class="rate-lbl" id="rateDesc"></div>
+                </div>
+                <div class="rate-lock">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  <span id="rateLock"></span>
+                </div>
               </div>
             </div>
+
+            <!-- Amortization -->
             <div class="fg">
               <label class="fl" id="lAmort"></label>
               <div class="cg" id="amortG">
                 <div class="ch ch-h sel" onclick="pick('amortG',this,'25')" id="am25"></div>
-                <div class="ch ch-h" onclick="pick('amortG',this,'30')" id="am30"></div>
+                <div class="ch ch-h"     onclick="pick('amortG',this,'30')" id="am30"></div>
               </div>
             </div>
+
+            <!-- Payment frequency -->
             <div class="fg">
               <label class="fl" id="lFreq"></label>
               <div class="cg" id="freqG">
-                <div class="ch ch-h sel" onclick="pick('freqG',this,'monthly')" id="fqMo"></div>
-                <div class="ch ch-h" onclick="pick('freqG',this,'biweekly')" id="fqBi"></div>
-                <div class="ch ch-f" onclick="pick('freqG',this,'accel')" id="fqAc"></div>
+                <div class="ch ch-h sel" onclick="pick('freqG',this,'monthly')"  id="fqMo"></div>
+                <div class="ch ch-h"     onclick="pick('freqG',this,'biweekly')" id="fqBi"></div>
+                <div class="ch ch-f"     onclick="pick('freqG',this,'accel')"    id="fqAc"></div>
               </div>
             </div>
+
             <div class="snav">
-              <button class="btn-back" onclick="goTo(1)">← <span id="btnBack2"></span></button>
-              <button class="btn-next" onclick="goTo(3)"><span id="btnCont2"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              <button class="btn-back" onclick="goTo(1)">
+                ← <span id="btnBack2"></span>
+              </button>
+              <button class="btn-next" onclick="goTo(3)">
+                <span id="btnCont2"></span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
             </div>
           </div>
-        </div>
+        </div><!-- /step2 -->
 
-        <!-- STEP 3 -->
+        <!-- ── STEP 3: Income & debts ───────────────────── -->
         <div class="sp" id="step3">
-          <div class="c-title-row"><div class="c-title" id="s3t"></div><div class="c-hint" id="s3h"></div></div>
+          <div class="c-title-row">
+            <div class="c-title" id="s3t"></div>
+            <div class="c-hint"  id="s3h"></div>
+          </div>
           <div class="c-body">
+
+            <!-- Employment type -->
             <div class="fg">
               <label class="fl" id="lEmp"></label>
               <div class="cg" id="empG">
                 <div class="ch ch-h sel" onclick="pick('empG',this,'employed')" id="empE"></div>
-                <div class="ch ch-h" onclick="pick('empG',this,'self')" id="empS"></div>
-                <div class="ch ch-h" onclick="pick('empG',this,'contract')" id="empC"></div>
-                <div class="ch ch-h" onclick="pick('empG',this,'other')" id="empO"></div>
+                <div class="ch ch-h"     onclick="pick('empG',this,'self')"     id="empS"></div>
+                <div class="ch ch-h"     onclick="pick('empG',this,'contract')" id="empC"></div>
+                <div class="ch ch-h"     onclick="pick('empG',this,'other')"    id="empO"></div>
               </div>
             </div>
+
+            <!-- Household income -->
             <div class="fg">
               <label class="fl" id="lIncome"></label>
               <select class="fi fsel" id="incomeBracket">
                 <option value="" id="incPh"></option>
-                <option value="under50" id="incU50"></option>
-                <option value="50to75" id="inc50_75"></option>
-                <option value="75to100" id="inc75_100"></option>
-                <option value="100to125" id="inc100_125"></option>
-                <option value="125to150" id="inc125_150"></option>
-                <option value="150to175" id="inc150_175"></option>
-                <option value="175to200" id="inc175_200"></option>
-                <option value="200plus" id="inc200plus"></option>
+                <option value="under50"   id="incU50"></option>
+                <option value="50to75"    id="inc50_75"></option>
+                <option value="75to100"   id="inc75_100"></option>
+                <option value="100to125"  id="inc100_125"></option>
+                <option value="125to150"  id="inc125_150"></option>
+                <option value="150to175"  id="inc150_175"></option>
+                <option value="175to200"  id="inc175_200"></option>
+                <option value="200plus"   id="inc200plus"></option>
               </select>
               <div class="err" id="eIncome"></div>
             </div>
+
+            <!-- Monthly debts (2-col) -->
             <div class="g2">
               <div class="fg">
                 <label class="fl"><span id="lCar"></span> <span class="opt" id="lOpt1"></span></label>
-                <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="carPay" placeholder="0" oninput="fmtC(this)" inputmode="numeric"></div>
+                <div class="pfx">
+                  <span class="pfx-lbl">$</span>
+                  <input type="text" class="fi" id="carPay"
+                    placeholder="0" oninput="fmtC(this)" inputmode="numeric">
+                </div>
               </div>
               <div class="fg">
                 <label class="fl"><span id="lDebts"></span> <span class="opt" id="lOpt2"></span></label>
-                <div class="pfx"><span class="pfx-lbl">$</span><input type="text" class="fi" id="otherDebts" placeholder="0" oninput="fmtC(this)" inputmode="numeric"></div>
+                <div class="pfx">
+                  <span class="pfx-lbl">$</span>
+                  <input type="text" class="fi" id="otherDebts"
+                    placeholder="0" oninput="fmtC(this)" inputmode="numeric">
+                </div>
               </div>
             </div>
+
+            <!-- Credit score (optional) -->
             <div class="fg">
               <label class="fl"><span id="lCredit"></span> <span class="opt" id="lOpt3"></span></label>
               <div class="cg" id="creditG">
-                <div class="ch ch-h" onclick="pick('creditG',this,'720+')" id="cr720"></div>
+                <div class="ch ch-h" onclick="pick('creditG',this,'720+')"    id="cr720"></div>
                 <div class="ch ch-h" onclick="pick('creditG',this,'680-719')" id="cr680"></div>
                 <div class="ch ch-h" onclick="pick('creditG',this,'600-679')" id="cr600"></div>
                 <div class="ch ch-h" onclick="pick('creditG',this,'under600')" id="crU600"></div>
               </div>
             </div>
+
             <div class="snav">
               <button class="btn-back" onclick="goTo(2)">← <span id="btnBack3"></span></button>
-              <button class="btn-next" onclick="goTo(4)"><span id="btnGetRes"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              <button class="btn-next" onclick="goTo(4)">
+                <span id="btnGetRes"></span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
             </div>
           </div>
-        </div>
+        </div><!-- /step3 -->
 
-        <!-- STEP 4: CONTACT -->
+        <!-- ── STEP 4: Contact ─────────────────────────── -->
         <div class="sp" id="step4">
           <div class="con-hdr"><h4 id="conTitle"></h4><p id="conSub"></p></div>
           <div class="c-body">
+
+            <!-- Social proof -->
             <div class="sp-strip">
-              <div class="sp-avs"><div class="sp-av">ML</div><div class="sp-av">SP</div><div class="sp-av">KT</div></div>
-              <div class="sp-txt"><strong id="spStrong"></strong><span id="spSub"></span></div>
+              <div class="sp-avs">
+                <div class="sp-av">ML</div>
+                <div class="sp-av">SP</div>
+                <div class="sp-av">KT</div>
+              </div>
+              <div class="sp-txt">
+                <strong id="spStrong"></strong>
+                <span id="spSub"></span>
+              </div>
             </div>
+
+            <!-- Name -->
             <div class="fg">
               <label class="fl" id="lName"></label>
-              <input type="text" class="fi" id="fullName" autocomplete="name" placeholder="Jean Tremblay">
+              <input type="text" class="fi" id="fullName"
+                autocomplete="name" placeholder="Jean Tremblay">
               <div class="err" id="eName"></div>
             </div>
+
+            <!-- Email -->
             <div class="fg">
               <label class="fl" id="lEmail"></label>
-              <input type="email" class="fi" id="emailAddr" autocomplete="email" inputmode="email" placeholder="vous@exemple.com">
+              <input type="email" class="fi" id="emailAddr"
+                autocomplete="email" inputmode="email" placeholder="vous@exemple.com">
               <div class="err" id="eEmail"></div>
             </div>
+
+            <!-- Timeline -->
             <div class="fg">
               <label class="fl" id="lTimeline"></label>
               <div class="cg" id="tlG">
                 <div class="ch ch-h sel" onclick="pick('tlG',this,'asap')" id="tlASAP"></div>
-                <div class="ch ch-h" onclick="pick('tlG',this,'0-3m')" id="tl3m"></div>
-                <div class="ch ch-h" onclick="pick('tlG',this,'3-6m')" id="tl6m"></div>
-                <div class="ch ch-h" onclick="pick('tlG',this,'6m+')" id="tl6plus"></div>
+                <div class="ch ch-h"     onclick="pick('tlG',this,'0-3m')" id="tl3m"></div>
+                <div class="ch ch-h"     onclick="pick('tlG',this,'3-6m')" id="tl6m"></div>
+                <div class="ch ch-h"     onclick="pick('tlG',this,'6m+')"  id="tl6plus"></div>
               </div>
             </div>
+
+            <!-- Phone -->
             <div class="fg">
               <label class="fl">
                 <span id="lPhone"></span>
@@ -255,72 +390,128 @@
               </label>
               <div class="ph-row">
                 <span class="ph-cc">🇨🇦 +1</span>
-                <input type="tel" class="fi" id="phoneNum" oninput="fmtPhone(this)" autocomplete="tel" inputmode="tel" placeholder="(514) 000-0000">
+                <input type="tel" class="fi" id="phoneNum"
+                  oninput="fmtPhone(this)" autocomplete="tel"
+                  inputmode="tel" placeholder="(514) 000-0000">
               </div>
               <div class="ph-tip" id="phTip"></div>
               <div class="err" id="ePhone"></div>
             </div>
+
+            <!-- Consent -->
             <label class="consent-lbl" id="consentLbl" onclick="toggleConsent()">
               <div class="consent-box" id="consentBox">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
               </div>
               <div class="consent-txt" id="consentTxt"></div>
             </label>
             <div class="err" id="eConsent" style="margin-bottom:10px"></div>
+
+            <!-- Submit -->
             <button class="btn-sub" id="submitBtn" onclick="submitForm()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
               <span id="submitTxt"></span>
             </button>
+
+            <!-- Trust row -->
             <div class="trust-row">
-              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span id="tr1"></span></div>
-              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span id="tr2"></span></div>
-              <div class="ti"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="tr3"></span></div>
+              <div class="ti">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <span id="tr1"></span>
+              </div>
+              <div class="ti">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 11 12 14 22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                <span id="tr2"></span>
+              </div>
+              <div class="ti">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span id="tr3"></span>
+              </div>
             </div>
+
             <div style="text-align:center;margin-top:10px">
               <button class="btn-back" onclick="goTo(3)">← <span id="btnBack4"></span></button>
             </div>
           </div>
-        </div>
+        </div><!-- /step4 -->
 
-        <!-- STEP 5: RESULTS -->
+        <!-- ── STEP 5: Results ─────────────────────────── -->
         <div class="sp" id="step5">
           <!-- Qualification banner -->
           <div class="res-hero" id="resHero"></div>
-          <!-- 4 key numbers -->
+          <!-- 4 key numbers (count-up) -->
           <div class="res-nums" id="resNums"></div>
           <!-- GDS / TDS ratio bars -->
           <div class="res-ratios" id="resRatios"></div>
-          <!-- Teaser copy -->
+          <!-- Qualification teaser copy -->
           <div class="res-cta">
             <div class="res-teaser" id="resTeaser"></div>
           </div>
-          <!-- Broker CTA -->
+          <!-- Broker CTA with virtual card -->
           <div id="resBrokerCta"></div>
           <!-- Redo estimate -->
-          <div class="redo-row">
-            <button class="redo-btn" onclick="restartEstimate()" id="redoBtn"></button>
+          <div class="res-redo">
+            <button onclick="restartEstimate()" id="redoBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/>
+              </svg>
+              <span id="redoBtnTxt"></span>
+            </button>
           </div>
-        </div>
+        </div><!-- /step5 -->
 
       </div><!-- /calc-card -->
-    </div>
-  </div>
+    </div><!-- /calc -->
+  </div><!-- /hero-inner -->
 </section>
 
-<!-- FEATURES -->
+<!-- ══ FEATURES ══════════════════════════════════════════════ -->
 <section class="sec-feat">
   <div class="sec-in">
     <div class="sec-ey" id="featEy"></div>
     <h2 class="sec-ttl" id="featTtl"></h2>
     <div class="feat-g">
-      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4 id="f1t"></h4><p id="f1b"></p></div>
-      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4 id="f2t"></h4><p id="f2b"></p></div>
-      <div class="feat-c"><div class="feat-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4 id="f3t"></h4><p id="f3b"></p></div>
+      <div class="feat-c">
+        <div class="feat-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h4 id="f1t"></h4><p id="f1b"></p>
+      </div>
+      <div class="feat-c">
+        <div class="feat-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h4 id="f2t"></h4><p id="f2b"></p>
+      </div>
+      <div class="feat-c">
+        <div class="feat-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h4 id="f3t"></h4><p id="f3b"></p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
+<!-- ══ REVIEWS ═══════════════════════════════════════════════ -->
 <section class="sec-rev">
   <div class="sec-in">
     <div class="sec-ey" id="revEy"></div>
@@ -333,1127 +524,61 @@
   </div>
 </section>
 
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
 <footer>
   <strong>MortgageIQ</strong>
   <p id="ftLicense"></p>
   <p style="margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto" id="ftDisc"></p>
-  <p style="margin-top:12px"><a href="#" onclick="openPrivacy(event)" id="ftPriv"></a> &nbsp;·&nbsp; <a href="#" id="ftTerms"></a> &nbsp;·&nbsp; <a href="#" id="ftOACIQ"></a></p>
+  <p style="margin-top:12px">
+    <a href="#" onclick="openPrivacy(event)" id="ftPriv"></a> &nbsp;·&nbsp;
+    <a href="#" id="ftTerms"></a> &nbsp;·&nbsp;
+    <a href="#" id="ftOACIQ"></a>
+  </p>
   <p style="margin-top:10px" id="ftCopy"></p>
 </footer>
 
-<!-- EXIT INTENT -->
+<!-- ══ EXIT INTENT OVERLAY ═══════════════════════════════════ -->
 <div class="ov" id="exitOv">
   <div class="ov-box">
     <div class="ov-emoji">⏳</div>
-    <h3 id="exitTitle"></h3><p id="exitBody"></p>
-    <button class="btn-ov-main" onclick="closeExit()" id="exitStay"></button>
+    <h3 id="exitTitle"></h3>
+    <p  id="exitBody"></p>
+    <button class="btn-ov-main"  onclick="closeExit()"   id="exitStay"></button>
     <button class="btn-ov-ghost" onclick="dismissExit()" id="exitLeave"></button>
   </div>
 </div>
 
-<!-- QUAL GATE -->
+<!-- ══ QUALIFICATION GATE ════════════════════════════════════ -->
 <div class="ov" id="gateOv">
   <div class="ov-box">
     <div class="ov-emoji">💡</div>
-    <h3 id="gateTitle"></h3><p id="gateBody"></p>
-    <button class="btn-ov-main" onclick="closeGate(true)" id="gateCont"></button>
-    <button class="btn-ov-sec" onclick="closeGate(false)" id="gateBack"></button>
+    <h3 id="gateTitle"></h3>
+    <p  id="gateBody"></p>
+    <button class="btn-ov-main" onclick="closeGate(true)"  id="gateCont"></button>
+    <button class="btn-ov-sec"  onclick="closeGate(false)" id="gateBack"></button>
   </div>
 </div>
 
-<!-- PRIVACY MODAL -->
+<!-- ══ PRIVACY MODAL ═════════════════════════════════════════ -->
 <div class="ov" id="privOv" onclick="if(event.target===this)closePrivacy()">
   <div class="priv-box">
-    <div class="priv-hdr"><h3 id="privTitle"></h3><button class="priv-close-x" onclick="closePrivacy()">✕</button></div>
+    <div class="priv-hdr">
+      <h3 id="privTitle"></h3>
+      <button class="priv-close-x" onclick="closePrivacy()">✕</button>
+    </div>
     <div class="priv-body" id="privBody"></div>
-    <button class="btn-sub" onclick="closePrivacy()" id="privClose" style="max-width:200px;margin:0 auto;padding:11px"></button>
+    <button class="btn-sub" onclick="closePrivacy()" id="privClose"
+      style="max-width:180px;margin:0 auto;padding:11px;font-size:0.88rem"></button>
   </div>
 </div>
 
-<script>
-// ═══════════════════════════════════════════════════════
-// TRANSLATIONS
-// ═══════════════════════════════════════════════════════
-const T = {
-en:{
-  navPill:'Licensed Quebec Broker',
-  eyebrow:'Free · No obligation · 2 minutes',
-  h1:'Find Out <em>Exactly</em><br>What You Can Afford',
-  sub:'Complete a brief questionnaire and receive an instant affordability estimate — a licensed mortgage professional will follow up with personalized options tailored to your profile.',
-  cta:'Start My Estimate',
-  noCredit:'No credit check required',
-  revCount:'Trusted by 400+ Quebec homebuyers this year',
-  stat1:'Lenders we work with',stat2:'Response time',stat3:'Broker fee to you',
-  s1t:'Tell us about the property',s1h:'Approximate values are fine — you can refine later.',
-  purLbl:"What's this for?",
-  purPurchLbl:'Purchase',purPurchSub:'Buying a property',
-  purRenLbl:'Renewal',purRenSub:'Renewing my mortgage',
-  lPropPrice:'Property value',lDown:'Down payment',
-  lBal:'Remaining Mortgage Balance',
-  lRenewAmort:'Remaining Amortization Period',lLender:'Current lender',
-  lenderPh:'Select your lender...',lenderOther:'Other',
-  lLoc:'Area',locPh:'Where is the property?',locOther:'Other Quebec area',
-  ePrice:'Please enter a valid amount (min $100,000).',
-  eDown:'Minimum down payment is 5% of the purchase price.',
-  eBal:'Please enter your remaining balance.',
-  eLoc:'Please select an area.',
-  cont:'Continue',back:'Back',
-  s2t:'Mortgage preferences',s2h:'These affect your monthly payment estimate.',
-  lRate:'Interest rate',rateDesc:'5-year fixed',rateLock:'Current best rate',
-  amort25:'25 years',amort30:'30 years',lAmort:'Amortization',
-  lFreq:'Payment frequency',freqMo:'Monthly',freqBi:'Biweekly',freqAc:'Accelerated Biweekly',
-  s3t:'Income & debts',s3h:'Used to calculate your qualification ratios — nothing else.',
-  lEmp:'Employment type',empE:'Employed',empS:'Self-employed',empC:'Contract',empO:'Other',
-  lIncome:'Household income',
-  incPh:'Select range...',incU50:'Under $50,000',
-  inc50_75:'$50,000 – $75,000',inc75_100:'$75,000 – $100,000',
-  inc100_125:'$100,000 – $125,000',inc125_150:'$125,000 – $150,000',
-  inc150_175:'$150,000 – $175,000',inc175_200:'$175,000 – $200,000',inc200plus:'$200,000+',
-  eIncome:'Please select your income range.',
-  lCar:'Car payment',lDebts:'Other debts',opt:'(optional)',
-  lCredit:'Credit score',cr720:'720+ Excellent',cr680:'680–719 Good',cr600:'600–679 Fair',crU600:'Under 600',
-  getRes:'Get My Results',
-  conTitle:'One final step — provide your contact details to receive your results',
-  conSub:'Your personalized affordability estimate is ready. A licensed mortgage professional will review your profile and follow up within 24 hours.',
-  spStrong:'Marc from Laval saved $14,200 in interest',spSub:'by switching lenders through a mortgage broker.',
-  lName:'Your name',lEmail:'Email',lPhone:'Phone number',
-  lTimeline:'When are you looking to proceed?',
-  tlASAP:'As soon as possible',tl3m:'Within 3 months',tl6m:'3–6 months',tl6plus:'6+ months',
-  whyBtn:'Why do we need this?',
-  phTip:'Your broker needs to call you personally to discuss your options. We never share your number with third parties.',
-  consentTxt:'I agree to be contacted by a licensed mortgage professional. My information will be used solely to provide mortgage advice.',
-  privacyLink:'Privacy Policy',
-  eConsent:'Please check the consent box to continue.',
-  ePhone:'Please enter a valid 10-digit phone number.',
-  eName:'Please enter your full name.',
-  eEmail:'Please enter a valid email address.',
-  submitBtn:'Show My Results',tr1:'Secure & encrypted',tr2:'No obligation',tr3:'Response in 24h',
-  backToRes:'Back',
-  redoBtn:'↺ Redo my estimate',
-  backToRes:'Back',
-  disc:'Free consultation · No obligation · Response within 24 hours',
-  qualGreenLbl:'Looking strong',qualGreenMsg:'Based on the information provided, you appear to be within qualification range.',
-  qualYellowLbl:'Close to the limit',qualYellowMsg:"You're near the qualification threshold. A broker may be able to structure your application to improve your odds.",
-  qualRedLbl:'Worth exploring options',qualRedMsg:'Your ratios are above standard guidelines, but there may still be lenders who can help — especially with a broker in your corner.',
-  tPurGreen:'<strong>Good news.</strong> Your profile looks solid. A licensed broker can help you secure a better rate than what\'s publicly listed — sometimes by as much as 0.4%.',
-  tPurYellow:'<strong>Don\'t give up.</strong> Standard online tools may show you don\'t qualify — but brokers have access to lenders with more flexible programs. It\'s worth a conversation.',
-  tPurRed:'<strong>There may still be options.</strong> Even with higher ratios, some lenders specialize in non-standard situations. A broker can assess whether alternative financing works for you.',
-  tRenGreen:'<strong>Good news.</strong> Your renewal profile looks solid. A broker can often beat your current lender\'s renewal offer — sometimes significantly.',
-  tRenYellow:'<strong>Worth reviewing.</strong> Even if your ratios are close to the limit, renewal situations have more flexibility. A broker can help.',
-  tRenRed:'<strong>Don\'t just accept your bank\'s offer.</strong> Brokers have access to lenders who evaluate renewals differently. Your situation may be better than you think.',
-  lblPay:'Est. payment',lblTax:'Est. monthly taxes',lblTotal:'Total monthly cost',lblMax:'Est. max purchase',lblBal:'Remaining balance',lblNewPay:'New est. payment',
-  gdsMax:'max 39%',tdsMax:'max 44%',
-  featEy:'Why MortgageIQ',featTtl:'The Professional Difference',
-  f1t:'Regulated & Licensed Professional',f1b:'A licensed mortgage professional regulated by the Autorité des marchés financiers (AMF) and the OACIQ. We act exclusively in your interest — not the lender\'s.',
-  f2t:'Access to an Extensive Lender Network',f2b:"We compare rates across major banks, alternative lenders, and private institutions to find solutions your bank may not offer.",
-  f3t:'No Brokerage Fees.*',f3b:'Our brokerage services are provided at no cost to you — lenders compensate us directly. You receive professional guidance and access to competitive rates. <em>*Note: Alternative and private lending solutions may include processing or administrative fees, which will always be disclosed in advance.</em>',
-  revEy:'Client Testimonials',revTtl:'Trusted by Quebec Homebuyers',
-  rv1b:'"I was skeptical at first, but they came back with a rate 0.4% lower than my bank offered. That\'s thousands of dollars over the life of my mortgage."',
-  rv1a:'Marc L. — Laval, first-time buyer',
-  rv2b:'"Super simple process. I filled out the form, got a call the next morning, and had my pre-approval in two days. Very professional team."',
-  rv2a:'Sophie P. — Brossard, renewal',
-  rv3b:'"As a self-employed person I thought it would be difficult. They found a lender who understood my situation and got me approved at a great rate."',
-  rv3a:'Kevin T. — Montréal, self-employed',
-  ftLicense:'Licensed Mortgage Broker · Regulated by the AMF (Autorité des marchés financiers) · OACIQ Member',
-  ftDisc:'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
-  ftPriv:'Privacy Policy',ftTerms:'Terms of Use',ftOACIQ:'Regulatory Disclosures',ftCopy:'© 2025 MortgageIQ. All rights reserved.',
-  exitTitle:'Wait — your estimate is almost ready',
-  exitBody:"You're only a few seconds away from seeing what you qualify for. Don't lose your progress.",
-  exitStay:'Continue My Estimate',exitLeave:"No thanks, I'll leave",
-  gateTitle:'A quick note before you continue',
-  gateBody:'Based on the income and property value provided, your qualification ratios may exceed standard lending guidelines. A mortgage professional can still review your file and explore available solutions — including alternative programs.',
-  gateCont:'I understand — continue anyway',gateBack:'Go back and adjust',
-  privTitle:'Privacy Policy',privClose:'Close',
-  privBody:`<p><strong>Information collected</strong>We collect your name, email, phone number, and mortgage details for the sole purpose of connecting you with a licensed mortgage broker.</p><p><strong>How it's used</strong>Your information is used exclusively to provide you with personalized mortgage options. It will never be sold, rented, or shared with third parties outside of our licensed broker network.</p><p><strong>Who sees your data</strong>Only the licensed Quebec mortgage broker associated with this platform will have access to your submitted information.</p><p><strong>Your rights</strong>You may request to view, correct, or delete your information at any time by contacting us. You can also withdraw your consent at any time prior to being contacted.</p><p><strong>Compliance</strong>This platform operates in compliance with Quebec's Act Respecting the Protection of Personal Information in the Private Sector (Law 25) and applicable federal PIPEDA regulations.</p>`,
-  cmhcNote:'Canada Mortgage and Housing Corporation — insurance required when down payment is under 20%',
-},
-fr:{
-  navPill:'Courtier hypothécaire agréé',
-  eyebrow:'Gratuit · Sans engagement · 2 minutes',
-  h1:'Découvrez <em>Exactement</em><br>Ce Que Vous Pouvez Vous Permettre',
-  sub:'Répondez à quelques questions et obtenez une estimation instantanée de votre capacité hypothécaire — un courtier agréé vous contactera avec des options personnalisées.',
-  cta:'Commencer mon estimation',noCredit:'Aucune vérification de crédit requise',
-  revCount:'Fait confiance par 400+ acheteurs québécois cette année',
-  stat1:'Prêteurs partenaires',stat2:'Délai de réponse',stat3:'Frais de courtage',
-  s1t:'Parlez-nous de la propriété',s1h:'Des valeurs approximatives suffisent — vous pourrez préciser plus tard.',
-  purLbl:"Quel est l'objectif ?",
-  purPurchLbl:'Achat',purPurchSub:"J'achète une propriété",
-  purRenLbl:'Renouvellement',purRenSub:'Je renouvelle mon hypothèque',
-  lPropPrice:'Valeur de la propriété',lDown:'Mise de fonds',
-  lBal:'Solde hypothécaire restant',
-  lRenewAmort:'Période d\'amortissement restante',lLender:'Prêteur actuel',
-  lenderPh:'Sélectionnez votre prêteur...',lenderOther:'Autre',
-  lLoc:'Région',locPh:'Où se situe la propriété ?',locOther:'Autre région du Québec',
-  ePrice:'Veuillez entrer un montant valide (min 100 000 $).',
-  eDown:"La mise de fonds minimale est de 5 % du prix d'achat.",
-  eBal:'Veuillez entrer votre solde restant.',eLoc:'Veuillez sélectionner une région.',
-  cont:'Continuer',back:'Retour',
-  s2t:'Préférences hypothécaires',s2h:"Ces choix affectent l'estimation de votre paiement mensuel.",
-  lRate:"Taux d'intérêt",rateDesc:'Fixe 5 ans',rateLock:'Meilleur taux actuel',
-  amort25:'25 ans',amort30:'30 ans',lAmort:'Amortissement',
-  lFreq:'Fréquence de paiement',freqMo:'Mensuel',freqBi:'Aux deux semaines',freqAc:'Bihebdomadaire accéléré',
-  s3t:'Revenu et dettes',s3h:"Utilisé uniquement pour calculer vos ratios d'admissibilité.",
-  lEmp:"Type d'emploi",empE:'Salarié',empS:'Travailleur autonome',empC:'Contrat',empO:'Autre',
-  lIncome:'Revenu du ménage',
-  incPh:'Sélectionnez une tranche...',incU50:'Moins de 50 000 $',
-  inc50_75:'50 000 $ – 75 000 $',inc75_100:'75 000 $ – 100 000 $',
-  inc100_125:'100 000 $ – 125 000 $',inc125_150:'125 000 $ – 150 000 $',
-  inc150_175:'150 000 $ – 175 000 $',inc175_200:'175 000 $ – 200 000 $',inc200plus:'200 000 $+',
-  eIncome:'Veuillez sélectionner votre tranche de revenu.',
-  lCar:'Paiement auto',lDebts:'Autres dettes',opt:'(optionnel)',
-  lCredit:'Cote de crédit',cr720:'720+ Excellent',cr680:'680–719 Bon',cr600:'600–679 Passable',crU600:'Moins de 600',
-  getRes:'Voir mes résultats',
-  conTitle:'Dernière étape — fournissez vos coordonnées pour recevoir vos résultats',
-  conSub:'Votre estimation personnalisée est prête. Un courtier hypothécaire agréé examinera votre profil et vous contactera dans les 24 heures.',
-  spStrong:'Marc de Laval a économisé 14 200 $ en intérêts',spSub:'en changeant de prêteur grâce à un courtier hypothécaire.',
-  lName:'Votre nom',lEmail:'Courriel',lPhone:'Numéro de téléphone',
-  lTimeline:'Dans quel délai souhaitez-vous procéder ?',
-  tlASAP:'Dès que possible',tl3m:'Dans les 3 mois',tl6m:'3 à 6 mois',tl6plus:'6 mois et plus',
-  whyBtn:'Pourquoi avez-vous besoin de ça ?',
-  phTip:'Votre courtier doit vous appeler personnellement pour discuter de vos options. Nous ne partageons jamais votre numéro avec des tiers.',
-  consentTxt:"J'accepte d'être contacté par un professionnel hypothécaire agréé. Mes informations seront utilisées uniquement pour me fournir des conseils hypothécaires.",
-  privacyLink:'Politique de confidentialité',
-  eConsent:'Veuillez cocher la case de consentement pour continuer.',
-  ePhone:'Veuillez entrer un numéro valide à 10 chiffres.',
-  eName:'Veuillez entrer votre nom complet.',
-  eEmail:'Veuillez entrer une adresse courriel valide.',
-  submitBtn:'Afficher mes résultats',tr1:'Sécurisé et chiffré',tr2:'Sans engagement',tr3:'Réponse en 24h',
-  backToRes:'Retour',
-  redoBtn:'↺ Refaire mon estimation',
-  disc:'Consultation gratuite · Sans engagement · Réponse dans les 24 heures',
-  qualGreenLbl:'Situation favorable',qualGreenMsg:"Selon les informations fournies, vous semblez être dans la fourchette d'admissibilité.",
-  qualYellowLbl:'Proche de la limite',qualYellowMsg:"Vous êtes près du seuil d'admissibilité. Un courtier peut structurer votre dossier pour améliorer vos chances.",
-  qualRedLbl:'Des options existent',qualRedMsg:'Vos ratios dépassent les normes standards, mais certains prêteurs peuvent vous aider — surtout avec l\'aide d\'un courtier.',
-  tPurGreen:"<strong>Bonne nouvelle.</strong> Votre profil est solide. Un courtier agréé peut vous obtenir un meilleur taux que ce qui est affiché publiquement — parfois jusqu'à 0,4 % de moins.",
-  tPurYellow:"<strong>Ne baissez pas les bras.</strong> Les outils en ligne standards peuvent indiquer que vous n'êtes pas admissible — mais les courtiers ont accès à des prêteurs plus flexibles.",
-  tPurRed:"<strong>Des options existent peut-être encore.</strong> Même avec des ratios plus élevés, certains prêteurs se spécialisent dans des situations non standards.",
-  tRenGreen:"<strong>Bonne nouvelle.</strong> Votre profil de renouvellement est solide. Un courtier peut souvent surpasser l'offre de renouvellement de votre prêteur actuel.",
-  tRenYellow:"<strong>Ça vaut la peine de vérifier.</strong> Même si vos ratios sont proches de la limite, les renouvellements offrent plus de flexibilité. Un courtier peut vous aider.",
-  tRenRed:"<strong>N'acceptez pas simplement l'offre de votre banque.</strong> Les courtiers ont accès à des prêteurs qui évaluent les renouvellements différemment.",
-  lblPay:'Paiement est.',lblTax:'Taxes mensuelles est.',lblTotal:'Coût mensuel total',lblMax:'Prix max. estimé',lblBal:'Solde restant',lblNewPay:'Nouveau paiement est.',
-  gdsMax:'max 39 %',tdsMax:'max 44 %',
-  featEy:'Pourquoi MortgageIQ',featTtl:"L'avantage du courtier professionnel",
-  f1t:'Professionnel réglementé et agréé',f1b:"Un professionnel hypothécaire agréé, réglementé par l'Autorité des marchés financiers (AMF) et l'OACIQ. Nous agissons exclusivement dans votre intérêt — pas celui du prêteur.",
-  f2t:'Accès à un vaste réseau de prêteurs',f2b:"Nous comparons les taux des grandes banques, des prêteurs alternatifs et des institutions privées pour trouver des solutions que votre banque ne vous proposera pas.",
-  f3t:'Aucun frais de courtage.*',f3b:'Nos services de courtage sont entièrement gratuits pour vous — les prêteurs nous rémunèrent directement. Vous bénéficiez d\'un accompagnement professionnel et de taux compétitifs. <em>*Note : Les solutions de financement alternatif ou privé peuvent inclure des frais de traitement ou d\'administration, qui seront toujours divulgués à l\'avance.</em>',
-  revEy:'Témoignages de nos clients',revTtl:'La confiance des acheteurs québécois',
-  rv1b:'« J\'étais sceptique au départ, mais ils ont trouvé un taux 0,4 % inférieur à celui de ma banque. Des milliers de dollars d\'économies sur la durée de mon hypothèque. »',
-  rv1a:'Marc L. — Laval, premier acheteur',
-  rv2b:'« Processus très simple. J\'ai rempli le formulaire, reçu un appel le lendemain matin et obtenu ma pré-approbation en deux jours. »',
-  rv2a:'Sophie P. — Brossard, renouvellement',
-  rv3b:'« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »',
-  rv3a:'Kevin T. — Montréal, travailleur autonome',
-  ftLicense:"Courtier hypothécaire agréé · Réglementé par l'AMF (Autorité des marchés financiers) · Membre de l'OACIQ",
-  ftDisc:"Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
-  ftPriv:'Politique de confidentialité',ftTerms:"Conditions d'utilisation",ftOACIQ:'Divulgations réglementaires',ftCopy:'© 2025 MortgageIQ. Tous droits réservés.',
-  exitTitle:'Attendez — votre estimation est presque prête',
-  exitBody:"Vous êtes à quelques secondes de voir ce à quoi vous êtes admissible. Ne perdez pas votre progression.",
-  exitStay:'Continuer mon estimation',exitLeave:'Non merci, je pars',
-  gateTitle:'Une note avant de continuer',
-  gateBody:"Selon le revenu et la valeur de la propriété fournis, vos ratios d'admissibilité pourraient dépasser les normes conventionnelles. Un courtier hypothécaire peut tout de même examiner votre dossier et explorer les solutions disponibles, y compris les programmes alternatifs.",
-  gateCont:'Je comprends — continuer quand même',gateBack:'Retour pour ajuster',
-  privTitle:'Politique de confidentialité',privClose:'Fermer',
-  privBody:`<p><strong>Informations collectées</strong>Nous collectons votre nom, courriel, numéro de téléphone et vos détails hypothécaires dans le seul but de vous mettre en contact avec un courtier hypothécaire agréé.</p><p><strong>Utilisation</strong>Vos informations sont utilisées exclusivement pour vous fournir des options hypothécaires personnalisées. Elles ne seront jamais vendues, louées ou partagées avec des tiers en dehors de notre réseau de courtiers agréés.</p><p><strong>Accès à vos données</strong>Seul le courtier hypothécaire agréé associé à cette plateforme aura accès à vos informations soumises.</p><p><strong>Vos droits</strong>Vous pouvez demander à consulter, corriger ou supprimer vos informations à tout moment. Vous pouvez également retirer votre consentement avant d'être contacté.</p><p><strong>Conformité</strong>Cette plateforme est conforme à la Loi sur la protection des renseignements personnels dans le secteur privé du Québec (Loi 25) et aux réglementations fédérales PIPEDA applicables.</p>`,
-  cmhcNote:"Société canadienne d'hypothèques et de logement — assurance requise si la mise de fonds est inférieure à 20 %",
-}};
-
-// ═══════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════
-let lang='en', step=1, consent=false, purpose='purchase', gateOk=false, exitShown=false, exitDismissed=false;
-let submitting=false, lastSub=0;
-const picks={amortG:'25',freqG:'monthly',empG:'employed',creditG:'',tlG:'asap'};
-
-// ═══════════════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════════════
-const t=k=>T[lang][k]||k;
-const $=id=>document.getElementById(id);
-const fmtC=el=>{const r=el.value.replace(/[^0-9]/g,'');el.value=r?Number(r).toLocaleString('en-CA'):''};
-const parseMoney=s=>parseInt((s||'0').replace(/[^0-9]/g,''))||0;
-const fmtPhone=el=>{
-  // Strip all non-digits
-  let d=el.value.replace(/\D/g,'');
-  // If user typed a leading 1 (country code), strip it so we always work with 10 digits
-  if(d.length===11&&d[0]==='1') d=d.slice(1);
-  // Cap at 10 digits
-  d=d.slice(0,10);
-  // Format as (NXX) NXX-XXXX
-  if(d.length>=7) d='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
-  else if(d.length>=4) d='('+d.slice(0,3)+') '+d.slice(3);
-  el.value=d;
-};
-const showErr=(id,show)=>$(id).classList.toggle('on',show);
-
-// ═══════════════════════════════════════════════════════
-// APPLY TRANSLATIONS
-// ═══════════════════════════════════════════════════════
-function applyT(){
-  const tl=T[lang];
-  // Simple text mappings id→key
-  const map={
-    navPill:'navPill',hEyebrow:'eyebrow',hH1:'h1',hSub:'sub',hCta:'cta',hNoCredit:'noCredit',
-    hRevCount:'revCount',hStat1:'stat1',hStat2:'stat2',hStat3:'stat3',
-    s1t:'s1t',s1h:'s1h',purLbl:'purLbl',purPurchLbl:'purPurchLbl',purPurchSub:'purPurchSub',
-    purRenLbl:'purRenLbl',purRenSub:'purRenSub',lPropPrice:'lPropPrice',lDown:'lDown',
-    lBal:'lBal',lRenewAmort:'lRenewAmort',lLender:'lLender',lenderPh:'lenderPh',lenderOtherOpt:'lenderOther',
-    lRenewAmort:'lRenewAmort',lLocation:'lLoc',locPh:'locPh',locOtherOpt:'locOther',
-    ePropPrice:'ePrice',eDown:'eDown',eBal:'eBal',eLoc:'eLoc',
-    btnCont1:'cont',btnCont2:'cont',btnBack2:'back',btnBack3:'back',btnBack4:'backToRes',
-    s2t:'s2t',s2h:'s2h',lRate:'lRate',rateDesc:'rateDesc',rateLock:'rateLock',
-    am25:'amort25',am30:'amort30',lAmort:'lAmort',lFreq:'lFreq',
-    fqMo:'freqMo',fqBi:'freqBi',fqAc:'freqAc',
-    s3t:'s3t',s3h:'s3h',lEmp:'lEmp',
-    empE:'empE',empS:'empS',empC:'empC',empO:'empO',
-    lIncome:'lIncome',incPh:'incPh',incU50:'incU50',
-    inc50_75:'inc50_75',inc75_100:'inc75_100',inc100_125:'inc100_125',inc125_150:'inc125_150',
-    inc150_175:'inc150_175',inc175_200:'inc175_200',inc200plus:'inc200plus',
-    eIncome:'eIncome',lCar:'lCar',lDebts:'lDebts',
-    lOpt1:'opt',lOpt2:'opt',lOpt3:'opt',lCredit:'lCredit',
-    cr720:'cr720',cr680:'cr680',cr600:'cr600',crU600:'crU600',
-    btnGetRes:'getRes',
-    conTitle:'conTitle',conSub:'conSub',spStrong:'spStrong',spSub:'spSub',
-    lName:'lName',lEmail:'lEmail',lTimeline:'lTimeline',
-    tlASAP:'tlASAP',tl3m:'tl3m',tl6m:'tl6m',tl6plus:'tl6plus',
-    lPhone:'lPhone',whyBtn:'whyBtn',phTip:'phTip',
-    eConsent:'eConsent',ePhone:'ePhone',eName:'eName',eEmail:'eEmail',
-    submitTxt:'submitBtn',
-    redoBtn:'redoBtn',tr1:'tr1',tr2:'tr2',tr3:'tr3',
-    resDisc:'disc',
-    featEy:'featEy',featTtl:'featTtl',f1t:'f1t',f1b:'f1b',f2t:'f2t',f2b:'f2b',f3t:'f3t',f3b:'f3b',
-    revEy:'revEy',revTtl:'revTtl',rv1b:'rv1b',rv1a:'rv1a',rv2b:'rv2b',rv2a:'rv2a',rv3b:'rv3b',rv3a:'rv3a',
-    ftLicense:'ftLicense',ftDisc:'ftDisc',ftPriv:'ftPriv',ftTerms:'ftTerms',ftOACIQ:'ftOACIQ',ftCopy:'ftCopy',
-    exitTitle:'exitTitle',exitBody:'exitBody',exitStay:'exitStay',exitLeave:'exitLeave',
-    gateTitle:'gateTitle',gateBody:'gateBody',gateCont:'gateCont',gateBack:'gateBack',
-    privTitle:'privTitle',privClose:'privClose',privBody:'privBody',
-  };
-  Object.entries(map).forEach(([id,key])=>{
-    const el=$(id); if(!el||!(key in tl)) return;
-    el.innerHTML=tl[key];
-  });
-  // h1 special
-  $('hH1').innerHTML=tl.h1;
-  // Consent with working privacy link
-  $('consentTxt').innerHTML=tl.consentTxt+' <a href="#" onclick="openPrivacy(event)" style="color:var(--blue)">'+tl.privacyLink+'</a>.';
-  // Step counter
-  updStepCtr();
-}
-
-function setLang(l){
-  lang=l;
-  document.getElementById('htmlRoot').lang=l;
-  $('btnEN').classList.toggle('active',l==='en');
-  $('btnFR').classList.toggle('active',l==='fr');
-  applyT();
-  if(step===5) renderResults();
-}
-
-// ═══════════════════════════════════════════════════════
-// DOWN PAYMENT
-// ═══════════════════════════════════════════════════════
-function updDown(){
-  const price=parseMoney($('propPrice').value);
-  const down=parseMoney($('downPay').value);
-  const el=$('downHint');
-  if(!price||!down){el.innerHTML='';return;}
-  const pct=(down/price*100).toFixed(1);
-  const ok=down>=price*0.05;
-  const over20=down>=price*0.2;
-  const tl=T[lang];
-  let html=`<span style="font-weight:600">${pct}%</span> `+(lang==='fr'?"du prix d'achat":"of purchase price");
-  if(over20){
-    html+=` <span style="color:var(--green)">— `+(lang==='fr'?"pas d'assurance SCHL requise ✓":"no CMHC insurance required ✓")+`</span>`;
-  } else {
-    html+=` <span style="color:var(--gray-400);font-size:0.7rem">— `+(lang==='fr'?"assurance SCHL s'applique":"CMHC insurance applies")+` <span title="${tl.cmhcNote}" style="cursor:help;text-decoration:underline dotted">(?)${lang==='fr'?'':''}</span></span>`;
-  }
-  el.innerHTML=html;
-  el.style.color=ok?'var(--gray-700)':'var(--red)';
-}
-
-function applyPct(pct){
-  const price=parseMoney($('propPrice').value);
-  if(!price){showErr('ePropPrice',true);return;}
-  $('downPay').value=Math.round(price*pct/100).toLocaleString('en-CA');
-  document.querySelectorAll('#downPctG .ch').forEach(c=>c.classList.toggle('sel',parseInt(c.getAttribute('data-p'))===pct));
-  updDown();
-}
-function clearPctCh(){document.querySelectorAll('#downPctG .ch').forEach(c=>c.classList.remove('sel'));}
-
-// ═══════════════════════════════════════════════════════
-// PURPOSE
-// ═══════════════════════════════════════════════════════
-function setPurpose(el,val){
-  purpose=val;
-  document.querySelectorAll('.pur-ch').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  const isPur=val==='purchase';
-  $('downGrp').style.display=isPur?'':'none';
-  document.querySelectorAll('.renew-f').forEach(f=>f.classList.toggle('on',!isPur));
-}
-
-// ═══════════════════════════════════════════════════════
-// CHIP PICKER
-// ═══════════════════════════════════════════════════════
-function pick(gId,el,val){
-  document.querySelectorAll('#'+gId+' .ch').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');picks[gId]=val;
-}
-
-// ═══════════════════════════════════════════════════════
-// CONSENT
-// ═══════════════════════════════════════════════════════
-function toggleConsent(){
-  consent=!consent;
-  $('consentLbl').classList.toggle('chk',consent);
-}
-
-// ═══════════════════════════════════════════════════════
-// STEP COUNTER & NAVIGATION
-// ═══════════════════════════════════════════════════════
-function updStepCtr(){$('stepCtr').textContent=(lang==='fr'?'Étape ':'Step ')+step+(lang==='fr'?' sur ':' of ')+5;}
-
-function goTo(n){
-  if(n>step&&!validate(step))return;
-  if(n===4&&step===3&&!gateOk){if(!checkGate())return;}
-  step=n;
-  document.querySelectorAll('.sp').forEach((p,i)=>p.classList.toggle('on',i+1===n));
-  for(let i=1;i<=5;i++){const d=$('d'+i);d.classList.remove('active','done');if(i===n)d.classList.add('active');else if(i<n)d.classList.add('done');}
-  updStepCtr();
-  $('progFill').style.width=(n/5*100)+'%';
-  if(n===5)renderResults();
-  saveProgress();
-  setTimeout(()=>$('calc').scrollIntoView({behavior:'smooth',block:'start'}),50);
-}
-
-// ═══════════════════════════════════════════════════════
-// VALIDATION
-// ═══════════════════════════════════════════════════════
-function validate(s){
-  let ok=true;
-  if(s===1){
-    const price=parseMoney($('propPrice').value);
-    const loc=$('location').value;
-    showErr('ePropPrice',price<100000);if(price<100000)ok=false;
-    showErr('eLoc',!loc);if(!loc)ok=false;
-    if(purpose==='purchase'){
-      const down=parseMoney($('downPay').value);
-      showErr('eDown',!down||down<price*0.05);if(!down||down<price*0.05)ok=false;
-    } else {
-      const bal=parseMoney($('remainBal').value);
-      showErr('eBal',!bal);if(!bal)ok=false;
-    }
-  } else if(s===3){
-    const inc=$('incomeBracket').value;
-    showErr('eIncome',!inc);if(!inc)ok=false;
-  }
-  return ok;
-}
-
-// ═══════════════════════════════════════════════════════
-// CALC ENGINE — Canadian semi-annual compounding (Bank Act)
-// ═══════════════════════════════════════════════════════
-const incMap={under50:40000,'50to75':62500,'75to100':87500,'100to125':112500,'125to150':137500,'150to175':162500,'175to200':187500,'200plus':220000};
-const taxR={montreal:0.01085,laval:0.01073,longueuil:0.01053,brossard:0.00924,'west-island':0.01085,'south-shore':0.00980,other:0.01000};
-
-// Canadian mortgages compound semi-annually by law (Bank Act).
-// Effective monthly rate = (1 + annualRate/2)^(1/6) - 1
-function getMonthlyRate(annualRate){
-  return Math.pow(1 + annualRate/2, 1/6) - 1;
-}
-
-// Standard amortization payment formula
-function calcPayment(principal, monthlyRate, nPayments){
-  if(monthlyRate === 0) return principal / nPayments;
-  return principal * (monthlyRate * Math.pow(1+monthlyRate, nPayments)) / (Math.pow(1+monthlyRate, nPayments) - 1);
-}
-
-// Balance remaining after k payments
-function calcBalance(principal, monthlyRate, nTotal, k){
-  return principal * Math.pow(1+monthlyRate, k) - calcPayment(principal,monthlyRate,nTotal) * (Math.pow(1+monthlyRate,k)-1)/monthlyRate;
-}
-
-// Total interest paid between payment 1 and payment k
-function calcInterestPaid(principal, monthlyRate, nTotal, k){
-  const pmt = calcPayment(principal, monthlyRate, nTotal);
-  const totalPaid = pmt * k;
-  const balRemaining = calcBalance(principal, monthlyRate, nTotal, k);
-  const principalPaid = principal - balRemaining;
-  return totalPaid - principalPaid;
-}
-
-function calcMtg(){
-  const price    = parseMoney($('propPrice').value);
-  const loc      = $('location').value;
-  const amort    = parseInt(picks.amortG);         // years (25 or 30)
-  const termYrs  = 5;                               // fixed 5-year term
-  const freq     = picks.freqG;
-  const annRate  = 0.0525;                          // 5.25% nominal
-  const inc      = incMap[$('incomeBracket').value] || 75000;
-  const car      = parseMoney($('carPay').value);
-  const debts    = parseMoney($('otherDebts').value);
-
-  const down      = purpose==='purchase' ? parseMoney($('downPay').value) : 0;
-  const principal = purpose==='purchase' ? price - down : parseMoney($('remainBal').value);
-
-  // Canadian effective monthly rate (semi-annual compounding)
-  const r  = getMonthlyRate(annRate);
-  const nA = amort * 12;          // total payments over amortization
-  const nT = termYrs * 12;        // payments over term (60)
-
-  // Monthly mortgage payment (always calculated monthly, then converted)
-  const mMtg = calcPayment(principal, r, nA);
-
-  // Display payment by frequency
-  let disPay, payLbl, payFreqLabel, paymentsPerYear, nTermDisplay;
-  if(freq==='monthly'){
-    disPay=mMtg; payLbl='/mo';
-    payFreqLabel=lang==='fr'?'mensuel (12x/an)':'monthly (12x/year)';
-    paymentsPerYear=12; nTermDisplay=nT;
-  } else if(freq==='biweekly'){
-    disPay=mMtg*12/26; payLbl='/2wk';
-    payFreqLabel=lang==='fr'?'aux deux semaines (26x/an)':'biweekly (26x/year)';
-    paymentsPerYear=26; nTermDisplay=termYrs*26;
-  } else {
-    // Accelerated biweekly: pay half monthly payment every 2 weeks
-    // Results in one extra monthly payment per year → pays off faster
-    disPay=mMtg/2; payLbl='/2wk';
-    payFreqLabel=lang==='fr'?'bihebdomadaire accéléré (26x/an)':'accelerated biweekly (26x/year)';
-    paymentsPerYear=26; nTermDisplay=termYrs*26;
-  }
-
-  // Term figures (5 years)
-  const termInterest   = calcInterestPaid(principal, r, nA, nT);
-  const termBalance    = Math.max(calcBalance(principal, r, nA, nT), 0);
-  const termPrincipal  = principal - termBalance;
-  const termTotalPaid  = mMtg * nT;
-
-  // Full amortization figures
-  const fullInterest   = mMtg * nA - principal;
-  const fullTotalPaid  = mMtg * nA;
-
-  // Taxes (municipal + school) based on property value and location
-  const tax  = (price*(taxR[loc]||0.01)/12) + (price*0.00154/12);
-  const heat = 150; // standard heating estimate
-
-  // Total housing cost (monthly)
-  const totHousing = mMtg + tax + heat;
-
-  // GDS & TDS ratios
-  const mInc = inc / 12;
-  const GDS  = (totHousing / mInc) * 100;
-  const TDS  = ((totHousing + car + debts) / mInc) * 100;
-
-  // Qualification colour
-  let col, emoji;
-  if(GDS<=39 && TDS<=44)      { col='green';  emoji='✓'; }
-  else if(GDS<=43 || TDS<=48) { col='yellow'; emoji='~'; }
-  else                         { col='red';    emoji='!'; }
-
-  // Max purchase price back-calculation
-  const maxMPay  = mInc*0.39 - tax - heat;
-  const maxPrin  = maxMPay>0 ? maxMPay*(Math.pow(1+r,nA)-1)/(r*Math.pow(1+r,nA)) : 0;
-  const maxPrice = maxPrin + down;
-
-  return {
-    disPay, payLbl, payFreqLabel, paymentsPerYear,
-    nTermDisplay, nTermMonthly:nT, nAmortMonthly:nA,
-    mMtg, tax, heat, totHousing,
-    GDS, TDS, col, emoji,
-    maxPrice, principal, down,
-    termYrs, amort, annRate,
-    termInterest, termPrincipal, termBalance, termTotalPaid,
-    fullInterest, fullTotalPaid,
-    price
-  };
-}
-
-// ═══════════════════════════════════════════════════════
-// COUNT-UP
-// ═══════════════════════════════════════════════════════
-function countUp(el,target,dur){
-  const start=performance.now();
-  (function step(now){
-    const p=Math.min((now-start)/dur,1);
-    const e=1-Math.pow(1-p,3);
-    el.textContent='$'+Math.round(target*e).toLocaleString('en-CA');
-    if(p<1)requestAnimationFrame(step);
-  })(start);
-}
-
-// ═══════════════════════════════════════════════════════
-// RENDER RESULTS
-// ═══════════════════════════════════════════════════════
-const cMap={green:{bar:'#15803d',bg:'#dcfce7',txt:'#15803d'},yellow:{bar:'#d97706',bg:'#fef3c7',txt:'#b45309'},red:{bar:'#dc2626',bg:'#fee2e2',txt:'#b91c1c'}};
-const fmt=n=>'$'+(Math.max(n,0)).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fmtR=n=>'$'+Math.round(Math.max(n,0)).toLocaleString('en-CA');
-
-
-function renderResults(){
-  const r   = calcMtg();
-  const c   = cMap[r.col];
-  const tl  = T[lang];
-  const isFR = lang === 'fr';
-  const CAP  = s => s.charAt(0).toUpperCase() + s.slice(1);
-
-  // ── Status banner ──────────────────────────────────────
-  const qLbl = tl['qual'+CAP(r.col)+'Lbl'];
-  const qMsg = tl['qual'+CAP(r.col)+'Msg'];
-  $('resHero').innerHTML=`
-    <div class="res-bar" style="background:${c.bar}"></div>
-    <div class="res-status">
-      <div class="res-icon" style="background:${c.bg};color:${c.txt}">${r.emoji}</div>
-      <div class="res-status-txt"><h4 style="color:${c.txt}">${qLbl}</h4><p>${qMsg}</p></div>
-    </div>`;
-
-  // ── 4 key numbers with count-up ────────────────────────
-  const n1 = purpose==='purchase' ? tl.lblPay : tl.lblNewPay;
-  const n4 = purpose==='purchase' ? tl.lblMax  : tl.lblBal;
-  const v4 = purpose==='purchase' ? r.maxPrice : r.principal;
-  $('resNums').innerHTML=`
-    <div class="res-num"><div class="res-num-val" id="rv1">$0</div><div class="res-num-lbl">${n1} ${r.payLbl}</div></div>
-    <div class="res-num"><div class="res-num-val" id="rv2">$0</div><div class="res-num-lbl">${tl.lblTax}</div></div>
-    <div class="res-num"><div class="res-num-val" id="rv3">$0</div><div class="res-num-lbl">${tl.lblTotal}</div></div>
-    <div class="res-num"><div class="res-num-val" id="rv4">$0</div><div class="res-num-lbl">${n4}</div></div>`;
-  setTimeout(()=>{
-    countUp($('rv1'),r.disPay,900);
-    countUp($('rv2'),r.tax,900);
-    countUp($('rv3'),r.totHousing,900);
-    countUp($('rv4'),v4,900);
-  },100);
-
-  // ── GDS / TDS ratio bars ───────────────────────────────
-  const gW=Math.min(r.GDS/50*100,100), tW=Math.min(r.TDS/55*100,100);
-  const gC=r.GDS<=39?'#15803d':r.GDS<=43?'#d97706':'#dc2626';
-  const tC=r.TDS<=44?'#15803d':r.TDS<=48?'#d97706':'#dc2626';
-  const gdsTip = (isFR
-    ? 'Ratio des dépenses brutes de logement. Max : 39 %. Inclut hypothèque, taxes et chauffage.'
-    : 'Gross Debt Service ratio. Max 39%. Includes mortgage, property taxes and heating.').replace(/"/g,'&quot;');
-  const tdsTip = (isFR
-    ? 'Ratio du service de la dette total. Max : 44 %. Inclut le GDS plus toutes les autres dettes mensuelles.'
-    : 'Total Debt Service ratio. Max 44%. Includes GDS plus all other monthly debt payments.').replace(/"/g,'&quot;');
-  $('resRatios').innerHTML=`
-    <div class="ratio-i">
-      <div class="ratio-lbl" style="display:flex;align-items:center">GDS <span class="info-i" data-tip="${gdsTip}" tabindex="0" role="button" aria-label="More info">i</span></div>
-      <div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div>
-      <div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.gdsMax})</span></div>
-    </div>
-    <div class="ratio-i">
-      <div class="ratio-lbl" style="display:flex;align-items:center">TDS <span class="info-i" data-tip="${tdsTip}" tabindex="0" role="button" aria-label="More info">i</span></div>
-      <div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div>
-      <div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}% <span style="color:var(--gray-400);font-weight:400;font-size:0.68rem">(${tl.tdsMax})</span></div>
-    </div>`;
-
-  // ── Teaser copy ────────────────────────────────────────
-  const tk = purpose==='renewal'?'tRen':'tPur';
-  $('resTeaser').innerHTML = tl[tk+CAP(r.col)] || '';
-
-
-  // ── Broker CTA ─────────────────────────────────────────
-  const saving = fmtR(r.fullInterest * 0.05);
-  $('resBrokerCta').innerHTML = `
-    <div class="res-broker-cta">
-      <h4>${isFR ? 'Un taux plus bas pourrait vous faire économiser des milliers' : 'A better rate could save you thousands'}</h4>
-      <p>${isFR
-        ? `Même une réduction de 0,25 % sur votre taux représente environ ${saving} d'économies en intérêts. Obtenez vos options gratuitement.`
-        : `Even a 0.25% rate reduction could save you approximately ${saving} in interest over your amortization. Get your options at no cost.`
-      }</p>
-      <button class="btn-broker-cta" onclick="openVcard()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        ${isFR ? 'Parler à mon courtier — Gratuit' : 'Talk to My Broker — Free'}
-      </button>
-    </div>`;
-}
-
-// ═══════════════════════════════════════════════════════
-// SUBMIT
-// ═══════════════════════════════════════════════════════
-const FAKE=['test@test.com','fake@email.com','test@email.com','example@example.com'];
-const DISP=['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','yopmail.com','trashmail.com'];
-const validEmail=e=>{if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return false;if(FAKE.includes(e))return false;return!DISP.includes(e.split('@')[1]);};
-const validPhone=p=>p.replace(/\D/g,'').length===10;
-const suspicious=(n,e,p)=>['test','fake','asdf'].includes(n.toLowerCase())||/^(.)\1{3,}/.test(n)||/^(\d)\1{9}$/.test(p.replace(/\D/g,''));
-
-function submitForm(){
-  if(submitting)return;
-  const now=Date.now();
-  if(now-lastSub<30000){alert(lang==='fr'?'Veuillez patienter avant de soumettre à nouveau.':'Please wait before submitting again.');return;}
-  const name=$('fullName').value.trim();
-  const email=$('emailAddr').value.trim().toLowerCase();
-  const phone=$('phoneNum').value;
-  let ok=true;
-  showErr('eName',!name||name.length<2);if(!name||name.length<2)ok=false;
-  showErr('eEmail',!validEmail(email));if(!validEmail(email))ok=false;
-  showErr('ePhone',!validPhone(phone));if(!validPhone(phone))ok=false;
-  showErr('eConsent',!consent);if(!consent)ok=false;
-  if(!ok)return;
-  submitting=true;lastSub=now;
-  const btn=$('submitBtn');btn.disabled=true;
-  $('submitTxt').textContent=lang==='fr'?'Envoi en cours...':'Sending...';
-  const res=calcMtg();
-  const lead={ts:new Date().toISOString(),lang,purpose,name,email,phone,
-    location:$('location').value,propVal:parseMoney($('propPrice').value),
-    downPay:purpose==='purchase'?parseMoney($('downPay').value):null,
-    remainBal:purpose==='renewal'?parseMoney($('remainBal').value):null,
-    curLender:purpose==='renewal'?$('curLender').value:null,
-    amort:picks.amortG,freq:picks.freqG,empType:picks.empG,
-    income:$('incomeBracket').value,car:parseMoney($('carPay').value),
-    debts:parseMoney($('otherDebts').value),credit:picks.creditG,timeline:picks.tlG,
-    GDS:res.GDS.toFixed(2),TDS:res.TDS.toFixed(2),qual:res.col,
-    consent:true,consentTs:new Date().toISOString(),suspicious:suspicious(name,email,phone)};
-  console.log('LEAD:', JSON.stringify(lead, null, 2));
-
-  // ─── VELOCITY API IN INTEGRATION ─────────────────────────────────
-  // Newton Velocity API IN — submits a lead/contact directly into your
-  // Velocity dashboard. Docs: http://developer.newton.ca/velocity/v1/
-  //
-  // HOW TO ACTIVATE:
-  //   1. Log into Velocity → Settings → Request API Key
-  //   2. Paste your key and domain into VELOCITY_CONFIG below
-  //   3. Remove the `if (false)` wrapper to go live
-  //
-  // The Velocity API IN endpoint accepts a JSON payload with borrower
-  // contact + lead data and creates a new lead record in your dashboard.
-  // ─────────────────────────────────────────────────────────────────
-
-  if (false) { // ← Change to: if (VELOCITY_CONFIG.apiKey) {
-    sendToVelocity(lead);
-  }
-  setTimeout(()=>{
-    submitting=false;btn.disabled=false;$('submitTxt').textContent=t('submitBtn');
-    step=5;
-    document.querySelectorAll('.sp').forEach((p,i)=>p.classList.toggle('on',i+1===5));
-    for(let i=1;i<=5;i++){const d=$('d'+i);d.classList.remove('active','done');if(i===5)d.classList.add('active');else d.classList.add('done');}
-    updStepCtr();$('progFill').style.width='100%';
-    renderResults();
-    setTimeout(()=>$('calc').scrollIntoView({behavior:'smooth',block:'start'}),50);
-    try{localStorage.removeItem('mqiq');}catch(e){}
-  },1200);
-}
-
-// ═══════════════════════════════════════════════════════
-// TOOLTIP PORTAL — click/tap to toggle, works on all devices
-// ═══════════════════════════════════════════════════════
-(function(){
-  const portal = document.createElement('div');
-  portal.className = 'tip-portal';
-  portal.style.display = 'none';
-  document.body.appendChild(portal);
-
-  let current = null;
-
-  function position(el) {
-    const rect = el.getBoundingClientRect();
-    const pW   = portal.offsetWidth;
-    const pH   = portal.offsetHeight;
-    const margin = 12;
-    const vw   = window.innerWidth;
-
-    // Arrow: show above if room, otherwise below
-    let top, arrowDir;
-    if (rect.top - pH - 14 >= margin) {
-      top = rect.top + window.scrollY - pH - 10;
-      arrowDir = 'arr-down';
-    } else {
-      top = rect.bottom + window.scrollY + 10;
-      arrowDir = 'arr-up';
-    }
-
-    // Centre horizontally, clamp to viewport edges
-    let left = rect.left + rect.width / 2 - pW / 2;
-    left = Math.max(margin, Math.min(left, vw - pW - margin));
-
-    portal.style.top  = top + 'px';
-    portal.style.left = left + 'px';
-    portal.className  = 'tip-portal ' + arrowDir;
-  }
-
-  function open(el) {
-    if (current) current.classList.remove('tip-open');
-    current = el;
-    el.classList.add('tip-open');
-    portal.textContent = el.getAttribute('data-tip');
-    portal.style.display = 'block';
-    // Re-position after content is set so offsetWidth is accurate
-    requestAnimationFrame(() => position(el));
-  }
-
-  function close() {
-    portal.style.display = 'none';
-    if (current) { current.classList.remove('tip-open'); current = null; }
-  }
-
-  // Guard: only real Element nodes have .closest()
-  function fromEvent(e) {
-    return (e.target && e.target.nodeType === 1 && typeof e.target.closest === 'function')
-      ? e.target.closest('.info-i[data-tip]')
-      : null;
-  }
-
-  // Single click — works for mouse AND tap on every device
-  document.addEventListener('click', e => {
-    const el = fromEvent(e);
-    if (el) { current === el ? close() : open(el); }
-    else close();
-  });
-
-  // Desktop hover
-  document.addEventListener('mouseenter', e => { const el = fromEvent(e); if (el) open(el); }, true);
-  document.addEventListener('mouseleave', e => { const el = fromEvent(e); if (el) close(); }, true);
-
-  // Keyboard
-  document.addEventListener('keydown', e => {
-    const el = fromEvent(e);
-    if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); current === el ? close() : open(el); }
-    if (e.key === 'Escape') close();
-  });
-})();
-
-// ═══════════════════════════════════════════════════════
-// EXIT INTENT
-// ═══════════════════════════════════════════════════════
-function initExit(){
-  document.addEventListener('mouseleave',e=>{
-    if(e.clientY<20&&!exitShown&&!exitDismissed&&step>=2&&step<5){
-      exitShown=true;$('exitOv').classList.add('on');saveProgress();
-    }
-  });
-  let idle;
-  const ri=()=>{clearTimeout(idle);if(step>=2&&step<5&&!exitDismissed)idle=setTimeout(()=>{if(!exitShown){exitShown=true;$('exitOv').classList.add('on');}},45000);};
-  ['touchstart','click'].forEach(ev=>document.addEventListener(ev,ri,{passive:true}));
-}
-function closeExit(){$('exitOv').classList.remove('on');$('calc').scrollIntoView({behavior:'smooth',block:'start'});}
-function dismissExit(){exitDismissed=true;$('exitOv').classList.remove('on');}
-
-// ═══════════════════════════════════════════════════════
-// QUAL GATE
-// ═══════════════════════════════════════════════════════
-function checkGate(){
-  if(gateOk)return true;
-  const price=parseMoney($('propPrice').value);
-  const inc=incMap[$('incomeBracket').value]||0;
-  if(!inc||!price)return true;
-  const maxApprox=(inc/12*0.39*12)/0.04;
-  if(price>maxApprox*1.4){$('gateOv').classList.add('on');return false;}
-  return true;
-}
-function closeGate(go){$('gateOv').classList.remove('on');if(go){gateOk=true;goTo(4);}}
-
-// ═══════════════════════════════════════════════════════
-// PHONE TOOLTIP
-// ═══════════════════════════════════════════════════════
-function toggleTip(e){e.preventDefault();e.stopPropagation();$('phTip').classList.toggle('on');}
-document.addEventListener('click',()=>$('phTip')&&$('phTip').classList.remove('on'));
-
-// ═══════════════════════════════════════════════════════
-// PRIVACY MODAL
-// ═══════════════════════════════════════════════════════
-function openPrivacy(e){e.preventDefault();e.stopPropagation();$('privOv').classList.add('on');}
-function closePrivacy(){$('privOv').classList.remove('on');}
-
-// ═══════════════════════════════════════════════════════
-// LOCALSTORAGE
-// ═══════════════════════════════════════════════════════
-function saveProgress(){
-  try{localStorage.setItem('mqiq',JSON.stringify({
-    lang,purpose,
-    propPrice:$('propPrice').value,downPay:$('downPay').value,
-    remainBal:$('remainBal').value,curLender:$('curLender').value,
-    location:$('location').value,incomeBracket:$('incomeBracket').value,
-    carPay:$('carPay').value,otherDebts:$('otherDebts').value,
-    picks:JSON.stringify(picks),step
-  }));}catch(e){}
-}
-function restoreProgress(){
-  try{
-    const raw=localStorage.getItem('mqiq');if(!raw)return;
-    const d=JSON.parse(raw);
-    if(d.lang)setLang(d.lang);
-    if(d.purpose&&d.purpose==='renewal')setPurpose($('cpRenewal'),'renewal');
-    if(d.propPrice)$('propPrice').value=d.propPrice;
-    if(d.downPay)$('downPay').value=d.downPay;
-    if(d.remainBal)$('remainBal').value=d.remainBal;
-    if(d.curLender)$('curLender').value=d.curLender;
-    if(d.location)$('location').value=d.location;
-    if(d.incomeBracket)$('incomeBracket').value=d.incomeBracket;
-    if(d.carPay)$('carPay').value=d.carPay;
-    if(d.otherDebts)$('otherDebts').value=d.otherDebts;
-    if(d.picks){const p=JSON.parse(d.picks);Object.assign(picks,p);}
-    updDown();
-  }catch(e){}
-}
-
-// ═══════════════════════════════════════════════════════
-// SCROLL
-// ═══════════════════════════════════════════════════════
-function scrollCalc(e) {
-  e.preventDefault();
-  $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ═══════════════════════════════════════════════════════
-// RESTART ESTIMATE
-// ═══════════════════════════════════════════════════════
-function restartEstimate() {
-  // Reset state
-  step = 1;
-  consent = false;
-  purpose = 'purchase';
-  gateOk = false;
-  exitShown = false;
-  Object.assign(picks, { amortG:'25', freqG:'monthly', empG:'employed', creditG:'', tlG:'asap' });
-
-  // Reset form fields
-  ['propPrice','downPay','remainBal','carPay','otherDebts','fullName','emailAddr','phoneNum'].forEach(id => {
-    const el = $(id);
-    if (el) el.value = '';
-  });
-  ['location','curLender','incomeBracket'].forEach(id => {
-    const el = $(id);
-    if (el) el.selectedIndex = 0;
-  });
-  $('downHint').innerHTML = '';
-
-  // Reset purpose UI
-  setPurpose($('cpPurchase'), 'purchase');
-
-  // Reset chip selections
-  document.querySelectorAll('.ch.sel').forEach(c => c.classList.remove('sel'));
-  // Re-select defaults
-  document.querySelectorAll('#amortG .ch')[0]?.classList.add('sel');
-  document.querySelectorAll('#freqG .ch')[0]?.classList.add('sel');
-  document.querySelectorAll('#empG .ch')[0]?.classList.add('sel');
-  document.querySelectorAll('#tlG .ch')[0]?.classList.add('sel');
-
-  // Reset consent
-  $('consentLbl')?.classList.remove('chk');
-
-  // Clear localStorage
-  try { localStorage.removeItem('mqiq'); } catch(e) {}
-
-  // Go to step 1 and scroll
-  document.querySelectorAll('.sp').forEach((p, i) => p.classList.toggle('on', i === 0));
-  for (let i = 1; i <= 5; i++) {
-    const d = $('d' + i);
-    d.classList.remove('active', 'done');
-    if (i === 1) d.classList.add('active');
-  }
-  updStepCtr();
-  $('progFill').style.width = '20%';
-
-  // Scroll to top smoothly
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  setTimeout(() => $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
-}
-
-// ═══════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════
-applyT();
-restoreProgress();
-initExit();
-
-// ═══════════════════════════════════════════════════════
-// VELOCITY CRM CONFIGURATION
-// Fill in your API key and domain from Velocity → Settings
-// ═══════════════════════════════════════════════════════
-const VELOCITY_CONFIG = {
-  apiKey: '',          // ← Paste your Velocity API key here
-  domain: '',          // ← Your registered domain (e.g. mortgageiq.ca)
-  endpoint: 'https://velocity.newton.ca/api/v1/contacts/lead',
-};
-
-// Maps our lead object to the Velocity API IN schema
-// Velocity API IN docs: http://developer.newton.ca/velocity/v1/
-function buildVelocityPayload(lead) {
-  // Split full name into first/last
-  const nameParts = (lead.name || '').trim().split(/\s+/);
-  const firstName = nameParts[0] || '';
-  const lastName  = nameParts.slice(1).join(' ') || '';
-
-  // Map income bracket midpoints to annual income
-  const incomeMap = {
-    under50: 40000, '50to75': 62500, '75to100': 87500,
-    '100to125': 112500, '125to150': 137500,
-    '150to175': 162500, '175to200': 187500, '200plus': 220000
-  };
-
-  // Velocity API IN — Lead schema
-  // See: http://developer.newton.ca/velocity/v1/#leads
-  return {
-    // Authentication
-    api_key: VELOCITY_CONFIG.apiKey,
-    domain:  VELOCITY_CONFIG.domain,
-
-    // Contact details
-    first_name: firstName,
-    last_name:  lastName,
-    email:      lead.email,
-    phone:      lead.phone.replace(/\D/g, ''),   // digits only
-    language:   lead.lang === 'fr' ? 'French' : 'English',
-
-    // Lead classification
-    lead_type:  lead.purpose === 'renewal' ? 'Renewal' : 'Purchase',
-    source:     'Website Calculator',
-    notes: [
-      `Qualification: ${lead.qual.toUpperCase()} (GDS ${lead.GDS}% / TDS ${lead.TDS}%)`,
-      `Property Value: $${(lead.propVal||0).toLocaleString('en-CA')}`,
-      lead.purpose === 'purchase'
-        ? `Down Payment: $${(lead.downPay||0).toLocaleString('en-CA')}`
-        : `Remaining Balance: $${(lead.remainBal||0).toLocaleString('en-CA')}`,
-      `Location: ${lead.location}`,
-      `Income Bracket: ${lead.income}`,
-      `Employment: ${lead.empType}`,
-      `Timeline: ${lead.timeline}`,
-      lead.credit ? `Credit Score Range: ${lead.credit}` : '',
-      `Submitted: ${new Date(lead.ts).toLocaleString('en-CA')}`,
-    ].filter(Boolean).join(' | '),
-
-    // Mortgage details
-    purchase_price:  lead.propVal     || 0,
-    down_payment:    lead.downPay     || 0,
-    mortgage_amount: lead.purpose === 'purchase'
-      ? (lead.propVal - lead.downPay)
-      : (lead.remainBal || 0),
-    annual_income:   incomeMap[lead.income] || 0,
-
-    // Consent
-    consent: lead.consent,
-    consent_timestamp: lead.consentTs,
-  };
-}
-
-async function sendToVelocity(lead) {
-  if (!VELOCITY_CONFIG.apiKey) {
-    console.warn('Velocity API key not set — skipping CRM sync.');
-    return;
-  }
-  try {
-    const payload = buildVelocityPayload(lead);
-    const res = await fetch(VELOCITY_CONFIG.endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-API-Key': VELOCITY_CONFIG.apiKey,
-      },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      const err = await res.text();
-      console.error('Velocity API error:', res.status, err);
-    } else {
-      const data = await res.json();
-      console.log('Velocity lead created:', data);
-    }
-  } catch (err) {
-    console.error('Velocity sync failed:', err);
-  }
-}
-
-// ═══════════════════════════════════════════════════════
-// VIRTUAL BUSINESS CARD
-// ── Update BROKER_INFO with the real broker's details ──
-// ═══════════════════════════════════════════════════════
-const BROKER = {
-  name:    'Your Name',           // ← Replace with broker full name
-  title_en:'Licensed Mortgage Broker',
-  title_fr:'Courtier hypothécaire agréé',
-  phone:   '+15140000000',        // ← Replace with real phone (no spaces)
-  phoneDisplay: '(514) 000-0000', // ← Display format
-  email:   'info@mortgageiq.ca',  // ← Replace with real email
-  website: 'mortgageiq.ca',       // ← Replace with real domain
-  amfNumber: '',                  // ← Optional: AMF licence number
-};
-
-function openVcard() {
-  const isFR = lang === 'fr';
-  // Update card content with broker info
-  $('vcName').textContent = BROKER.name;
-  $('vcTitle').textContent = (isFR ? BROKER.title_fr : BROKER.title_en)
-    + (BROKER.amfNumber ? ` · ${isFR?'Licence AMF':'AMF Licence'} #${BROKER.amfNumber}` : '');
-  $('vcPhoneLink').textContent = BROKER.phoneDisplay;
-  $('vcPhoneLink').href = 'tel:' + BROKER.phone;
-  $('vcEmailLink').textContent = BROKER.email;
-  $('vcEmailLink').href = 'mailto:' + BROKER.email;
-  $('vcWebLink').textContent = BROKER.website;
-  $('vcWebLink').href = 'https://' + BROKER.website;
-  // Button labels
-  $('vcCallTxt').textContent  = isFR ? 'Appeler maintenant' : 'Call Now';
-  $('vcSaveTxt').textContent  = isFR ? 'Enregistrer le contact' : 'Save Contact';
-  $('vcCloseTxt').textContent = isFR ? 'Fermer' : 'Close';
-  // Show modal
-  $('vcardOv').classList.add('on');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeVcard() {
-  $('vcardOv').classList.remove('on');
-  document.body.style.overflow = '';
-}
-
-function callBroker() {
-  window.location.href = 'tel:' + BROKER.phone;
-}
-
-function saveVcard() {
-  const isFR = lang === 'fr';
-  // Build .vcf file content (vCard 3.0 standard)
-  const vcf = [
-    'BEGIN:VCARD',
-    'VERSION:3.0',
-    'FN:' + BROKER.name,
-    'ORG:MortgageIQ',
-    'TITLE:' + (isFR ? BROKER.title_fr : BROKER.title_en),
-    'TEL;TYPE=CELL:' + BROKER.phone,
-    'EMAIL:' + BROKER.email,
-    'URL:https://' + BROKER.website,
-    BROKER.amfNumber ? 'NOTE:AMF Licence #' + BROKER.amfNumber : '',
-    'END:VCARD'
-  ].filter(Boolean).join('\r\n');
-
-  const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = BROKER.name.replace(/\s+/g, '_') + '.vcf';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-// Swipe down to close on mobile
-(function(){
-  const sheet = $('vcardSheet');
-  let startY = 0, isDragging = false;
-  sheet.addEventListener('touchstart', e => {
-    startY = e.touches[0].clientY;
-    isDragging = true;
-  }, { passive: true });
-  sheet.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const dy = e.touches[0].clientY - startY;
-    if (dy > 0) sheet.style.transform = `translateY(${dy}px)`;
-  }, { passive: true });
-  sheet.addEventListener('touchend', e => {
-    isDragging = false;
-    const dy = e.changedTouches[0].clientY - startY;
-    if (dy > 80) {
-      closeVcard();
-    }
-    sheet.style.transform = '';
-  });
-})();
-
-</script>
-
-<!-- VIRTUAL BUSINESS CARD MODAL -->
+<!-- ══ VIRTUAL BUSINESS CARD ═════════════════════════════════ -->
 <div class="vcard-ov" id="vcardOv" onclick="if(event.target===this)closeVcard()">
   <div class="vcard-sheet" id="vcardSheet">
     <div class="vcard-drag"></div>
     <div class="vcard-card">
       <div class="vcard-logo">Mortgage<span>IQ</span></div>
-      <div class="vcard-name" id="vcName">Your Name</div>
+      <div class="vcard-name"  id="vcName">Your Name</div>
       <div class="vcard-title" id="vcTitle">Licensed Mortgage Broker · AMF Regulated</div>
       <div class="vcard-creds">
         <span class="vcard-badge">AMF Licensed</span>
@@ -1463,30 +588,45 @@ function saveVcard() {
       <div class="vcard-divider"></div>
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
         </div>
         <a href="tel:+15140000000" id="vcPhoneLink">(514) 000-0000</a>
       </div>
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
         </div>
         <a href="mailto:info@mortgageiq.ca" id="vcEmailLink">info@mortgageiq.ca</a>
       </div>
       <div class="vcard-contact-row">
         <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
         </div>
         <a href="https://mortgageiq.ca" target="_blank" id="vcWebLink">mortgageiq.ca</a>
       </div>
     </div>
     <div class="vcard-actions">
-      <button class="vcard-btn vcard-btn-call" id="vcCallBtn" onclick="callBroker()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <button class="vcard-btn vcard-btn-call" onclick="callBroker()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
         <span id="vcCallTxt">Call Now</span>
       </button>
-      <button class="vcard-btn vcard-btn-save" id="vcSaveBtn" onclick="saveVcard()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <button class="vcard-btn vcard-btn-save" onclick="saveVcard()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
         <span id="vcSaveTxt">Save Contact</span>
       </button>
     </div>
@@ -1496,5 +636,1159 @@ function saveVcard() {
   </div>
 </div>
 
+<!-- ══ JAVASCRIPT ════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ════════════════════════════════════════════════════════════
+// TRANSLATIONS
+// ════════════════════════════════════════════════════════════
+const T = {
+en: {
+  navPill:     'Licensed Quebec Broker',
+  eyebrow:     'Free · No obligation · 2 minutes',
+  h1:          'Find Out <em>Exactly</em><br>What You Can Afford',
+  sub:         'Complete a brief questionnaire and receive an instant affordability estimate — a licensed mortgage professional will follow up with personalized options.',
+  cta:         'Start My Estimate',
+  noCredit:    'No credit check required',
+  revCount:    'Trusted by 400+ Quebec homebuyers this year',
+  stat1: 'Lenders we work with', stat2: 'Response time', stat3: 'Broker fee to you',
+
+  // Step 1
+  s1t: 'Tell us about the property',
+  s1h: 'Approximate values are fine — you can refine later.',
+  purLbl:      "What's this for?",
+  purPurchLbl: 'Purchase',    purPurchSub: 'Buying a property',
+  purRenLbl:   'Renewal',     purRenSub:   'Renewing my mortgage',
+  lPropPrice:  'Property value',
+  lDown:       'Down payment',
+  lBal:        'Remaining Mortgage Balance',
+  lRenewAmort: 'Remaining Amortization Period',
+  lLender:     'Current Lender',
+  lenderPh:    'Select your lender...',
+  lenderOther: 'Other',
+  lLoc:        'Area',
+  locPh:       'Where is the property?',
+  locOther:    'Other Quebec area',
+  ePrice:      'Please enter a valid amount (min $100,000).',
+  eDown:       'Minimum down payment is 5% of the purchase price.',
+  eBal:        'Please enter your remaining balance.',
+  eLoc:        'Please select an area.',
+
+  // Step 2
+  s2t:     'Mortgage preferences',
+  s2h:     'These settings affect your monthly payment estimate.',
+  lRate:   'Interest rate',   rateDesc: '5-year fixed',   rateLock: 'Current best rate',
+  lAmort:  'Amortization',   amort25: '25 years',         amort30:  '30 years',
+  lFreq:   'Payment frequency',
+  freqMo:  'Monthly',   freqBi: 'Biweekly',   freqAc: 'Accelerated Biweekly',
+
+  // Step 3
+  s3t:   'Income & debts',
+  s3h:   'Used to calculate your qualification ratios — nothing else.',
+  lEmp:  'Employment type',
+  empE:  'Employed',   empS: 'Self-employed',   empC: 'Contract',   empO: 'Other',
+  lIncome: 'Household income',
+  incPh:       'Select range...',
+  incU50:      'Under $50,000',
+  inc50_75:    '$50,000 – $75,000',
+  inc75_100:   '$75,000 – $100,000',
+  inc100_125:  '$100,000 – $125,000',
+  inc125_150:  '$125,000 – $150,000',
+  inc150_175:  '$150,000 – $175,000',
+  inc175_200:  '$175,000 – $200,000',
+  inc200plus:  '$200,000+',
+  eIncome:  'Please select your income range.',
+  lCar:     'Car payment',   lDebts: 'Other debts',   opt: '(optional)',
+  lCredit:  'Credit score',
+  cr720: '720+ Excellent', cr680: '680–719 Good', cr600: '600–679 Fair', crU600: 'Under 600',
+  getRes: 'Get My Results',
+
+  // Step 4
+  conTitle: 'One final step — provide your contact details to receive your results',
+  conSub:   'Your personalized affordability estimate is ready. A licensed mortgage professional will review your profile and follow up within 24 hours.',
+  spStrong: 'Marc from Laval saved $14,200 in interest',
+  spSub:    'by switching lenders through a mortgage broker.',
+  lName:  'Your name',   lEmail: 'Email',   lPhone: 'Phone number',
+  lTimeline: 'When are you looking to proceed?',
+  tlASAP: 'As soon as possible', tl3m: 'Within 3 months', tl6m: '3–6 months', tl6plus: '6+ months',
+  whyBtn:      'Why do we need this?',
+  phTip:       'Your broker needs to call you personally to discuss your options. We never share your number with third parties.',
+  consentTxt:  'I agree to be contacted by a licensed mortgage professional. My information will be used solely to provide mortgage advice.',
+  privacyLink: 'Privacy Policy',
+  eConsent: 'Please check the consent box to continue.',
+  ePhone:   'Please enter a valid 10-digit phone number.',
+  eName:    'Please enter your full name.',
+  eEmail:   'Please enter a valid email address.',
+  submitBtn: 'Show My Results',
+  tr1: 'Secure & encrypted',   tr2: 'No obligation',   tr3: 'Response in 24h',
+  back: 'Back',   backToRes: 'Back',   cont: 'Continue',
+
+  // Step 5
+  qualGreenLbl: 'Looking strong',
+  qualGreenMsg: 'Based on the information provided, you appear to be within qualification range.',
+  qualYellowLbl: 'Close to the limit',
+  qualYellowMsg: "You're near the qualification threshold. A broker may be able to structure your application to improve your odds.",
+  qualRedLbl: 'Worth exploring options',
+  qualRedMsg: 'Your ratios are above standard guidelines, but there may still be lenders who can help — especially with a broker in your corner.',
+  tPurGreen:  "<strong>Good news.</strong> Your profile looks solid. A licensed broker can help you secure a better rate than what's publicly listed — sometimes by as much as 0.4%.",
+  tPurYellow: "<strong>Don't give up.</strong> Standard online tools may show you don't qualify — but brokers have access to lenders with more flexible programs.",
+  tPurRed:    "<strong>There may still be options.</strong> Even with higher ratios, some lenders specialize in non-standard situations. A broker can assess your file.",
+  tRenGreen:  "<strong>Good news.</strong> Your renewal profile looks solid. A broker can often beat your current lender's renewal offer — sometimes significantly.",
+  tRenYellow: "<strong>Worth reviewing.</strong> Even if your ratios are close to the limit, renewal situations have more flexibility. A broker can help.",
+  tRenRed:    "<strong>Don't just accept your bank's offer.</strong> Brokers have access to lenders who evaluate renewals differently. Your situation may be better than you think.",
+  lblPay:    'Est. payment',   lblTax:    'Est. monthly taxes',
+  lblTotal:  'Total monthly cost',
+  lblMax:    'Est. max purchase',   lblBal:    'Remaining balance',   lblNewPay: 'New est. payment',
+  gdsMax:  'max 39%',   tdsMax:  'max 44%',
+  redoBtn: '↩ Redo my estimate',
+
+  // Features
+  featEy: 'Why MortgageIQ',   featTtl: 'The Professional Difference',
+  f1t: 'Regulated & Licensed Professional',
+  f1b: "A licensed mortgage professional regulated by the Autorité des marchés financiers (AMF) and the OACIQ. We act exclusively in your interest — not the lender's.",
+  f2t: 'Access to an Extensive Lender Network',
+  f2b: "We compare rates across major banks, alternative lenders, and private institutions to find solutions your bank may not offer.",
+  f3t: 'No Brokerage Fees.*',
+  f3b: 'Our brokerage services are provided at no cost to you — lenders compensate us directly. <em>*Alternative and private lending solutions may include processing or administrative fees, which will always be disclosed in advance.</em>',
+
+  // Reviews
+  revEy: 'Client Testimonials',   revTtl: 'Trusted by Quebec Homebuyers',
+  rv1b: '"I was skeptical at first, but they came back with a rate 0.4% lower than my bank offered. That\'s thousands of dollars over the life of my mortgage."',
+  rv1a: 'Marc L. — Laval, first-time buyer',
+  rv2b: '"Super simple process. I filled out the form, got a call the next morning, and had my pre-approval in two days. Very professional team."',
+  rv2a: 'Sophie P. — Brossard, renewal',
+  rv3b: '"As a self-employed person I thought it would be difficult. They found a lender who understood my situation and got me approved at a great rate."',
+  rv3a: 'Kevin T. — Montréal, self-employed',
+
+  // Footer
+  ftLicense: 'Licensed Mortgage Broker · Regulated by the AMF (Autorité des marchés financiers) · OACIQ Member',
+  ftDisc:    'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
+  ftPriv: 'Privacy Policy',   ftTerms: 'Terms of Use',   ftOACIQ: 'Regulatory Disclosures',
+  ftCopy: '© 2025 MortgageIQ. All rights reserved.',
+
+  // Overlays
+  exitTitle: 'Wait — your estimate is almost ready',
+  exitBody:  "You're only a few seconds away from seeing what you qualify for. Don't lose your progress.",
+  exitStay:  'Continue My Estimate',   exitLeave: "No thanks, I'll leave",
+  gateTitle: 'A quick note before you continue',
+  gateBody:  'Based on the income and property value provided, your qualification ratios may exceed standard lending guidelines. A mortgage professional can still review your file and explore available solutions — including alternative programs.',
+  gateCont:  'I understand — continue anyway',   gateBack: 'Go back and adjust',
+  privTitle: 'Privacy Policy',   privClose: 'Close',
+  privBody: `<p><strong>Information collected</strong>We collect your name, email, phone number, and mortgage details for the sole purpose of connecting you with a licensed mortgage broker.</p><p><strong>How it's used</strong>Your information is used exclusively to provide you with personalized mortgage options. It will never be sold, rented, or shared with third parties outside of our licensed broker network.</p><p><strong>Who sees your data</strong>Only the licensed Quebec mortgage broker associated with this platform will have access to your submitted information.</p><p><strong>Your rights</strong>You may request to view, correct, or delete your information at any time by contacting us.</p><p><strong>Compliance</strong>This platform operates in compliance with Quebec's Act Respecting the Protection of Personal Information in the Private Sector (Law 25) and applicable federal PIPEDA regulations.</p>`,
+  cmhcNote: 'Canada Mortgage and Housing Corporation — insurance required when down payment is under 20%',
+},
+
+fr: {
+  navPill:     'Courtier hypothécaire agréé',
+  eyebrow:     'Gratuit · Sans engagement · 2 minutes',
+  h1:          'Découvrez <em>Exactement</em><br>Ce Que Vous Pouvez Vous Permettre',
+  sub:         "Répondez à quelques questions et obtenez une estimation instantanée — un courtier agréé vous contactera avec des options personnalisées.",
+  cta:         'Commencer mon estimation',
+  noCredit:    'Aucune vérification de crédit requise',
+  revCount:    'Fait confiance par 400+ acheteurs québécois cette année',
+  stat1: 'Prêteurs partenaires', stat2: 'Délai de réponse', stat3: 'Frais de courtage',
+
+  s1t: 'Parlez-nous de la propriété',
+  s1h: 'Des valeurs approximatives suffisent — vous pourrez préciser plus tard.',
+  purLbl:      "Quel est l'objectif ?",
+  purPurchLbl: 'Achat',          purPurchSub: "J'achète une propriété",
+  purRenLbl:   'Renouvellement', purRenSub:   'Je renouvelle mon hypothèque',
+  lPropPrice:  'Valeur de la propriété',
+  lDown:       'Mise de fonds',
+  lBal:        'Solde hypothécaire restant',
+  lRenewAmort: "Période d'amortissement restante",
+  lLender:     'Prêteur actuel',
+  lenderPh:    'Sélectionnez votre prêteur...',
+  lenderOther: 'Autre',
+  lLoc:        'Région',
+  locPh:       'Où se situe la propriété ?',
+  locOther:    'Autre région du Québec',
+  ePrice:      'Veuillez entrer un montant valide (min 100 000 $).',
+  eDown:       "La mise de fonds minimale est de 5 % du prix d'achat.",
+  eBal:        'Veuillez entrer votre solde restant.',
+  eLoc:        'Veuillez sélectionner une région.',
+
+  s2t:     'Préférences hypothécaires',
+  s2h:     "Ces choix affectent l'estimation de votre paiement mensuel.",
+  lRate:   "Taux d'intérêt",   rateDesc: 'Fixe 5 ans',   rateLock: 'Meilleur taux actuel',
+  lAmort:  'Amortissement',    amort25: '25 ans',          amort30: '30 ans',
+  lFreq:   'Fréquence de paiement',
+  freqMo:  'Mensuel',   freqBi: 'Aux deux semaines',   freqAc: 'Bihebdomadaire accéléré',
+
+  s3t:   'Revenu et dettes',
+  s3h:   "Utilisé uniquement pour calculer vos ratios d'admissibilité.",
+  lEmp:  "Type d'emploi",
+  empE:  'Salarié',   empS: 'Travailleur autonome',   empC: 'Contrat',   empO: 'Autre',
+  lIncome: 'Revenu du ménage',
+  incPh:       'Sélectionnez une tranche...',
+  incU50:      'Moins de 50 000 $',
+  inc50_75:    '50 000 $ – 75 000 $',
+  inc75_100:   '75 000 $ – 100 000 $',
+  inc100_125:  '100 000 $ – 125 000 $',
+  inc125_150:  '125 000 $ – 150 000 $',
+  inc150_175:  '150 000 $ – 175 000 $',
+  inc175_200:  '175 000 $ – 200 000 $',
+  inc200plus:  '200 000 $+',
+  eIncome: 'Veuillez sélectionner votre tranche de revenu.',
+  lCar:    'Paiement auto',   lDebts: 'Autres dettes',   opt: '(optionnel)',
+  lCredit: 'Cote de crédit',
+  cr720: '720+ Excellent', cr680: '680–719 Bon', cr600: '600–679 Passable', crU600: 'Moins de 600',
+  getRes: 'Voir mes résultats',
+
+  conTitle: 'Dernière étape — fournissez vos coordonnées pour recevoir vos résultats',
+  conSub:   'Votre estimation personnalisée est prête. Un courtier agréé examinera votre profil et vous contactera dans les 24 heures.',
+  spStrong: 'Marc de Laval a économisé 14 200 $ en intérêts',
+  spSub:    'en changeant de prêteur grâce à un courtier hypothécaire.',
+  lName:  'Votre nom',   lEmail: 'Courriel',   lPhone: 'Numéro de téléphone',
+  lTimeline: 'Dans quel délai souhaitez-vous procéder ?',
+  tlASAP: 'Dès que possible', tl3m: 'Dans les 3 mois', tl6m: '3 à 6 mois', tl6plus: '6 mois et plus',
+  whyBtn:      'Pourquoi avez-vous besoin de ça ?',
+  phTip:       'Votre courtier doit vous appeler personnellement pour discuter de vos options. Nous ne partageons jamais votre numéro avec des tiers.',
+  consentTxt:  "J'accepte d'être contacté par un professionnel hypothécaire agréé. Mes informations seront utilisées uniquement pour me fournir des conseils hypothécaires.",
+  privacyLink: 'Politique de confidentialité',
+  eConsent: 'Veuillez cocher la case de consentement pour continuer.',
+  ePhone:   'Veuillez entrer un numéro valide à 10 chiffres.',
+  eName:    'Veuillez entrer votre nom complet.',
+  eEmail:   'Veuillez entrer une adresse courriel valide.',
+  submitBtn: 'Afficher mes résultats',
+  tr1: 'Sécurisé et chiffré',   tr2: 'Sans engagement',   tr3: 'Réponse en 24h',
+  back: 'Retour',   backToRes: 'Retour',   cont: 'Continuer',
+
+  qualGreenLbl: 'Situation favorable',
+  qualGreenMsg: "Selon les informations fournies, vous semblez être dans la fourchette d'admissibilité.",
+  qualYellowLbl: 'Proche de la limite',
+  qualYellowMsg: "Vous êtes près du seuil d'admissibilité. Un courtier peut structurer votre dossier pour améliorer vos chances.",
+  qualRedLbl: 'Des options existent',
+  qualRedMsg: "Vos ratios dépassent les normes standards, mais certains prêteurs peuvent vous aider — surtout avec l'aide d'un courtier.",
+  tPurGreen:  "<strong>Bonne nouvelle.</strong> Votre profil est solide. Un courtier agréé peut vous obtenir un meilleur taux — parfois jusqu'à 0,4 % de moins.",
+  tPurYellow: "<strong>Ne baissez pas les bras.</strong> Les outils en ligne standards peuvent indiquer que vous n'êtes pas admissible — mais les courtiers ont accès à des prêteurs plus flexibles.",
+  tPurRed:    "<strong>Des options existent peut-être encore.</strong> Même avec des ratios plus élevés, certains prêteurs se spécialisent dans des situations non standards.",
+  tRenGreen:  "<strong>Bonne nouvelle.</strong> Votre profil de renouvellement est solide. Un courtier peut souvent surpasser l'offre de renouvellement de votre prêteur actuel.",
+  tRenYellow: "<strong>Ça vaut la peine de vérifier.</strong> Même si vos ratios sont proches de la limite, les renouvellements offrent plus de flexibilité.",
+  tRenRed:    "<strong>N'acceptez pas simplement l'offre de votre banque.</strong> Les courtiers ont accès à des prêteurs qui évaluent les renouvellements différemment.",
+  lblPay:    'Paiement est.',   lblTax:    'Taxes mensuelles est.',
+  lblTotal:  'Coût mensuel total',
+  lblMax:    'Prix max. estimé',   lblBal:    'Solde restant',   lblNewPay: 'Nouveau paiement est.',
+  gdsMax: 'max 39 %',   tdsMax: 'max 44 %',
+  redoBtn: '↩ Refaire mon estimation',
+
+  featEy: 'Pourquoi MortgageIQ',   featTtl: "L'avantage du courtier professionnel",
+  f1t: 'Professionnel réglementé et agréé',
+  f1b: "Un professionnel hypothécaire agréé, réglementé par l'Autorité des marchés financiers (AMF) et l'OACIQ. Nous agissons exclusivement dans votre intérêt.",
+  f2t: 'Accès à un vaste réseau de prêteurs',
+  f2b: "Nous comparons les taux des grandes banques, des prêteurs alternatifs et des institutions privées pour trouver des solutions que votre banque ne vous proposera pas.",
+  f3t: 'Aucun frais de courtage.*',
+  f3b: "Nos services de courtage sont entièrement gratuits pour vous — les prêteurs nous rémunèrent directement. <em>*Les solutions de financement alternatif peuvent inclure des frais de traitement, toujours divulgués à l'avance.</em>",
+
+  revEy: 'Témoignages de nos clients',   revTtl: 'La confiance des acheteurs québécois',
+  rv1b: "« J'étais sceptique au départ, mais ils ont trouvé un taux 0,4 % inférieur à celui de ma banque. Des milliers de dollars d'économies. »",
+  rv1a: 'Marc L. — Laval, premier acheteur',
+  rv2b: "« Processus très simple. J'ai rempli le formulaire, reçu un appel le lendemain matin et obtenu ma pré-approbation en deux jours. »",
+  rv2a: 'Sophie P. — Brossard, renouvellement',
+  rv3b: "« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »",
+  rv3a: 'Kevin T. — Montréal, travailleur autonome',
+
+  ftLicense: "Courtier hypothécaire agréé · Réglementé par l'AMF (Autorité des marchés financiers) · Membre de l'OACIQ",
+  ftDisc:    "Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
+  ftPriv: 'Politique de confidentialité',   ftTerms: "Conditions d'utilisation",   ftOACIQ: 'Divulgations réglementaires',
+  ftCopy: '© 2025 MortgageIQ. Tous droits réservés.',
+
+  exitTitle: 'Attendez — votre estimation est presque prête',
+  exitBody:  "Vous êtes à quelques secondes de voir ce à quoi vous êtes admissible. Ne perdez pas votre progression.",
+  exitStay:  'Continuer mon estimation',   exitLeave: 'Non merci, je pars',
+  gateTitle: 'Une note avant de continuer',
+  gateBody:  "Selon le revenu et la valeur de la propriété fournis, vos ratios d'admissibilité pourraient dépasser les normes conventionnelles. Un courtier peut tout de même explorer les solutions disponibles.",
+  gateCont:  'Je comprends — continuer quand même',   gateBack: 'Retour pour ajuster',
+  privTitle: 'Politique de confidentialité',   privClose: 'Fermer',
+  privBody: `<p><strong>Informations collectées</strong>Nous collectons votre nom, courriel, numéro de téléphone et vos détails hypothécaires dans le seul but de vous mettre en contact avec un courtier agréé.</p><p><strong>Utilisation</strong>Vos informations sont utilisées exclusivement pour vous fournir des options hypothécaires personnalisées. Elles ne seront jamais vendues ni partagées.</p><p><strong>Vos droits</strong>Vous pouvez demander à consulter, corriger ou supprimer vos informations à tout moment.</p><p><strong>Conformité</strong>Cette plateforme est conforme à la Loi 25 du Québec et aux réglementations fédérales PIPEDA applicables.</p>`,
+  cmhcNote: "Société canadienne d'hypothèques et de logement — assurance requise si la mise de fonds est inférieure à 20 %",
+}
+};
+
+// ════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════
+let lang         = 'en';
+let step         = 1;
+let consent      = false;
+let purpose      = 'purchase';
+let gateOk       = false;
+let exitShown    = false;
+let exitDismissed= false;
+let submitting   = false;
+let lastSub      = 0;
+const picks = { amortG:'25', freqG:'monthly', empG:'employed', creditG:'', tlG:'asap' };
+
+// ════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════
+const t   = k => T[lang][k] || k;
+const $   = id => document.getElementById(id);
+
+// Format number input as CA locale (commas, no $)
+const fmtC = el => {
+  const raw = el.value.replace(/[^0-9]/g, '');
+  el.value = raw ? Number(raw).toLocaleString('en-CA') : '';
+};
+
+const parseMoney = s => parseInt((s || '0').replace(/[^0-9]/g, '')) || 0;
+
+// Phone: strip non-digits, remove leading country code 1, format (NXX) NXX-XXXX
+const fmtPhone = el => {
+  let d = el.value.replace(/\D/g, '');
+  if (d.length === 11 && d[0] === '1') d = d.slice(1); // strip +1 / 1
+  d = d.slice(0, 10);
+  if (d.length >= 7)      d = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+  else if (d.length >= 4) d = '(' + d.slice(0,3) + ') ' + d.slice(3);
+  el.value = d;
+};
+
+const showErr = (id, show) => $(id).classList.toggle('on', show);
+
+// ════════════════════════════════════════════════════════════
+// APPLY TRANSLATIONS
+// ════════════════════════════════════════════════════════════
+function applyT() {
+  const tl = T[lang];
+
+  // id → translation key map
+  const map = {
+    navPill:'navPill', hEyebrow:'eyebrow', hH1:'h1', hSub:'sub', hCta:'cta',
+    hNoCredit:'noCredit', hRevCount:'revCount',
+    hStat1:'stat1', hStat2:'stat2', hStat3:'stat3',
+
+    // Step 1
+    s1t:'s1t', s1h:'s1h',
+    purLbl:'purLbl', purPurchLbl:'purPurchLbl', purPurchSub:'purPurchSub',
+    purRenLbl:'purRenLbl', purRenSub:'purRenSub',
+    lPropPrice:'lPropPrice', lDown:'lDown',
+    lBal:'lBal', lRenewAmort:'lRenewAmort',
+    lLender:'lLender', lenderPh:'lenderPh', lenderOtherOpt:'lenderOther',
+    lLocation:'lLoc', locPh:'locPh', locOtherOpt:'locOther',
+    ePropPrice:'ePrice', eDown:'eDown', eBal:'eBal', eLoc:'eLoc',
+
+    // Step 2
+    s2t:'s2t', s2h:'s2h',
+    lRate:'lRate', rateDesc:'rateDesc', rateLock:'rateLock',
+    lAmort:'lAmort', am25:'amort25', am30:'amort30',
+    lFreq:'lFreq', fqMo:'freqMo', fqBi:'freqBi', fqAc:'freqAc',
+
+    // Step 3
+    s3t:'s3t', s3h:'s3h', lEmp:'lEmp',
+    empE:'empE', empS:'empS', empC:'empC', empO:'empO',
+    lIncome:'lIncome', incPh:'incPh',
+    incU50:'incU50', inc50_75:'inc50_75', inc75_100:'inc75_100',
+    inc100_125:'inc100_125', inc125_150:'inc125_150',
+    inc150_175:'inc150_175', inc175_200:'inc175_200', inc200plus:'inc200plus',
+    eIncome:'eIncome',
+    lCar:'lCar', lOpt1:'opt',
+    lDebts:'lDebts', lOpt2:'opt',
+    lCredit:'lCredit', lOpt3:'opt',
+    cr720:'cr720', cr680:'cr680', cr600:'cr600', crU600:'crU600',
+    btnGetRes:'getRes',
+
+    // Nav buttons (steps 1–4)
+    btnCont1:'cont', btnCont2:'cont',
+    btnBack2:'back', btnBack3:'back', btnBack4:'backToRes',
+
+    // Step 4
+    conTitle:'conTitle', conSub:'conSub',
+    spStrong:'spStrong', spSub:'spSub',
+    lName:'lName', lEmail:'lEmail', lTimeline:'lTimeline',
+    tlASAP:'tlASAP', tl3m:'tl3m', tl6m:'tl6m', tl6plus:'tl6plus',
+    lPhone:'lPhone', whyBtn:'whyBtn', phTip:'phTip',
+    eConsent:'eConsent', ePhone:'ePhone', eName:'eName', eEmail:'eEmail',
+    submitTxt:'submitBtn',
+    tr1:'tr1', tr2:'tr2', tr3:'tr3',
+
+    // Step 5
+    redoBtn:'redoBtn', redoBtnTxt:'redoBtn', redoBtnTxt:'redoBtn',
+
+    // Sections
+    featEy:'featEy', featTtl:'featTtl',
+    f1t:'f1t', f1b:'f1b', f2t:'f2t', f2b:'f2b', f3t:'f3t', f3b:'f3b',
+    revEy:'revEy', revTtl:'revTtl',
+    rv1b:'rv1b', rv1a:'rv1a', rv2b:'rv2b', rv2a:'rv2a', rv3b:'rv3b', rv3a:'rv3a',
+    ftLicense:'ftLicense', ftDisc:'ftDisc',
+    ftPriv:'ftPriv', ftTerms:'ftTerms', ftOACIQ:'ftOACIQ', ftCopy:'ftCopy',
+
+    // Overlays
+    exitTitle:'exitTitle', exitBody:'exitBody',
+    exitStay:'exitStay', exitLeave:'exitLeave',
+    gateTitle:'gateTitle', gateBody:'gateBody',
+    gateCont:'gateCont', gateBack:'gateBack',
+    privTitle:'privTitle', privClose:'privClose', privBody:'privBody',
+  };
+
+  Object.entries(map).forEach(([id, key]) => {
+    const el = $(id);
+    if (!el || !(key in tl)) return;
+    el.innerHTML = tl[key];
+  });
+
+  // h1 uses innerHTML for <em>
+  $('hH1').innerHTML = tl.h1;
+
+  // Consent text with working privacy link
+  $('consentTxt').innerHTML =
+    tl.consentTxt +
+    ' <a href="#" onclick="openPrivacy(event)" style="color:var(--blue)">' +
+    tl.privacyLink + '</a>.';
+
+  updStepCtr();
+}
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('htmlRoot').lang = l;
+  $('btnEN').classList.toggle('active', l === 'en');
+  $('btnFR').classList.toggle('active', l === 'fr');
+  applyT();
+  if (step === 5) renderResults();
+}
+
+// ════════════════════════════════════════════════════════════
+// DOWN PAYMENT HELPERS
+// ════════════════════════════════════════════════════════════
+function updDown() {
+  const price = parseMoney($('propPrice').value);
+  const down  = parseMoney($('downPay').value);
+  const el    = $('downHint');
+  if (!price || !down) { el.innerHTML = ''; return; }
+
+  const pct    = (down / price * 100).toFixed(1);
+  const ok     = down >= price * 0.05;
+  const over20 = down >= price * 0.2;
+  const note   = T[lang].cmhcNote;
+
+  let html = `<span style="font-weight:600">${pct}%</span> ` +
+    (lang === 'fr' ? "du prix d'achat" : 'of purchase price');
+
+  if (over20) {
+    html += ` <span style="color:var(--green)">— ` +
+      (lang === 'fr' ? "pas d'assurance SCHL requise ✓" : 'no CMHC insurance required ✓') +
+      `</span>`;
+  } else {
+    html += ` <span style="color:var(--gray-400);font-size:0.7rem">— ` +
+      (lang === 'fr' ? "assurance SCHL s'applique" : 'CMHC insurance applies') +
+      ` <span title="${note}" style="cursor:help;text-decoration:underline dotted">(?)</span></span>`;
+  }
+  el.innerHTML = html;
+  el.style.color = ok ? 'var(--gray-700)' : 'var(--red)';
+}
+
+function applyPct(pct) {
+  const price = parseMoney($('propPrice').value);
+  if (!price) { showErr('ePropPrice', true); return; }
+  $('downPay').value = Math.round(price * pct / 100).toLocaleString('en-CA');
+  document.querySelectorAll('#downPctG .ch').forEach(c =>
+    c.classList.toggle('sel', parseInt(c.getAttribute('data-p')) === pct)
+  );
+  updDown();
+}
+function clearPctCh() {
+  document.querySelectorAll('#downPctG .ch').forEach(c => c.classList.remove('sel'));
+}
+
+// ════════════════════════════════════════════════════════════
+// PURPOSE
+// ════════════════════════════════════════════════════════════
+function setPurpose(el, val) {
+  purpose = val;
+  document.querySelectorAll('.pur-ch').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  const isPur = (val === 'purchase');
+  $('downGrp').style.display = isPur ? '' : 'none';
+  document.querySelectorAll('.renew-f').forEach(f => f.classList.toggle('on', !isPur));
+}
+
+// ════════════════════════════════════════════════════════════
+// CHIP PICKER
+// ════════════════════════════════════════════════════════════
+function pick(gId, el, val) {
+  document.querySelectorAll('#' + gId + ' .ch').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  picks[gId] = val;
+}
+
+// ════════════════════════════════════════════════════════════
+// CONSENT
+// ════════════════════════════════════════════════════════════
+function toggleConsent() {
+  consent = !consent;
+  $('consentLbl').classList.toggle('chk', consent);
+}
+
+// ════════════════════════════════════════════════════════════
+// STEP NAVIGATION
+// ════════════════════════════════════════════════════════════
+function updStepCtr() {
+  $('stepCtr').textContent =
+    (lang === 'fr' ? 'Étape ' : 'Step ') + step +
+    (lang === 'fr' ? ' sur '  : ' of ')  + 5;
+}
+
+function goTo(n) {
+  if (n > step && !validate(step)) return;
+  if (n === 4 && step === 3 && !gateOk) { if (!checkGate()) return; }
+  step = n;
+  document.querySelectorAll('.sp').forEach((p, i) => p.classList.toggle('on', i + 1 === n));
+  for (let i = 1; i <= 5; i++) {
+    const d = $('d' + i);
+    d.classList.remove('active', 'done');
+    if (i === n) d.classList.add('active');
+    else if (i < n) d.classList.add('done');
+  }
+  updStepCtr();
+  $('progFill').style.width = (n / 5 * 100) + '%';
+  if (n === 5) renderResults();
+  saveProgress();
+  setTimeout(() => $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+// ════════════════════════════════════════════════════════════
+// VALIDATION
+// ════════════════════════════════════════════════════════════
+function validate(s) {
+  let ok = true;
+  if (s === 1) {
+    const price = parseMoney($('propPrice').value);
+    const loc   = $('location').value;
+    showErr('ePropPrice', price < 100000); if (price < 100000) ok = false;
+    showErr('eLoc', !loc);                 if (!loc) ok = false;
+    if (purpose === 'purchase') {
+      const down = parseMoney($('downPay').value);
+      showErr('eDown', !down || down < price * 0.05);
+      if (!down || down < price * 0.05) ok = false;
+    } else {
+      const bal = parseMoney($('remainBal').value);
+      showErr('eBal', !bal); if (!bal) ok = false;
+    }
+  } else if (s === 3) {
+    const inc = $('incomeBracket').value;
+    showErr('eIncome', !inc); if (!inc) ok = false;
+  }
+  return ok;
+}
+
+// ════════════════════════════════════════════════════════════
+// MORTGAGE CALCULATION ENGINE
+// Canadian semi-annual compounding (Bank Act)
+// ════════════════════════════════════════════════════════════
+const incMap = {
+  under50:40000, '50to75':62500, '75to100':87500,
+  '100to125':112500, '125to150':137500,
+  '150to175':162500, '175to200':187500, '200plus':220000
+};
+const taxR = {
+  montreal:0.01085, laval:0.01073, longueuil:0.01053,
+  brossard:0.00924, 'west-island':0.01085, 'south-shore':0.00980, other:0.01000
+};
+
+// Effective monthly rate from nominal annual (semi-annual compounding)
+function monthlyRate(annRate) {
+  return Math.pow(1 + annRate / 2, 1 / 6) - 1;
+}
+function calcPmt(P, r, n) {
+  if (r === 0) return P / n;
+  return P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+}
+function calcBal(P, r, nTotal, k) {
+  return P * Math.pow(1 + r, k) -
+    calcPmt(P, r, nTotal) * (Math.pow(1 + r, k) - 1) / r;
+}
+
+function calcMtg() {
+  const price   = parseMoney($('propPrice').value);
+  const loc     = $('location').value;
+  const amort   = purpose === 'renewal'
+    ? parseInt($('renewAmort').value || 25)
+    : parseInt(picks.amortG);
+  const termYrs = 5;
+  const freq    = picks.freqG;
+  const annRate = 0.0525;
+  const inc     = incMap[$('incomeBracket').value] || 75000;
+  const car     = parseMoney($('carPay').value);
+  const debts   = parseMoney($('otherDebts').value);
+  const down    = purpose === 'purchase' ? parseMoney($('downPay').value) : 0;
+  const principal = purpose === 'purchase'
+    ? price - down
+    : parseMoney($('remainBal').value);
+
+  const r  = monthlyRate(annRate);
+  const nA = amort * 12;
+  const nT = termYrs * 12;
+  const mMtg = calcPmt(principal, r, nA);
+
+  let disPay, payLbl, nTermDisplay;
+  if (freq === 'monthly') {
+    disPay = mMtg; payLbl = '/mo'; nTermDisplay = nT;
+  } else if (freq === 'biweekly') {
+    disPay = mMtg * 12 / 26; payLbl = '/2wk'; nTermDisplay = termYrs * 26;
+  } else {
+    disPay = mMtg / 2; payLbl = '/2wk'; nTermDisplay = termYrs * 26;
+  }
+
+  const termBal       = Math.max(calcBal(principal, r, nA, nT), 0);
+  const termPrincipal = principal - termBal;
+  const termTotalPaid = mMtg * nT;
+  const termInterest  = termTotalPaid - termPrincipal;
+  const fullInterest  = mMtg * nA - principal;
+  const fullTotalPaid = mMtg * nA;
+
+  const tax  = (price * (taxR[loc] || 0.01) / 12) + (price * 0.00154 / 12);
+  const heat = 150;
+  const totHousing = mMtg + tax + heat;
+  const mInc = inc / 12;
+  const GDS  = totHousing / mInc * 100;
+  const TDS  = (totHousing + car + debts) / mInc * 100;
+
+  let col, emoji;
+  if      (GDS <= 39 && TDS <= 44) { col = 'green';  emoji = '✓'; }
+  else if (GDS <= 43 || TDS <= 48) { col = 'yellow'; emoji = '~'; }
+  else                               { col = 'red';    emoji = '!'; }
+
+  const maxMPay  = mInc * 0.39 - tax - heat;
+  const maxPrin  = maxMPay > 0 ? maxMPay * (Math.pow(1+r,nA)-1) / (r * Math.pow(1+r,nA)) : 0;
+  const maxPrice = maxPrin + down;
+
+  return {
+    disPay, payLbl, nTermDisplay,
+    mMtg, tax, heat, totHousing,
+    GDS, TDS, col, emoji,
+    maxPrice, principal, down,
+    termYrs, amort, annRate,
+    termInterest, termPrincipal, termBal, termTotalPaid,
+    fullInterest, fullTotalPaid, price
+  };
+}
+
+// ════════════════════════════════════════════════════════════
+// COUNT-UP ANIMATION
+// ════════════════════════════════════════════════════════════
+function countUp(el, target, dur) {
+  const start = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = '$' + Math.round(target * e).toLocaleString('en-CA');
+    if (p < 1) requestAnimationFrame(step);
+  })(start);
+}
+
+// ════════════════════════════════════════════════════════════
+// RENDER RESULTS (Step 5)
+// ════════════════════════════════════════════════════════════
+const cMap = {
+  green:  { bar:'#15803d', bg:'#dcfce7', txt:'#15803d' },
+  yellow: { bar:'#d97706', bg:'#fef3c7', txt:'#b45309' },
+  red:    { bar:'#dc2626', bg:'#fee2e2', txt:'#b91c1c' },
+};
+const fmtR = n => '$' + Math.round(Math.max(n, 0)).toLocaleString('en-CA');
+
+function renderResults() {
+  const r    = calcMtg();
+  const c    = cMap[r.col];
+  const tl   = T[lang];
+  const isFR = lang === 'fr';
+  const CAP  = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // ── Qualification banner
+  const qLbl = tl['qual' + CAP(r.col) + 'Lbl'];
+  const qMsg = tl['qual' + CAP(r.col) + 'Msg'];
+  $('resHero').innerHTML = `
+    <div class="res-bar" style="background:${c.bar}"></div>
+    <div class="res-status">
+      <div class="res-icon" style="background:${c.bg};color:${c.txt}">${r.emoji}</div>
+      <div class="res-status-txt">
+        <h4 style="color:${c.txt}">${qLbl}</h4>
+        <p>${qMsg}</p>
+      </div>
+    </div>`;
+
+  // ── 4 key numbers with count-up
+  const n1 = purpose === 'purchase' ? tl.lblPay    : tl.lblNewPay;
+  const n4 = purpose === 'purchase' ? tl.lblMax    : tl.lblBal;
+  const v4 = purpose === 'purchase' ? r.maxPrice   : r.principal;
+  $('resNums').innerHTML = `
+    <div class="res-num"><div class="res-num-val" id="rv1">$0</div><div class="res-num-lbl">${n1} ${r.payLbl}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv2">$0</div><div class="res-num-lbl">${tl.lblTax}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv3">$0</div><div class="res-num-lbl">${tl.lblTotal}</div></div>
+    <div class="res-num"><div class="res-num-val" id="rv4">$0</div><div class="res-num-lbl">${n4}</div></div>`;
+  setTimeout(() => {
+    countUp($('rv1'), r.disPay,      900);
+    countUp($('rv2'), r.tax,         900);
+    countUp($('rv3'), r.totHousing,  900);
+    countUp($('rv4'), v4,            900);
+  }, 100);
+
+  // ── GDS / TDS ratio bars with (i) tooltips
+  const gW = Math.min(r.GDS / 50 * 100, 100);
+  const tW = Math.min(r.TDS / 55 * 100, 100);
+  const gC = r.GDS <= 39 ? '#15803d' : r.GDS <= 43 ? '#d97706' : '#dc2626';
+  const tC = r.TDS <= 44 ? '#15803d' : r.TDS <= 48 ? '#d97706' : '#dc2626';
+  const gdsTip = (isFR
+    ? 'Ratio des dépenses brutes de logement. Max : 39 %. Inclut hypothèque, taxes et chauffage.'
+    : 'Gross Debt Service ratio. Max 39%. Includes mortgage, property taxes and heating.'
+  ).replace(/"/g, '&quot;');
+  const tdsTip = (isFR
+    ? 'Ratio du service de la dette total. Max : 44 %. Inclut le GDS plus toutes les autres dettes mensuelles.'
+    : 'Total Debt Service ratio. Max 44%. Includes GDS plus all other monthly debt payments.'
+  ).replace(/"/g, '&quot;');
+  $('resRatios').innerHTML = `
+    <div class="ratio-i">
+      <div class="ratio-lbl">GDS
+        <span class="info-i" data-tip="${gdsTip}" tabindex="0" role="button" aria-label="More info">i</span>
+      </div>
+      <div class="ratio-bw"><div class="ratio-b" style="width:${gW}%;background:${gC}"></div></div>
+      <div class="ratio-val" style="color:${gC}">${r.GDS.toFixed(1)}%
+        <span style="color:var(--gray-400);font-weight:400;font-size:0.66rem">(${tl.gdsMax})</span>
+      </div>
+    </div>
+    <div class="ratio-i">
+      <div class="ratio-lbl">TDS
+        <span class="info-i" data-tip="${tdsTip}" tabindex="0" role="button" aria-label="More info">i</span>
+      </div>
+      <div class="ratio-bw"><div class="ratio-b" style="width:${tW}%;background:${tC}"></div></div>
+      <div class="ratio-val" style="color:${tC}">${r.TDS.toFixed(1)}%
+        <span style="color:var(--gray-400);font-weight:400;font-size:0.66rem">(${tl.tdsMax})</span>
+      </div>
+    </div>`;
+
+  // ── Teaser copy
+  const tk = purpose === 'renewal' ? 'tRen' : 'tPur';
+  $('resTeaser').innerHTML = tl[tk + CAP(r.col)] || '';
+
+  // ── Broker CTA with virtual card
+  const saving = fmtR(r.fullInterest * 0.05);
+  $('resBrokerCta').innerHTML = `
+    <div class="res-broker-cta">
+      <h4>${isFR ? 'Un taux plus bas pourrait vous faire économiser des milliers' : 'A better rate could save you thousands'}</h4>
+      <p>${isFR
+        ? `Même une réduction de 0,25 % sur votre taux représente environ ${saving} d'économies en intérêts.`
+        : `Even a 0.25% rate reduction could save you approximately ${saving} in interest over your amortization.`
+      }</p>
+      <button class="btn-broker-cta" onclick="openVcard()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        ${isFR ? 'Parler à mon courtier — Gratuit' : 'Talk to My Broker — Free'}
+      </button>
+    </div>`;
+}
+
+// ════════════════════════════════════════════════════════════
+// SUBMIT
+// ════════════════════════════════════════════════════════════
+const FAKE = ['test@test.com','fake@email.com','test@email.com','example@example.com'];
+const DISP = ['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','yopmail.com','trashmail.com'];
+const validEmail = e => {
+  if (!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return false;
+  if (FAKE.includes(e)) return false;
+  return !DISP.includes(e.split('@')[1]);
+};
+const validPhone  = p => p.replace(/\D/g,'').length === 10;
+const suspicious  = (n,e,p) =>
+  ['test','fake','asdf'].includes(n.toLowerCase()) ||
+  /^(.)\1{3,}/.test(n) ||
+  /^(\d)\1{9}$/.test(p.replace(/\D/g,''));
+
+function submitForm() {
+  if (submitting) return;
+  const now = Date.now();
+  if (now - lastSub < 30000) {
+    alert(lang === 'fr' ? 'Veuillez patienter avant de soumettre à nouveau.' : 'Please wait before submitting again.');
+    return;
+  }
+  const name  = $('fullName').value.trim();
+  const email = $('emailAddr').value.trim().toLowerCase();
+  const phone = $('phoneNum').value;
+  let ok = true;
+  showErr('eName',    !name  || name.length < 2);  if (!name  || name.length < 2)  ok = false;
+  showErr('eEmail',   !validEmail(email));           if (!validEmail(email))          ok = false;
+  showErr('ePhone',   !validPhone(phone));           if (!validPhone(phone))          ok = false;
+  showErr('eConsent', !consent);                     if (!consent)                    ok = false;
+  if (!ok) return;
+
+  submitting = true; lastSub = now;
+  const btn = $('submitBtn');
+  btn.disabled = true;
+  $('submitTxt').textContent = lang === 'fr' ? 'Envoi en cours...' : 'Sending...';
+
+  const res  = calcMtg();
+  const lead = {
+    ts: new Date().toISOString(), lang, purpose, name, email, phone,
+    location: $('location').value,
+    propVal:  parseMoney($('propPrice').value),
+    downPay:  purpose === 'purchase' ? parseMoney($('downPay').value)  : null,
+    remainBal:purpose === 'renewal'  ? parseMoney($('remainBal').value): null,
+    curLender:purpose === 'renewal'  ? $('curLender').value            : null,
+    amort:    picks.amortG, freq: picks.freqG, empType: picks.empG,
+    income:   $('incomeBracket').value,
+    car:      parseMoney($('carPay').value),
+    debts:    parseMoney($('otherDebts').value),
+    credit:   picks.creditG, timeline: picks.tlG,
+    GDS: res.GDS.toFixed(2), TDS: res.TDS.toFixed(2), qual: res.col,
+    consent: true, consentTs: new Date().toISOString(),
+    suspicious: suspicious(name, email, phone),
+  };
+  console.log('LEAD:', JSON.stringify(lead, null, 2));
+
+  // ── VELOCITY API IN ─────────────────────────────────────
+  // Docs: http://developer.newton.ca/velocity/v1/
+  // Activate: set apiKey below and change `if (false)` to `if (VELOCITY_CONFIG.apiKey)`
+  if (false) { sendToVelocity(lead); } // ← change condition to go live
+
+  setTimeout(() => {
+    submitting = false; btn.disabled = false;
+    $('submitTxt').textContent = t('submitBtn');
+    step = 5;
+    document.querySelectorAll('.sp').forEach((p, i) => p.classList.toggle('on', i + 1 === 5));
+    for (let i = 1; i <= 5; i++) {
+      const d = $('d' + i);
+      d.classList.remove('active', 'done');
+      if (i === 5) d.classList.add('active'); else d.classList.add('done');
+    }
+    updStepCtr();
+    $('progFill').style.width = '100%';
+    renderResults();
+    setTimeout(() => $('calc').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+    try { localStorage.removeItem('mqiq'); } catch(e) {}
+  }, 1200);
+}
+
+// ════════════════════════════════════════════════════════════
+// TOOLTIP PORTAL — click/tap, works on all devices
+// ════════════════════════════════════════════════════════════
+(function () {
+  const portal = document.createElement('div');
+  portal.className = 'tip-portal';
+  portal.style.display = 'none';
+  document.body.appendChild(portal);
+  let current = null;
+
+  function pos(el) {
+    const r  = el.getBoundingClientRect();
+    const pW = portal.offsetWidth;
+    const pH = portal.offsetHeight;
+    const mg = 12;
+    const vw = window.innerWidth;
+    let top, dir;
+    if (r.top - pH - 14 >= mg) { top = r.top + scrollY - pH - 10; dir = 'arr-down'; }
+    else                         { top = r.bottom + scrollY + 10;  dir = 'arr-up';   }
+    let left = r.left + r.width / 2 - pW / 2;
+    left = Math.max(mg, Math.min(left, vw - pW - mg));
+    portal.style.top  = top + 'px';
+    portal.style.left = left + 'px';
+    portal.className  = 'tip-portal ' + dir;
+  }
+
+  function open(el) {
+    if (current) current.classList.remove('tip-open');
+    current = el; el.classList.add('tip-open');
+    portal.textContent  = el.getAttribute('data-tip');
+    portal.style.display = 'block';
+    requestAnimationFrame(() => pos(el));
+  }
+  function close() {
+    portal.style.display = 'none';
+    if (current) { current.classList.remove('tip-open'); current = null; }
+  }
+
+  function fromEvent(e) {
+    return (e.target && e.target.nodeType === 1 && typeof e.target.closest === 'function')
+      ? e.target.closest('.info-i[data-tip]') : null;
+  }
+
+  document.addEventListener('click', e => {
+    const el = fromEvent(e);
+    if (el) { current === el ? close() : open(el); } else close();
+  });
+  document.addEventListener('mouseenter', e => { const el = fromEvent(e); if (el) open(el); }, true);
+  document.addEventListener('mouseleave', e => { const el = fromEvent(e); if (el) close(); }, true);
+  document.addEventListener('keydown', e => {
+    const el = fromEvent(e);
+    if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); current === el ? close() : open(el); }
+    if (e.key === 'Escape') close();
+  });
+})();
+
+// ════════════════════════════════════════════════════════════
+// EXIT INTENT
+// ════════════════════════════════════════════════════════════
+function initExit() {
+  document.addEventListener('mouseleave', e => {
+    if (e.clientY < 20 && !exitShown && !exitDismissed && step >= 2 && step < 5) {
+      exitShown = true; $('exitOv').classList.add('on'); saveProgress();
+    }
+  });
+  let idle;
+  const ri = () => {
+    clearTimeout(idle);
+    if (step >= 2 && step < 5 && !exitDismissed) {
+      idle = setTimeout(() => { if (!exitShown) { exitShown = true; $('exitOv').classList.add('on'); } }, 45000);
+    }
+  };
+  ['touchstart','click'].forEach(ev => document.addEventListener(ev, ri, { passive:true }));
+}
+function closeExit()   { $('exitOv').classList.remove('on'); $('calc').scrollIntoView({ behavior:'smooth', block:'start' }); }
+function dismissExit() { exitDismissed = true; $('exitOv').classList.remove('on'); }
+
+// ════════════════════════════════════════════════════════════
+// QUALIFICATION GATE
+// ════════════════════════════════════════════════════════════
+function checkGate() {
+  if (gateOk) return true;
+  const price = parseMoney($('propPrice').value);
+  const inc   = incMap[$('incomeBracket').value] || 0;
+  if (!inc || !price) return true;
+  const maxApprox = (inc / 12 * 0.39 * 12) / 0.04;
+  if (price > maxApprox * 1.4) { $('gateOv').classList.add('on'); return false; }
+  return true;
+}
+function closeGate(go) { $('gateOv').classList.remove('on'); if (go) { gateOk = true; goTo(4); } }
+
+// ════════════════════════════════════════════════════════════
+// PHONE TOOLTIP
+// ════════════════════════════════════════════════════════════
+function toggleTip(e) { e.preventDefault(); e.stopPropagation(); $('phTip').classList.toggle('on'); }
+document.addEventListener('click', () => { const t = $('phTip'); if (t) t.classList.remove('on'); });
+
+// ════════════════════════════════════════════════════════════
+// PRIVACY MODAL
+// ════════════════════════════════════════════════════════════
+function openPrivacy(e) { e.preventDefault(); e.stopPropagation(); $('privOv').classList.add('on'); }
+function closePrivacy()  { $('privOv').classList.remove('on'); }
+
+// ════════════════════════════════════════════════════════════
+// RESTART ESTIMATE (logo click / redo button)
+// ════════════════════════════════════════════════════════════
+function restartEstimate() {
+  // Reset state
+  step = 1; consent = false; purpose = 'purchase';
+  gateOk = false; exitShown = false; exitDismissed = false;
+  picks.amortG = '25'; picks.freqG = 'monthly';
+  picks.empG = 'employed'; picks.creditG = ''; picks.tlG = 'asap';
+
+  // Reset form fields
+  ['propPrice','downPay','remainBal','carPay','otherDebts','fullName','emailAddr','phoneNum']
+    .forEach(id => { const el=$(id); if(el) el.value=''; });
+  ['location','incomeBracket','curLender'].forEach(id => { const el=$(id); if(el) el.value=''; });
+
+  // Reset chip selections to defaults
+  document.querySelectorAll('#amortG .ch').forEach((c,i)=>c.classList.toggle('sel',i===0));
+  document.querySelectorAll('#freqG .ch').forEach((c,i)=>c.classList.toggle('sel',i===0));
+  document.querySelectorAll('#empG .ch').forEach((c,i)=>c.classList.toggle('sel',i===0));
+  document.querySelectorAll('#creditG .ch, #tlG .ch').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('#tlG .ch:first-child').forEach(c=>c.classList.add('sel'));
+  document.querySelectorAll('#downPctG .ch').forEach(c=>c.classList.remove('sel'));
+
+  // Reset purpose to purchase
+  setPurpose($('cpPurchase'), 'purchase');
+  $('consentLbl').classList.remove('chk');
+  $('downHint').innerHTML = '';
+
+  // Reset errors
+  document.querySelectorAll('.err').forEach(e=>e.classList.remove('on'));
+
+  // Navigate to step 1
+  document.querySelectorAll('.sp').forEach((p,i)=>p.classList.toggle('on',i===0));
+  for(let i=1;i<=5;i++){const d=$('d'+i);d.classList.remove('active','done');if(i===1)d.classList.add('active');}
+  updStepCtr();
+  $('progFill').style.width='20%';
+
+  // Clear localStorage and scroll to top
+  try { localStorage.removeItem('mqiq'); } catch(e) {}
+  document.getElementById('home').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// ════════════════════════════════════════════════════════════
+// LOCALSTORAGE — save / restore progress
+// ════════════════════════════════════════════════════════════
+function saveProgress() {
+  try {
+    localStorage.setItem('mqiq', JSON.stringify({
+      lang, purpose,
+      propPrice:      $('propPrice').value,
+      downPay:        $('downPay').value,
+      remainBal:      $('remainBal').value,
+      curLender:      $('curLender').value,
+      location:       $('location').value,
+      incomeBracket:  $('incomeBracket').value,
+      carPay:         $('carPay').value,
+      otherDebts:     $('otherDebts').value,
+      picks:          JSON.stringify(picks),
+      step,
+    }));
+  } catch(e) {}
+}
+
+function restoreProgress() {
+  try {
+    const raw = localStorage.getItem('mqiq');
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (d.lang)    setLang(d.lang);
+    if (d.purpose === 'renewal') setPurpose($('cpRenewal'), 'renewal');
+    if (d.propPrice)     $('propPrice').value     = d.propPrice;
+    if (d.downPay)       $('downPay').value        = d.downPay;
+    if (d.remainBal)     $('remainBal').value      = d.remainBal;
+    if (d.curLender)     $('curLender').value      = d.curLender;
+    if (d.location)      $('location').value       = d.location;
+    if (d.incomeBracket) $('incomeBracket').value  = d.incomeBracket;
+    if (d.carPay)        $('carPay').value         = d.carPay;
+    if (d.otherDebts)    $('otherDebts').value     = d.otherDebts;
+    if (d.picks) { const p = JSON.parse(d.picks); Object.assign(picks, p); }
+    updDown();
+  } catch(e) {}
+}
+
+// ════════════════════════════════════════════════════════════
+// SCROLL HELPER
+// ════════════════════════════════════════════════════════════
+function scrollCalc(e) {
+  e.preventDefault();
+  $('calc').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// ════════════════════════════════════════════════════════════
+// VELOCITY CRM — API IN (Newton)
+// Docs: http://developer.newton.ca/velocity/v1/
+// ════════════════════════════════════════════════════════════
+const VELOCITY_CONFIG = {
+  apiKey:   '',   // ← Paste your Velocity API key here (from Velocity → Settings → Request API Key)
+  domain:   '',   // ← Your registered domain (e.g. mortgageiq.ca)
+  endpoint: 'https://velocity.newton.ca/api/v1/contacts/lead',
+};
+
+function buildVelocityPayload(lead) {
+  const parts     = (lead.name || '').trim().split(/\s+/);
+  const firstName = parts[0] || '';
+  const lastName  = parts.slice(1).join(' ') || '';
+  const iMap      = { under50:40000,'50to75':62500,'75to100':87500,'100to125':112500,'125to150':137500,'150to175':162500,'175to200':187500,'200plus':220000 };
+  return {
+    api_key: VELOCITY_CONFIG.apiKey,
+    domain:  VELOCITY_CONFIG.domain,
+    first_name: firstName, last_name: lastName,
+    email: lead.email,
+    phone: lead.phone.replace(/\D/g,''),
+    language: lead.lang === 'fr' ? 'French' : 'English',
+    lead_type: lead.purpose === 'renewal' ? 'Renewal' : 'Purchase',
+    source: 'Website Calculator — MortgageIQ',
+    notes: [
+      `Qualification: ${lead.qual.toUpperCase()} (GDS ${lead.GDS}% / TDS ${lead.TDS}%)`,
+      `Property: $${(lead.propVal||0).toLocaleString('en-CA')}`,
+      lead.purpose === 'purchase'
+        ? `Down: $${(lead.downPay||0).toLocaleString('en-CA')}`
+        : `Balance: $${(lead.remainBal||0).toLocaleString('en-CA')}`,
+      `Location: ${lead.location}`,
+      `Income: ${lead.income}`, `Employment: ${lead.empType}`,
+      `Timeline: ${lead.timeline}`,
+      lead.credit ? `Credit: ${lead.credit}` : '',
+    ].filter(Boolean).join(' | '),
+    purchase_price:  lead.propVal    || 0,
+    down_payment:    lead.downPay    || 0,
+    mortgage_amount: lead.purpose === 'purchase' ? (lead.propVal - lead.downPay) : (lead.remainBal || 0),
+    annual_income:   iMap[lead.income] || 0,
+    consent: lead.consent, consent_timestamp: lead.consentTs,
+  };
+}
+
+async function sendToVelocity(lead) {
+  if (!VELOCITY_CONFIG.apiKey) { console.warn('Velocity API key not set.'); return; }
+  try {
+    const res = await fetch(VELOCITY_CONFIG.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Accept':'application/json', 'X-API-Key': VELOCITY_CONFIG.apiKey },
+      body: JSON.stringify(buildVelocityPayload(lead)),
+    });
+    if (!res.ok) console.error('Velocity error:', res.status, await res.text());
+    else         console.log('Velocity lead created:', await res.json());
+  } catch(err) { console.error('Velocity sync failed:', err); }
+}
+
+// ════════════════════════════════════════════════════════════
+// VIRTUAL BUSINESS CARD
+// ── Fill in your real broker details below ──
+// ════════════════════════════════════════════════════════════
+const BROKER = {
+  name:         'Your Name',           // ← Replace with broker full name
+  title_en:     'Licensed Mortgage Broker',
+  title_fr:     'Courtier hypothécaire agréé',
+  phone:        '+15140000000',        // ← Replace (no spaces or dashes)
+  phoneDisplay: '(514) 000-0000',      // ← Display format shown on card
+  email:        'info@mortgageiq.ca',  // ← Replace with real email
+  website:      'mortgageiq.ca',       // ← Replace with real domain
+  amfNumber:    '',                    // ← Optional: AMF licence # (e.g. '123456')
+};
+
+function openVcard() {
+  const isFR = lang === 'fr';
+  $('vcName').textContent  = BROKER.name;
+  $('vcTitle').textContent = (isFR ? BROKER.title_fr : BROKER.title_en) +
+    (BROKER.amfNumber ? ` · ${isFR ? 'Licence AMF' : 'AMF Licence'} #${BROKER.amfNumber}` : '');
+  $('vcPhoneLink').textContent = BROKER.phoneDisplay;
+  $('vcPhoneLink').href        = 'tel:' + BROKER.phone;
+  $('vcEmailLink').textContent = BROKER.email;
+  $('vcEmailLink').href        = 'mailto:' + BROKER.email;
+  $('vcWebLink').textContent   = BROKER.website;
+  $('vcWebLink').href          = 'https://' + BROKER.website;
+  $('vcCallTxt').textContent   = isFR ? 'Appeler maintenant'       : 'Call Now';
+  $('vcSaveTxt').textContent   = isFR ? 'Enregistrer le contact'   : 'Save Contact';
+  $('vcCloseTxt').textContent  = isFR ? 'Fermer'                   : 'Close';
+  $('vcardOv').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVcard() {
+  $('vcardOv').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+function callBroker() { window.location.href = 'tel:' + BROKER.phone; }
+
+function saveVcard() {
+  const isFR = lang === 'fr';
+  const vcf  = [
+    'BEGIN:VCARD', 'VERSION:3.0',
+    'FN:'    + BROKER.name,
+    'ORG:MortgageIQ',
+    'TITLE:' + (isFR ? BROKER.title_fr : BROKER.title_en),
+    'TEL;TYPE=CELL:' + BROKER.phone,
+    'EMAIL:' + BROKER.email,
+    'URL:https://' + BROKER.website,
+    BROKER.amfNumber ? 'NOTE:AMF Licence #' + BROKER.amfNumber : '',
+    'END:VCARD',
+  ].filter(Boolean).join('\r\n');
+  const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = BROKER.name.replace(/\s+/g, '_') + '.vcf';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// Swipe down to close vCard on mobile
+(function () {
+  const sheet = $('vcardSheet');
+  let startY = 0, dragging = false;
+  sheet.addEventListener('touchstart', e => { startY = e.touches[0].clientY; dragging = true; }, { passive:true });
+  sheet.addEventListener('touchmove',  e => { if (!dragging) return; const dy = e.touches[0].clientY - startY; if (dy > 0) sheet.style.transform = `translateY(${dy}px)`; }, { passive:true });
+  sheet.addEventListener('touchend',   e => {
+    dragging = false;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 80) closeVcard();
+    sheet.style.transform = '';
+  });
+})();
+
+// ════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════
+applyT();
+restoreProgress();
+initExit();
+</script>
 </body>
 </html>
