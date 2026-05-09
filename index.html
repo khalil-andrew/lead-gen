@@ -11,7 +11,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Mortgage<span>IQ</span></div>
+  <button class="nav-logo" onclick="restartEstimate()" title="Start over" aria-label="MortgageIQ — restart estimate">Mortgage<span>IQ</span></button>
   <div class="nav-pill" id="navPill"></div>
   <div class="lang-sw">
     <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
@@ -296,6 +296,10 @@
           </div>
           <!-- Broker CTA -->
           <div id="resBrokerCta"></div>
+          <!-- Redo estimate -->
+          <div class="redo-row">
+            <button class="redo-btn" onclick="restartEstimate()" id="redoBtn"></button>
+          </div>
         </div>
 
       </div><!-- /calc-card -->
@@ -425,6 +429,8 @@ en:{
   eEmail:'Please enter a valid email address.',
   submitBtn:'Show My Results',tr1:'Secure & encrypted',tr2:'No obligation',tr3:'Response in 24h',
   backToRes:'Back',
+  redoBtn:'↺ Redo my estimate',
+  backToRes:'Back',
   disc:'Free consultation · No obligation · Response within 24 hours',
   qualGreenLbl:'Looking strong',qualGreenMsg:'Based on the information provided, you appear to be within qualification range.',
   qualYellowLbl:'Close to the limit',qualYellowMsg:"You're near the qualification threshold. A broker may be able to structure your application to improve your odds.",
@@ -513,6 +519,7 @@ fr:{
   eEmail:'Veuillez entrer une adresse courriel valide.',
   submitBtn:'Afficher mes résultats',tr1:'Sécurisé et chiffré',tr2:'Sans engagement',tr3:'Réponse en 24h',
   backToRes:'Retour',
+  redoBtn:'↺ Refaire mon estimation',
   disc:'Consultation gratuite · Sans engagement · Réponse dans les 24 heures',
   qualGreenLbl:'Situation favorable',qualGreenMsg:"Selon les informations fournies, vous semblez être dans la fourchette d'admissibilité.",
   qualYellowLbl:'Proche de la limite',qualYellowMsg:"Vous êtes près du seuil d'admissibilité. Un courtier peut structurer votre dossier pour améliorer vos chances.",
@@ -564,7 +571,18 @@ const t=k=>T[lang][k]||k;
 const $=id=>document.getElementById(id);
 const fmtC=el=>{const r=el.value.replace(/[^0-9]/g,'');el.value=r?Number(r).toLocaleString('en-CA'):''};
 const parseMoney=s=>parseInt((s||'0').replace(/[^0-9]/g,''))||0;
-const fmtPhone=el=>{let d=el.value.replace(/\D/g,'').slice(0,10);if(d.length>=7)d='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);else if(d.length>=4)d='('+d.slice(0,3)+') '+d.slice(3);el.value=d};
+const fmtPhone=el=>{
+  // Strip all non-digits
+  let d=el.value.replace(/\D/g,'');
+  // If user typed a leading 1 (country code), strip it so we always work with 10 digits
+  if(d.length===11&&d[0]==='1') d=d.slice(1);
+  // Cap at 10 digits
+  d=d.slice(0,10);
+  // Format as (NXX) NXX-XXXX
+  if(d.length>=7) d='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+  else if(d.length>=4) d='('+d.slice(0,3)+') '+d.slice(3);
+  el.value=d;
+};
 const showErr=(id,show)=>$(id).classList.toggle('on',show);
 
 // ═══════════════════════════════════════════════════════
@@ -599,7 +617,8 @@ function applyT(){
     tlASAP:'tlASAP',tl3m:'tl3m',tl6m:'tl6m',tl6plus:'tl6plus',
     lPhone:'lPhone',whyBtn:'whyBtn',phTip:'phTip',
     eConsent:'eConsent',ePhone:'ePhone',eName:'eName',eEmail:'eEmail',
-    submitTxt:'submitBtn',tr1:'tr1',tr2:'tr2',tr3:'tr3',
+    submitTxt:'submitBtn',
+    redoBtn:'redoBtn',tr1:'tr1',tr2:'tr2',tr3:'tr3',
     resDisc:'disc',
     featEy:'featEy',featTtl:'featTtl',f1t:'f1t',f1b:'f1b',f2t:'f2t',f2b:'f2b',f3t:'f3t',f3b:'f3b',
     revEy:'revEy',revTtl:'revTtl',rv1b:'rv1b',rv1a:'rv1a',rv2b:'rv2b',rv2a:'rv2a',rv3b:'rv3b',rv3a:'rv3a',
@@ -928,7 +947,6 @@ function renderResults(){
   const tk = purpose==='renewal'?'tRen':'tPur';
   $('resTeaser').innerHTML = tl[tk+CAP(r.col)] || '';
 
-  $('resSummary').innerHTML = '';
 
   // ── Broker CTA ─────────────────────────────────────────
   const saving = fmtR(r.fullInterest * 0.05);
@@ -1167,7 +1185,65 @@ function restoreProgress(){
 // ═══════════════════════════════════════════════════════
 // SCROLL
 // ═══════════════════════════════════════════════════════
-function scrollCalc(e){e.preventDefault();$('calc').scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollCalc(e) {
+  e.preventDefault();
+  $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ═══════════════════════════════════════════════════════
+// RESTART ESTIMATE
+// ═══════════════════════════════════════════════════════
+function restartEstimate() {
+  // Reset state
+  step = 1;
+  consent = false;
+  purpose = 'purchase';
+  gateOk = false;
+  exitShown = false;
+  Object.assign(picks, { amortG:'25', freqG:'monthly', empG:'employed', creditG:'', tlG:'asap' });
+
+  // Reset form fields
+  ['propPrice','downPay','remainBal','carPay','otherDebts','fullName','emailAddr','phoneNum'].forEach(id => {
+    const el = $(id);
+    if (el) el.value = '';
+  });
+  ['location','curLender','incomeBracket'].forEach(id => {
+    const el = $(id);
+    if (el) el.selectedIndex = 0;
+  });
+  $('downHint').innerHTML = '';
+
+  // Reset purpose UI
+  setPurpose($('cpPurchase'), 'purchase');
+
+  // Reset chip selections
+  document.querySelectorAll('.ch.sel').forEach(c => c.classList.remove('sel'));
+  // Re-select defaults
+  document.querySelectorAll('#amortG .ch')[0]?.classList.add('sel');
+  document.querySelectorAll('#freqG .ch')[0]?.classList.add('sel');
+  document.querySelectorAll('#empG .ch')[0]?.classList.add('sel');
+  document.querySelectorAll('#tlG .ch')[0]?.classList.add('sel');
+
+  // Reset consent
+  $('consentLbl')?.classList.remove('chk');
+
+  // Clear localStorage
+  try { localStorage.removeItem('mqiq'); } catch(e) {}
+
+  // Go to step 1 and scroll
+  document.querySelectorAll('.sp').forEach((p, i) => p.classList.toggle('on', i === 0));
+  for (let i = 1; i <= 5; i++) {
+    const d = $('d' + i);
+    d.classList.remove('active', 'done');
+    if (i === 1) d.classList.add('active');
+  }
+  updStepCtr();
+  $('progFill').style.width = '20%';
+
+  // Scroll to top smoothly
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+}
 
 // ═══════════════════════════════════════════════════════
 // INIT
