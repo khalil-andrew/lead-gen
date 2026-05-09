@@ -777,183 +777,217 @@ footer a { color: rgba(255,255,255,0.5); text-decoration: underline; }
 
 /* ============================================================
    VIRTUAL BUSINESS CARD
-   Design: Isabelle Khalil brand — deep black, gold (#c9a84c)
-   Inspired by her physical business card aesthetic
+   High-contrast, premium — Isabelle Khalil / MortgageIQ brand
+   Dark sheet with gold accent card. All text legible at a glance.
    ============================================================ */
 
-/* Overlay */
+/* ── Overlay ── */
 .vcard-ov {
-  display: none; position: fixed; inset: 0; z-index: 999;
-  background: rgba(5, 5, 8, 0.82);
+  display: none;
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(8, 10, 18, 0.85);
   backdrop-filter: blur(10px);
-  align-items: flex-end; justify-content: center; padding: 0;
+  align-items: flex-end; justify-content: center;
+  padding: 0;
 }
-.vcard-ov.on { display: flex; animation: vcFadeIn 0.22s ease; }
+.vcard-ov.on { display: flex; animation: vcFadeIn 0.2s ease; }
 @keyframes vcFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* Sheet — dark background */
+/* ── Sheet — white base, gold top accent ── */
 .vcard-sheet {
-  background: #111113;
+  background: #f9f9f7;
   width: 100%; max-width: 480px;
   border-radius: 24px 24px 0 0;
   padding-bottom: max(28px, env(safe-area-inset-bottom));
-  box-shadow: 0 -2px 0 rgba(201,168,76,0.4), 0 -20px 60px rgba(0,0,0,0.7);
-  animation: vcSlideUp 0.32s cubic-bezier(0.34, 1.15, 0.64, 1);
+  box-shadow: 0 -3px 0 #c9a84c, 0 -24px 60px rgba(0,0,0,0.5);
+  animation: vcSlideUp 0.32s cubic-bezier(0.34, 1.1, 0.64, 1);
+  overflow: hidden;
 }
 @keyframes vcSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-/* Drag handle */
+/* ── Drag handle ── */
 .vcard-drag {
   width: 36px; height: 4px; border-radius: 4px;
-  background: rgba(255,255,255,0.12); margin: 12px auto 0;
+  background: rgba(0,0,0,0.12);
+  margin: 14px auto 0;
 }
 
-/* Card face — matches Isabelle's biz card: near-black with gold accents */
-.vcard-card {
-  margin: 14px 14px 0;
-  background: radial-gradient(ellipse at 80% 10%, #222018 0%, #0f0f0f 55%, #0a0a0a 100%);
-  border-radius: 18px;
-  padding: 22px 20px 20px;
-  position: relative; overflow: hidden;
-  border: 1px solid rgba(201,168,76,0.22);
-  box-shadow: inset 0 1px 0 rgba(201,168,76,0.12), 0 10px 40px rgba(0,0,0,0.6);
+/* ── Header: "Powered by MortgageIQ" ── */
+.vcard-header {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 10px 20px 4px;
 }
-
-/* Gold radial shimmer top-right (mimics biz card light effect) */
-.vcard-card::before {
-  content: '';
-  position: absolute; top: -50px; right: -50px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,168,76,0.14) 0%, transparent 65%);
-  pointer-events: none;
-}
-.vcard-card::after {
-  content: '';
-  position: absolute; bottom: -40px; left: -30px;
-  width: 140px; height: 140px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* "Powered by MortgageIQ" */
-.vcard-powered {
-  display: flex; align-items: center; gap: 5px;
-  margin-bottom: 16px;
-}
-.vcard-powered > span:first-child {
-  font-size: 0.6rem; color: rgba(255,255,255,0.25);
+.vcard-powered-label {
+  font-size: 0.65rem; color: #9aa3b2;
   text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
 }
-.vcard-powered-brand {
+.vcard-powered-name {
   font-family: 'Fraunces', serif;
-  color: rgba(201,168,76,0.55);
-  font-size: 0.7rem; font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 0.8rem; font-weight: 700;
+  color: #0f1e3c; letter-spacing: -0.02em;
+}
+.vcard-powered-name span { color: #2460e8; }
+
+/* ── Card face — deep navy/black, Isabelle's brand colors ── */
+.vcard-card {
+  margin: 12px 16px 0;
+  background: linear-gradient(160deg, #0f1e3c 0%, #101820 60%, #0a1020 100%);
+  border-radius: 18px;
+  padding: 24px 22px 20px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(15,30,60,0.35);
+}
+/* Gold shimmer top-right */
+.vcard-card::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 65%);
+  pointer-events: none;
 }
 
-/* Broker name — gold uppercase, mirrors biz card style */
+/* ── Identity block ── */
+.vcard-identity {
+  margin-bottom: 14px;
+}
 .vcard-name {
   font-family: 'Fraunces', serif;
-  font-size: 1.4rem; font-weight: 700;
+  font-size: 1.5rem; font-weight: 700;
   color: #c9a84c;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  line-height: 1.15; margin-bottom: 3px;
+  line-height: 1.1;
+  margin-bottom: 4px;
 }
-
-/* Title */
 .vcard-title {
-  font-size: 0.72rem;
-  color: rgba(201,168,76,0.6);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-size: 0.82rem; font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.01em;
   margin-bottom: 2px;
 }
-
-/* Company */
-.vcard-company {
-  font-size: 0.67rem;
-  color: rgba(255,255,255,0.28);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 13px;
+.vcard-network {
+  font-size: 0.72rem; font-weight: 400;
+  color: rgba(201,168,76,0.65);
+  letter-spacing: 0.03em;
 }
 
-/* Credential badges */
-.vcard-creds { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
+/* ── Badges ── */
+.vcard-creds {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
 .vcard-badge {
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.28);
-  color: rgba(201,168,76,0.7);
-  font-size: 0.6rem; font-weight: 600;
-  padding: 3px 8px; border-radius: 100px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: #c9a84c;
+  font-size: 0.63rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 100px;
   letter-spacing: 0.05em; text-transform: uppercase;
 }
 
-/* Gold-tinted divider */
+/* ── Divider ── */
 .vcard-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.35) 50%, transparent 100%);
-  margin-bottom: 14px;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 16px;
 }
 
-/* Contact rows */
-.vcard-contact-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+/* ── Contact rows — high contrast on dark card ── */
+.vcard-contacts { display: flex; flex-direction: column; gap: 10px; }
+
+.vcard-contact-row {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.vcard-contact-row:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.25);
+}
+
 .vcard-contact-icon {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: rgba(201,168,76,0.09);
-  border: 1px solid rgba(201,168,76,0.18);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: #c9a84c;
 }
-.vcard-contact-row a {
-  color: rgba(255,255,255,0.72);
-  font-size: 0.81rem; text-decoration: none; font-weight: 400;
-  letter-spacing: 0.01em; transition: color 0.15s;
-}
-.vcard-contact-row a:hover { color: #c9a84c; }
 
-/* Action buttons */
+.vcard-contact-info {
+  display: flex; flex-direction: column; gap: 1px; min-width: 0;
+}
+.vcard-contact-label {
+  font-size: 0.62rem; font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.vcard-contact-value {
+  font-size: 0.85rem; font-weight: 500;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Action buttons ── */
 .vcard-actions {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin: 14px 14px 0;
+  gap: 10px;
+  margin: 14px 16px 0;
 }
 .vcard-btn {
-  display: flex; align-items: center; justify-content: center; gap: 7px;
-  padding: 13px; border-radius: 12px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 12px;
+  border-radius: 12px; border: none; cursor: pointer;
   font-family: 'DM Sans', sans-serif; font-weight: 700;
-  font-size: 0.84rem; transition: all 0.18s; min-height: 48px;
+  font-size: 0.88rem; transition: all 0.18s; min-height: 50px;
+  letter-spacing: 0.01em;
 }
-/* Call — gold button matching Isabelle's brand */
+/* Call — gold, on-brand primary action */
 .vcard-btn-call {
-  background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 100%);
-  color: #0d0d0d;
-  box-shadow: 0 3px 16px rgba(201,168,76,0.4);
+  background: linear-gradient(135deg, #c9a84c 0%, #e0c060 100%);
+  color: #0f1e3c;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.38);
 }
 .vcard-btn-call:hover {
-  background: linear-gradient(135deg, #dbb958 0%, #f2d97a 100%);
+  background: linear-gradient(135deg, #dbb958 0%, #eece6e 100%);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(201,168,76,0.5);
+  box-shadow: 0 7px 22px rgba(201,168,76,0.48);
 }
-/* Save — dark ghost */
+/* Save — navy, clearly readable */
 .vcard-btn-save {
-  background: rgba(255,255,255,0.06);
+  background: #0f1e3c;
+  color: rgba(255,255,255,0.9);
   border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.7);
 }
-.vcard-btn-save:hover { background: rgba(255,255,255,0.11); color: white; }
+.vcard-btn-save:hover {
+  background: #1a2f58;
+  color: white;
+}
 
-/* Close */
-.vcard-close-row { text-align: center; margin-top: 12px; padding: 0 14px; }
+/* ── Close ── */
+.vcard-close-row {
+  text-align: center;
+  padding: 14px 16px 4px;
+}
 .vcard-close-btn {
   background: none; border: none;
-  color: rgba(255,255,255,0.28);
-  font-size: 0.78rem; cursor: pointer;
+  color: #9aa3b2;
+  font-size: 0.8rem; cursor: pointer;
   font-family: 'DM Sans', sans-serif;
-  padding: 10px; min-height: 44px;
-  letter-spacing: 0.02em; transition: color 0.15s;
+  padding: 10px 24px; min-height: 44px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  transition: color 0.15s, background 0.15s;
 }
-.vcard-close-btn:hover { color: rgba(255,255,255,0.55); }
+.vcard-close-btn:hover {
+  color: #374151;
+  background: rgba(0,0,0,0.05);
+}
 
 /* ============================================================
    RESPONSIVE — TABLET (≤860px)
