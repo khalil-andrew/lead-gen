@@ -575,62 +575,90 @@
 <!-- ══ VIRTUAL BUSINESS CARD ═════════════════════════════════ -->
 <div class="vcard-ov" id="vcardOv" onclick="if(event.target===this)closeVcard()">
   <div class="vcard-sheet" id="vcardSheet">
+
+    <!-- Drag handle -->
     <div class="vcard-drag"></div>
+
+    <!-- MortgageIQ powered-by header -->
+    <div class="vcard-header">
+      <span class="vcard-powered-label">Powered by</span>
+      <span class="vcard-powered-name">MortgageIQ</span>
+    </div>
+
+    <!-- Card face -->
     <div class="vcard-card">
-      <!-- Header: powered-by branding -->
-      <div class="vcard-powered">
-        <span>Powered by</span>
-        <span class="vcard-powered-brand">MortgageIQ</span>
+
+      <!-- Identity block -->
+      <div class="vcard-identity">
+        <div class="vcard-name" id="vcName">Isabelle Khalil</div>
+        <div class="vcard-title" id="vcTitle">Mortgage Broker</div>
+        <div class="vcard-network" id="vcNetwork">Dominion Lending Centres</div>
       </div>
-      <!-- Broker identity -->
-      <div class="vcard-name"    id="vcName">Isabelle Khalil</div>
-      <div class="vcard-title"   id="vcTitle">Mortgage Broker · Dominion Lending Centres</div>
-      <div class="vcard-company" id="vcCompany">Real Estate Lending Inc.</div>
-      <!-- Credential badges -->
+
+      <!-- Badges -->
       <div class="vcard-creds">
         <span class="vcard-badge">AMF Licensed</span>
-        <span class="vcard-badge">OACIQ Member</span>
         <span class="vcard-badge">DLC Network</span>
       </div>
+
+      <!-- Divider -->
       <div class="vcard-divider"></div>
-      <!-- Contact rows -->
-      <div class="vcard-contact-row">
-        <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-        </div>
-        <a href="tel:+15143589236" id="vcPhoneLink">514-358-9236</a>
-      </div>
-      <div class="vcard-contact-row">
-        <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-        </div>
-        <a href="mailto:info@isabellehypotheque.com" id="vcEmailLink">info@isabellehypotheque.com</a>
-      </div>
-      <div class="vcard-contact-row">
-        <div class="vcard-contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-        </div>
-        <a href="https://isabellehypotheque.com" target="_blank" id="vcWebLink">isabellehypotheque.com</a>
-      </div>
-    </div>
+
+      <!-- Contact info -->
+      <div class="vcard-contacts">
+
+        <a class="vcard-contact-row" href="tel:+15143589236" id="vcPhoneLink">
+          <div class="vcard-contact-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div class="vcard-contact-info">
+            <span class="vcard-contact-label">Phone</span>
+            <span class="vcard-contact-value">514-358-9236</span>
+          </div>
+        </a>
+
+        <a class="vcard-contact-row" href="mailto:info@isabellehypotheque.com" id="vcEmailLink">
+          <div class="vcard-contact-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="vcard-contact-info">
+            <span class="vcard-contact-label">Email</span>
+            <span class="vcard-contact-value">info@isabellehypotheque.com</span>
+          </div>
+        </a>
+
+        <a class="vcard-contact-row" href="https://isabellehypotheque.com" target="_blank" id="vcWebLink">
+          <div class="vcard-contact-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="vcard-contact-info">
+            <span class="vcard-contact-label">Website</span>
+            <span class="vcard-contact-value">isabellehypotheque.com</span>
+          </div>
+        </a>
+
+      </div><!-- /vcard-contacts -->
+    </div><!-- /vcard-card -->
+
+    <!-- Action buttons -->
     <div class="vcard-actions">
       <button class="vcard-btn vcard-btn-call" onclick="callBroker()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
         <span id="vcCallTxt">Call Now</span>
       </button>
       <button class="vcard-btn vcard-btn-save" onclick="saveVcard()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
@@ -638,10 +666,13 @@
         <span id="vcSaveTxt">Save Contact</span>
       </button>
     </div>
+
+    <!-- Close -->
     <div class="vcard-close-row">
       <button class="vcard-close-btn" onclick="closeVcard()" id="vcCloseTxt">Close</button>
     </div>
-  </div>
+
+  </div><!-- /vcard-sheet -->
 </div>
 
 <!-- ══ JAVASCRIPT ════════════════════════════════════════════ -->
@@ -770,7 +801,7 @@ en: {
   rv3a: 'Kevin T. — Montréal, self-employed',
 
   // Footer
-  ftLicense: 'Isabelle Khalil — Mortgage Broker · Real Estate Lending Inc. · Dominion Lending Centres · OACIQ Member',
+  ftLicense: 'Isabelle Khalil — Mortgage Broker · Dominion Lending Centres · AMF Licensed',
   ftDisc:    'Estimates are for informational purposes only and do not constitute a mortgage commitment. All applications are subject to lender credit approval. Tax estimates are approximate and vary by municipality.',
   ftPriv: 'Privacy Policy',   ftTerms: 'Terms of Use',   ftOACIQ: 'Regulatory Disclosures',
   ftCopy: '© 2025 MortgageIQ. All rights reserved.',
@@ -897,7 +928,7 @@ fr: {
   rv3b: "« En tant que travailleur autonome, je croyais que ce serait difficile. Ils ont trouvé un prêteur qui comprenait ma situation. »",
   rv3a: 'Kevin T. — Montréal, travailleur autonome',
 
-  ftLicense: "Isabelle Khalil — Courtière Hypothécaire · Financement Immobilier Inc. · Dominion Lending Centres · Membre de l'OACIQ",
+  ftLicense: "Isabelle Khalil — Courtière Hypothécaire · Dominion Lending Centres · Agréée AMF",
   ftDisc:    "Les estimations sont fournies à titre informatif seulement et ne constituent pas un engagement de prêt. Toutes les demandes sont soumises à l'approbation de crédit du prêteur.",
   ftPriv: 'Politique de confidentialité',   ftTerms: "Conditions d'utilisation",   ftOACIQ: 'Divulgations réglementaires',
   ftCopy: '© 2025 MortgageIQ. Tous droits réservés.',
@@ -1722,33 +1753,29 @@ async function sendToVelocity(lead) {
 // ════════════════════════════════════════════════════════════
 const BROKER = {
   name:         'Isabelle Khalil',
-  company_en:   'Real Estate Lending Inc.',
-  company_fr:   'Financement Immobilier Inc.',
-  title_en:     'Mortgage Broker · Dominion Lending Centres',
-  title_fr:     'Courtière Hypothécaire · Dominion Lending Centres',
+  title_en:     'Mortgage Broker',
+  title_fr:     'Courtière Hypothécaire',
   phone:        '+15143589236',
   phoneDisplay: '514-358-9236',
   email:        'info@isabellehypotheque.com',
   website:      'isabellehypotheque.com',
-  amfNumber:    '',
 };
 
 function openVcard() {
   const isFR = lang === 'fr';
+  // Broker identity
   $('vcName').textContent  = BROKER.name;
-  $('vcTitle').textContent = (isFR ? BROKER.title_fr : BROKER.title_en) +
-    (BROKER.amfNumber ? ` · ${isFR ? 'Licence AMF' : 'AMF Licence'} #${BROKER.amfNumber}` : '');
-  const compEl = $('vcCompany');
-  if (compEl) compEl.textContent = isFR ? BROKER.company_fr : BROKER.company_en;
-  $('vcPhoneLink').textContent = BROKER.phoneDisplay;
-  $('vcPhoneLink').href        = 'tel:' + BROKER.phone;
-  $('vcEmailLink').textContent = BROKER.email;
-  $('vcEmailLink').href        = 'mailto:' + BROKER.email;
-  $('vcWebLink').textContent   = BROKER.website;
-  $('vcWebLink').href          = 'https://' + BROKER.website;
-  $('vcCallTxt').textContent   = isFR ? 'Appeler maintenant'       : 'Call Now';
-  $('vcSaveTxt').textContent   = isFR ? 'Enregistrer le contact'   : 'Save Contact';
-  $('vcCloseTxt').textContent  = isFR ? 'Fermer'                   : 'Close';
+  $('vcTitle').textContent = isFR ? 'Courtière Hypothécaire' : 'Mortgage Broker';
+  const netEl = $('vcNetwork');
+  if (netEl) netEl.textContent = 'Dominion Lending Centres';
+  // Contact links
+  $('vcPhoneLink').href  = 'tel:' + BROKER.phone;
+  $('vcEmailLink').href  = 'mailto:' + BROKER.email;
+  $('vcWebLink').href    = 'https://' + BROKER.website;
+  // Button labels
+  $('vcCallTxt').textContent  = isFR ? 'Appeler maintenant'     : 'Call Now';
+  $('vcSaveTxt').textContent  = isFR ? 'Enregistrer le contact' : 'Save Contact';
+  $('vcCloseTxt').textContent = isFR ? 'Fermer'                 : 'Close';
   $('vcardOv').classList.add('on');
   document.body.style.overflow = 'hidden';
 }
@@ -1765,12 +1792,11 @@ function saveVcard() {
   const vcf  = [
     'BEGIN:VCARD', 'VERSION:3.0',
     'FN:'    + BROKER.name,
-    'ORG:'   + (isFR ? BROKER.company_fr : BROKER.company_en),
+    'ORG:Dominion Lending Centres',
     'TITLE:' + (isFR ? BROKER.title_fr : BROKER.title_en),
     'TEL;TYPE=CELL:' + BROKER.phone,
     'EMAIL:' + BROKER.email,
     'URL:https://' + BROKER.website,
-    BROKER.amfNumber ? 'NOTE:AMF Licence #' + BROKER.amfNumber : '',
     'END:VCARD',
   ].filter(Boolean).join('\r\n');
   const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
